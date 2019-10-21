@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
   /** The spinner menu items */
   public final static String MENU_ACTIVITY = "menu activity";
 
+  /** The spinners array */
   private final String[] activities = {MENU_ACTIVITY};
 
   @Override
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     Intent intent;
 
+    // pick the activity to go to
     switch(activity){
 
       case MENU_ACTIVITY:
