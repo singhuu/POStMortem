@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">POStMortem</string>
+    <string name="open_instruction">Create a button that sends you to your working activity</string>
+    <string name="menu_button">Menu activity</string>
 </resources>
