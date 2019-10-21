@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">POStMortem</string>
-    <string name="open_instruction">Create a button that sends you to your working activity</string>
-    <string name="menu_button">Menu activity</string>
+    <string name="open_instruction">Add you activity to the spinner and the switch statement</string>
+    <string name="activity_button">Go</string>
 </resources>
