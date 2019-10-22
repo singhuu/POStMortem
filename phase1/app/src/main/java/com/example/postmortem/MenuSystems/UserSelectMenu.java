@@ -1,11 +1,14 @@
 package com.example.postmortem.MenuSystems;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,7 @@ class UserSelectMenu extends GameMenu {
     }
 
     @Override
-    public List<View> buildMenuItems(Context context) {
+    public List<View> buildMenuItems(final AppCompatActivity context) {
 
         ArrayList<View> items = new ArrayList<>();
 
@@ -50,6 +53,12 @@ class UserSelectMenu extends GameMenu {
         loginButton.setTextSize(18);
         loginButton.setY(512);
         loginButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptLogin(context);
+            }
+        });
         items.add(loginButton);
 
         //set the properties of the create user button
@@ -58,9 +67,28 @@ class UserSelectMenu extends GameMenu {
         createButton.setTextSize(18);
         createButton.setY(640);
         createButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptCreateAccount(context);
+            }
+        });
         items.add(createButton);
+
+        this.items = items;
 
         return items;
 
     }
+
+    private void attemptLogin(AppCompatActivity context){
+        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        context.startActivity(intent);
+    }
+
+    private void attemptCreateAccount(AppCompatActivity context){
+        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        context.startActivity(intent);
+    }
+
 }

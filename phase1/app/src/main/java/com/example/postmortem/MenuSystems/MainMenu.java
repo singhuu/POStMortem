@@ -7,6 +7,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.postmortem.MainActivity;
 
 import java.util.ArrayList;
@@ -18,7 +20,8 @@ class MainMenu extends GameMenu {
         super(title);
     }
 
-    public List<View> buildMenuItems(final Context context){
+    @Override
+    public List<View> buildMenuItems(final AppCompatActivity context){
 
         ArrayList<View> items = new ArrayList<>();
 
@@ -45,6 +48,8 @@ class MainMenu extends GameMenu {
         });
 
         items.add(button);
+
+        this.items = items;
 
         return items;
 

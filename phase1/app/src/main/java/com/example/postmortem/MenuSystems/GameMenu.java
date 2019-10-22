@@ -16,6 +16,9 @@ public abstract class GameMenu {
 
     public static final String MENU_TYPE = "menu_type";
 
+    /** Menu items */
+    protected List<View> items;
+
 
     protected String title;
 
@@ -50,6 +53,6 @@ public abstract class GameMenu {
 
     }
 
-    public abstract List<View> buildMenuItems(Context context);
+    public abstract List<View> buildMenuItems(AppCompatActivity context);
 
 }
