@@ -1,4 +1,4 @@
-package com.example.postmortem;
+package com.example.postmortem.MenuSystems;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,13 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.postmortem.R;
+
 import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 
-  private  GameMenu menu_controller;
+  private GameMenu menu_controller;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
