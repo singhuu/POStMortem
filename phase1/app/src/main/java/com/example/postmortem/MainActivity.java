@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
   /**
    * The spinners array
    */
-  private final String[] activities = {MENU_ACTIVITY};
+  private final String[] activities = {MENU_ACTIVITY, "nihil"};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
     switch (activity) {
 
       case MENU_ACTIVITY:
-        intent = new Intent(this, MenuActivity.class);
+        intent  = GameMenu.openMenu(this, GameMenu.MAIN_MENU);
         break;
 
       default:
-        intent = new Intent(this, MenuActivity.class);
+        intent = new Intent(this, MainActivity.class);
         break;
 
     }
