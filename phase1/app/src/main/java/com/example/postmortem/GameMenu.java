@@ -1,8 +1,12 @@
 package com.example.postmortem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
 
 public abstract class GameMenu {
 
@@ -12,7 +16,7 @@ public abstract class GameMenu {
     public static final String MENU_TYPE = "menu_type";
 
 
-    private String title;
+    protected String title;
 
     public GameMenu(String title){
         this.title = title;
@@ -40,5 +44,7 @@ public abstract class GameMenu {
         return menu;
 
     }
+
+    public abstract List<View> buildMenuItems(Context context);
 
 }

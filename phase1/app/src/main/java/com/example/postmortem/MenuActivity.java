@@ -2,8 +2,12 @@ package com.example.postmortem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -19,5 +23,13 @@ public class MenuActivity extends AppCompatActivity {
 
     //create the backbone of the menu
     this.menu_controller = GameMenu.createMenu(menu_type);
+
+    //build the menu interface
+    ConstraintLayout layout = findViewById(R.id.constrain_layout);
+    List<View> items = menu_controller.buildMenuItems(this);
+    for(View item: items){
+      layout.addView(item);
+    }
+
   }
 }
