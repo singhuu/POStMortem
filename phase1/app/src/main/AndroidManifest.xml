@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".typeLevel" />
         <activity android:name=".tapLevel" />
+        <activity android:name=".tapLevelActivity" />
     </application>
 
 </manifest>
