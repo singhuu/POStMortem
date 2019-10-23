@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".typeLevel" />
+        <activity android:name=".tapLevel" />
     </application>
 
 </manifest>
