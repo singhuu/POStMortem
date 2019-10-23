@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     switch (activity) {
 
       case MENU_ACTIVITY:
-        intent  = GameMenu.openMenu(this, GameMenu.MAIN_MENU);
+        intent  = GameMenu.openMenu(this, GameMenu.LOGIN_MENU);
         break;
 
       default:
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     startActivity(intent);
+    finish();
 
   }
 

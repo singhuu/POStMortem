@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GameMenu {
@@ -24,6 +25,7 @@ public abstract class GameMenu {
 
     public GameMenu(String title){
         this.title = title;
+        this.items = new ArrayList<>();
     }
 
     public static Intent openMenu(AppCompatActivity packageContext, String menu_type){

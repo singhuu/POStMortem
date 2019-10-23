@@ -3,6 +3,7 @@ package com.example.postmortem.MenuSystems;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,26 +24,14 @@ class MainMenu extends GameMenu {
     @Override
     public List<View> buildMenuItems(final AppCompatActivity context){
 
-        ArrayList<View> items = new ArrayList<>();
+        createTextViews(context);
+        createButtons(context);
 
-        Intent intent = context.getIntent();
-        String username = intent.getStringExtra("username");
+        return items;
 
-        //set the properties of the user text view
-        TextView userText = new TextView(context);
-        userText.setText(username);
-        userText.setX(832);
-        items.add(userText);
+    }
 
-        //set the properties of the title text view
-        TextView textView = new TextView(context);
-        textView.setText(title);
-        textView.setTextSize(32);
-        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView.setY(64);
-        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        items.add(textView);
-
+    private void createButtons(final AppCompatActivity context) {
         //set the properties of the continue button
         Button continueButton = new Button(context);
         continueButton.setText("Continue");
@@ -98,12 +87,26 @@ class MainMenu extends GameMenu {
             }
         });
         items.add(exitButton);
+    }
 
+    private void createTextViews(AppCompatActivity context) {
+        Intent intent = context.getIntent();
+        String username = intent.getStringExtra("username");
 
-        this.items = items;
+        //set the properties of the user text view
+        TextView userText = new TextView(context);
+        userText.setText(username);
+        userText.setX(832);
+        items.add(userText);
 
-        return items;
-
+        //set the properties of the title text view
+        TextView textView = new TextView(context);
+        textView.setText(title);
+        textView.setTextSize(32);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textView.setY(64);
+        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        items.add(textView);
     }
 
     private void start(AppCompatActivity context){

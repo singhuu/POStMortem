@@ -3,6 +3,7 @@ package com.example.postmortem.MenuSystems;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,17 +23,15 @@ class UserSelectMenu extends GameMenu {
     @Override
     public List<View> buildMenuItems(final AppCompatActivity context) {
 
-        ArrayList<View> items = new ArrayList<>();
+        createMenuTitle(context);
+        createUserFields(context);
+        createButtons(context);
 
-        //set the properties of the textview
-        TextView textView = new TextView(context);
-        textView.setText(title);
-        textView.setTextSize(32);
-        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView.setY(64);
-        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        items.add(textView);
+        return items;
 
+    }
+
+    private void createUserFields(AppCompatActivity context) {
         //set the properties of the username edittext
         EditText usernameBar = new EditText(context);
         usernameBar.setText("username");
@@ -46,7 +45,20 @@ class UserSelectMenu extends GameMenu {
         passwordBar.setY(384);
         passwordBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         items.add(passwordBar);
+    }
 
+    private void createMenuTitle(AppCompatActivity context) {
+        //set the properties of the title
+        TextView textView = new TextView(context);
+        textView.setText(title);
+        textView.setTextSize(32);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textView.setY(64);
+        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        items.add(textView);
+    }
+
+    private void createButtons(final AppCompatActivity context) {
         //set the properties of the login button
         Button loginButton = new Button(context);
         loginButton.setText("Login");
@@ -74,11 +86,6 @@ class UserSelectMenu extends GameMenu {
             }
         });
         items.add(createButton);
-
-        this.items = items;
-
-        return items;
-
     }
 
     private void attemptLogin(AppCompatActivity context){
@@ -89,11 +96,11 @@ class UserSelectMenu extends GameMenu {
         intent.putExtra("username", username);
 
         context.startActivity(intent);
+        context.finish();
     }
 
     private void attemptCreateAccount(AppCompatActivity context){
-        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
-        context.startActivity(intent);
+        attemptLogin(context);
     }
 
 }
