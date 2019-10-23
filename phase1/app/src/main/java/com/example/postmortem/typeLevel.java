@@ -7,10 +7,12 @@ import android.view.View;
 
 public class typeLevel extends Level {
 
+
+    private String timerString = "00:30";
+
     /** Initiates the typeLevel and sets the difficulty using the Level constructor*/
     public typeLevel(int difficulty) {
         super(difficulty);
-
     }
 
     /**Overriding draw for now as to not get any errors, might not use in future */

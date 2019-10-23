@@ -1,4 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:padding="16dp"
+
+    >
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question 1/x"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "15dp"
+        android:textSize="50sp"
+        />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*question text goes here*"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "100dp"
+        android:textSize="25sp"
+        />
+
+    <Button
+        android:id="@+id/button_answer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "170dp"
+        android:textSize="30sp"
+        />
+
+    <Button
+        android:id="@+id/button_answer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "290dp"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/button_answer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "410dp"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/button_answer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Answer4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "530dp"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "640dp"
+        android:textSize="30sp" />
+
+
+</RelativeLayout>
+
