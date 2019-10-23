@@ -25,7 +25,16 @@ class MainMenu extends GameMenu {
 
         ArrayList<View> items = new ArrayList<>();
 
-        //set the properties of the text view
+        Intent intent = context.getIntent();
+        String username = intent.getStringExtra("username");
+
+        //set the properties of the user text view
+        TextView userText = new TextView(context);
+        userText.setText(username);
+        userText.setX(832);
+        items.add(userText);
+
+        //set the properties of the title text view
         TextView textView = new TextView(context);
         textView.setText(title);
         textView.setTextSize(32);

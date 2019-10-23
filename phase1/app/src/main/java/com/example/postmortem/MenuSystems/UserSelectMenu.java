@@ -82,7 +82,12 @@ class UserSelectMenu extends GameMenu {
     }
 
     private void attemptLogin(AppCompatActivity context){
+        EditText usernameBar = (EditText) items.get(1);
+        String username = usernameBar.getText().toString();
+
         Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        intent.putExtra("username", username);
+
         context.startActivity(intent);
     }
 
