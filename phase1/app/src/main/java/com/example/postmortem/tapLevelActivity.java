@@ -8,19 +8,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class tapLevelActivity extends AppCompatActivity {
-  private tapLevel tapLevel = null;
+  private tapLevel tapLevel = new tapLevel(-1);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.tap_level);
 
-    // TODO SET UP DIFFICULTY PASS
-    this.tapLevel = new tapLevel(0);
-
-    int timesPressed = tapLevel.getTimesPressed();
     TextView textView = findViewById(R.id.textViewTapImage);
-    textView.setText(Integer.toString(timesPressed));
+    textView.setText(Integer.toString(tapLevel.getTimesPressed()));
   }
 
 
