@@ -1,6 +1,5 @@
 package com.example.postmortem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -9,23 +8,20 @@ public class PickUpLevel extends Level {
     static final String[] possibleObjects = {"Deodorant", "Laptop", "Phone", "Pencil", "Tissue",
                                             "Wallet", "Notebook", "Gym Bag", "Glasses", "Backpack"};
 
-    private String[] targetObjects;
+    private String targetObject;
+    private String[] selectables;
     int numCorrect = 0;
 
     public PickUpLevel(int difficulty){
         super(difficulty);
-        ArrayList<String> targetObjectsList = new ArrayList<>(Arrays.asList(possibleObjects));
-        targetObjects = getTargets(targetObjectsList);
-    }
 
-    @Override
-    public int getScore() {
-        return 0;
+        ArrayList<String> selectablesList = new ArrayList<>(Arrays.asList(possibleObjects));
+        updateInteractData(selectablesList);
     }
 
     // Code taken from https://www.geeksforgeeks.org/randomly-select-items-from-a-list-in-java/
-    private String[] getTargets(ArrayList<String> list){
-        int totalItems = 3;
+    public void updateInteractData(ArrayList<String> list){
+        int totalItems = 6;
         Random rand = new Random();
 
         // create a temporary list for storing
@@ -44,33 +40,30 @@ public class PickUpLevel extends Level {
         }
 
         Object[] abstractResultArr = newList.toArray();
-        return Arrays.copyOf(abstractResultArr, abstractResultArr.length, String[].class);
+        selectables = Arrays.copyOf(abstractResultArr, abstractResultArr.length, String[].class);
+
+        targetObject = selectables[(int) (Math.random() * selectables.length)];
     }
 
-    String createSearchString() {
-        String searchStr = "";
-        StringBuilder searchStrBuilder = new StringBuilder("Find the ");
-        for(String target : targetObjects){
-            searchStrBuilder.append(target);
+    public String getTarget(){
+        return this.targetObject;
+    }
 
-            if(!target.equals(targetObjects[targetObjects.length - 1]))
-                searchStrBuilder.append(", ");
-        }
+    public String[] getSelectables() {
+        return selectables;
+    }
 
-        searchStr += searchStrBuilder.toString();
-        searchStr += "!";
-
-        return searchStr;
+    @Override
+    public int getScore() {
+        return 0;
     }
 
     boolean checkSelectVal(String val){
-        for(String target : targetObjects){
-            System.out.println("Correct");
-            if(val.equals(target))
-                return true;
+        if(val.equals(targetObject)){
+            updateInteractData(new ArrayList<>(Arrays.asList(possibleObjects)));
+            return true;
         }
 
-        System.out.println("WRONG");
         return false;
     }
 }
