@@ -1,5 +1,10 @@
 package com.example.postmortem;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 public class PickUpLevel extends Level {
     static final String[] possibleObjects = {"Deodorant", "Laptop", "Phone", "Pencil", "Tissue",
                                             "Wallet", "Notebook", "Gym Bag", "Glasses", "Backpack"};
@@ -9,11 +14,8 @@ public class PickUpLevel extends Level {
 
     public PickUpLevel(int difficulty){
         super(difficulty);
-        targetObjects = new String[3];
-
-        targetObjects[0] = possibleObjects[(int)(Math.random() * possibleObjects.length)];
-        targetObjects[1] = possibleObjects[(int)(Math.random() * possibleObjects.length)];
-        targetObjects[2] = possibleObjects[(int)(Math.random() * possibleObjects.length)];
+        ArrayList<String> targetObjectsList = new ArrayList<>(Arrays.asList(possibleObjects));
+        targetObjects = getTargets(targetObjectsList);
     }
 
     @Override
@@ -21,9 +23,33 @@ public class PickUpLevel extends Level {
         return 0;
     }
 
+    // Code taken from https://www.geeksforgeeks.org/randomly-select-items-from-a-list-in-java/
+    private String[] getTargets(ArrayList<String> list){
+        int totalItems = 3;
+        Random rand = new Random();
+
+        // create a temporary list for storing
+        // selected element
+        ArrayList<String> newList = new ArrayList<>();
+        for (int i = 0; i < totalItems; i++) {
+
+            // take a random index between 0 to size
+            // of given List
+            int randomIndex = rand.nextInt(list.size());
+
+            // add element in temporary list
+            newList.add(list.get(randomIndex));
+
+            list.remove(randomIndex);
+        }
+
+        Object[] abstractResultArr = newList.toArray();
+        return Arrays.copyOf(abstractResultArr, abstractResultArr.length, String[].class);
+    }
+
     String createSearchString() {
-        String searchStr = "Find the ";
-        StringBuilder searchStrBuilder = new StringBuilder(searchStr);
+        String searchStr = "";
+        StringBuilder searchStrBuilder = new StringBuilder("Find the ");
         for(String target : targetObjects){
             searchStrBuilder.append(target);
 
@@ -39,11 +65,12 @@ public class PickUpLevel extends Level {
 
     boolean checkSelectVal(String val){
         for(String target : targetObjects){
-            System.out.println("Hello");
+            System.out.println("Correct");
             if(val.equals(target))
                 return true;
         }
 
+        System.out.println("WRONG");
         return false;
     }
 }

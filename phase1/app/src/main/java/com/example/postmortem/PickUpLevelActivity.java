@@ -12,6 +12,7 @@ import org.w3c.dom.Text;
 
 public class PickUpLevelActivity extends AppCompatActivity {
     PickUpLevel level = new PickUpLevel(-1);
+    Button[] selectButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class PickUpLevelActivity extends AppCompatActivity {
 
         level.difficulty = 1; //TODO temp value to be passed in as extra
 
-        Button[] selectButtons = getButtons();
+        selectButtons = getButtons();
         assignButtonVals(selectButtons);
 
         TextView searchPrompt = findViewById(R.id.searchPrompt);
@@ -29,21 +30,24 @@ public class PickUpLevelActivity extends AppCompatActivity {
 
     }
 
+    //TODO need to make sure at least one button has a target
     private void assignButtonVals(Button[] selectButtons) {
         String[] possibleButtonVals = PickUpLevel.possibleObjects;
-        for(Button button : selectButtons){
-            button.setText(possibleButtonVals[(int)(Math.random() * possibleButtonVals.length)]);
+        for(int i = 0; i < selectButtons.length; i++){
+            String newButtonVal = possibleButtonVals[(int)(Math.random() * possibleButtonVals.length)];
+            selectButtons[i].setText(newButtonVal);
         }
     }
 
     private Button[] getButtons(){
-        Button[] buttons = new Button[5];
+        Button[] buttons = new Button[6];
 
         buttons[0] = findViewById(R.id.button1);
         buttons[1] = findViewById(R.id.button2);
         buttons[2] = findViewById(R.id.button3);
         buttons[3] = findViewById(R.id.button4);
         buttons[4] = findViewById(R.id.button5);
+        buttons[5] = findViewById(R.id.button6);
 
         return buttons;
     }
@@ -56,7 +60,7 @@ public class PickUpLevelActivity extends AppCompatActivity {
 
         if(correctSelect){
             level.numCorrect += 1;
-            //TODO change image
+            assignButtonVals(selectButtons);
         }else{
             //TODO display x on screen
         }
