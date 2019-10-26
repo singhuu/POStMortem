@@ -1,5 +1,7 @@
 package com.example.postmortem;
 
+import com.example.postmortem.LevelSystems.LevelType;
+
 public class User {
 
   private String username;

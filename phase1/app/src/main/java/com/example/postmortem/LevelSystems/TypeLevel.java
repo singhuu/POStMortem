@@ -1,4 +1,4 @@
-package com.example.postmortem;
+package com.example.postmortem.LevelSystems;
 
 public class TypeLevel extends Level {
     private String timerString = "00:30";

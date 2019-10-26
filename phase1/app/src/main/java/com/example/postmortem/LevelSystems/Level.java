@@ -1,9 +1,9 @@
-package com.example.postmortem;
+package com.example.postmortem.LevelSystems;
 
 import android.app.Activity;
 import android.os.CountDownTimer;
 
-abstract class Level extends Activity {
+public abstract class Level extends Activity {
 
   protected int difficulty;
   /** Constructor Class Easy = 1 Medium = 2 Hard = 3 No more than 3 levels */

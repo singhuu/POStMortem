@@ -1,4 +1,4 @@
-package com.example.postmortem;
+package com.example.postmortem.LevelSystems;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.postmortem.LevelSystems.TapLevel;
+import com.example.postmortem.R;
 
 public class TapLevelActivity extends AppCompatActivity {
   private TapLevel tapLevel = new TapLevel(-1);
