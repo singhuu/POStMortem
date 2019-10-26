@@ -24,8 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".typeLevel" />
-        <activity android:name=".tapLevel" />
-        <activity android:name=".tapLevelActivity" />
+        <activity android:name=".TapLevel" />
+        <activity android:name=".TapLevelActivity" />
         <activity android:name=".PickUpLevelActivity" />
     </application>
 

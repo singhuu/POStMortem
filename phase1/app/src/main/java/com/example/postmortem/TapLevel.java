@@ -1,10 +1,10 @@
 package com.example.postmortem;
 
-public class tapLevel extends Level {
+public class TapLevel extends Level {
 
   private int timesPressed = 0;
 
-  public tapLevel(int difficulty) {
+  public TapLevel(int difficulty) {
     super(difficulty);
   }
 
