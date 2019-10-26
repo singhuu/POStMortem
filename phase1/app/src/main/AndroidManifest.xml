@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".typeLevel" />
+        <activity android:name=".TypeLevel" />
         <activity android:name=".TapLevel" />
         <activity android:name=".TapLevelActivity" />
         <activity android:name=".PickUpLevelActivity" />
