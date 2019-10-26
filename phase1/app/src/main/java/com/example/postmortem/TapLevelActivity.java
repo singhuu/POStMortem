@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class tapLevelActivity extends AppCompatActivity {
-  private tapLevel tapLevel = new tapLevel(-1);
+public class TapLevelActivity extends AppCompatActivity {
+  private TapLevel tapLevel = new TapLevel(-1);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

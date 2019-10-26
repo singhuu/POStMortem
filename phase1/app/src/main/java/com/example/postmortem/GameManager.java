@@ -17,14 +17,15 @@ public class GameManager {
 
   // Creates a level and adds it to level list, returns true if success, false if failed
   public boolean createLevel(int difficulty, String levelType) {
+    Level level;
     if(levelType.equals("tap")){
-      Level level = new tapLevel(difficulty);
+      level = new TapLevel(difficulty);
     }
     else if(levelType.equals("type")){
-      Level level = new typeLevel(difficulty);
+      level = new TypeLevel(difficulty);
     }
     else if(levelType.equals("pickup")){
-      Level level = new pickupLevel(difficulty);
+      level = new PickUpLevel(difficulty);
     }
     else{
       System.out.println("Unknown level type");
