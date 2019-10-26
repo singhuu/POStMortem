@@ -2,7 +2,9 @@ package com.example.postmortem.MenuSystems;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,6 +55,11 @@ public abstract class GameMenu {
 
         return menu;
 
+    }
+
+    protected void setColours(TextView view){
+        view.setBackgroundColor(Color.rgb(208, 33, 32));
+        view.setTextColor(Color.rgb(255, 255, 255));
     }
 
     public abstract List<View> buildMenuItems(AppCompatActivity context);
