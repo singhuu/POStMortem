@@ -35,13 +35,22 @@ public class User {
     return this.hiScore;
   }
 
-  public void setScore(int score, String game) {
-    if (game.equals("pickup")) {
-      this.pickupScore = score;
-    } else if (game.equals("tap")) {
-      this.tapScore = score;
-    } else if (game.equals("type")) {
-      this.typeScore = score;
+  public void setScore(int score, LevelType game) {
+    switch (game){
+      case TAP:
+        this.tapScore = score;
+        break;
+
+      case TYPE:
+        this.typeScore = score;
+        break;
+
+      case PICKUP:
+        this.pickupScore = score;
+        break;
+
+      default:
+        break;
     }
   }
 
