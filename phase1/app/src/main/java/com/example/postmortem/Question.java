@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Question {
 
-    /** This class stores the question information for each question in the typeLevel game.
+    /** This class stores the question information for each question in the TypeLevel game.
      * It also randomizes the order of the questions.*/
     private String question;
     private ArrayList<String> answers;

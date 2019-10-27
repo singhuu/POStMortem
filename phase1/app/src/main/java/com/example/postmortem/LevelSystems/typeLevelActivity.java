@@ -1,4 +1,4 @@
-package com.example.postmortem;
+package com.example.postmortem.LevelSystems;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +7,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.R;
+
+
 
 public class typeLevelActivity extends AppCompatActivity {
 
-  typeLevel level = new typeLevel(1);
+  TypeLevel level = new TypeLevel(1);
   Button[] selectButtons;
   /** Chooses how to display this level when it is created in the app */
   protected void onCreate(Bundle savedInstanceState) {
