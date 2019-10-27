@@ -113,7 +113,7 @@ class MainMenu extends GameMenu {
     }
 
     private void start(AppCompatActivity context){
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = GameMenu.openMenu(context, GameMenu.GAME_OVER_MENU);
         context.startActivity(intent);
     }
 

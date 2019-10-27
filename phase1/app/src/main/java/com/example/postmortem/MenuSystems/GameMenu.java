@@ -16,6 +16,7 @@ public abstract class GameMenu {
     /** Menu Invariants, Types and Keys */
     public static final String MAIN_MENU = "Main Menu";
     public static final String LOGIN_MENU = "Login or Create a New User";
+    public static final String GAME_OVER_MENU = "Game Over";
 
     public static final String MENU_TYPE = "menu_type";
 
@@ -46,6 +47,10 @@ public abstract class GameMenu {
 
             case LOGIN_MENU:
                 menu = new UserSelectMenu(menu_type);
+                break;
+
+            case GAME_OVER_MENU:
+                menu = new GameOverMenu(menu_type);
                 break;
 
             default:
