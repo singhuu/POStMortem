@@ -1,5 +1,7 @@
 package com.example.postmortem;
 
+import android.content.Context;
+
 import com.example.postmortem.LevelSystems.LevelType;
 
 import java.io.BufferedWriter;
@@ -17,7 +19,23 @@ public class UserLoader {
     private static List<User> users = new ArrayList<>();
     private static List<String[]> hiscores = new ArrayList<>();
 
+    private static String dir;
+
+    /**
+     * Finds the directory of the project
+     * @param context the project
+     */
+    public static void findFilePath(Context context){
+        dir = context.getFilesDir().getPath() + System.getProperty("file.separator");
+    }
+
+    /**
+     * Load the info from the files
+     */
     public static void load(){
+
+        users.clear();
+        hiscores.clear();
 
         tryLoadUsers();
         tryLoadHiscores();
@@ -28,7 +46,13 @@ public class UserLoader {
     private static File tryOpenFile(String filePath) {
         File file = new File(filePath);
         try{
-            file.createNewFile();
+
+            boolean created = file.createNewFile();
+            if (created){
+                created = !created;
+            } else {
+                created = !created;
+            }
 
         } catch (IOException e){
             e.printStackTrace();
@@ -53,7 +77,8 @@ public class UserLoader {
     }
 
     private static void tryLoadUsers(){
-        File usersFile = tryOpenFile("Users.csv");
+
+        File usersFile = tryOpenFile(dir + "usersdata.csv");
         Scanner scan = tryCreateReader(usersFile);
         loadUsersFromFile(scan);
     }
@@ -92,7 +117,7 @@ public class UserLoader {
     }
 
     private static void tryLoadHiscores(){
-        File hiscoresFile = tryOpenFile("Hiscores.csv");
+        File hiscoresFile = tryOpenFile(dir + "Hiscores.csv");
         Scanner scan = tryCreateReader(hiscoresFile);
         loadHiscoresFromFile(scan);
     }
@@ -105,6 +130,12 @@ public class UserLoader {
         }
     }
 
+    /**
+     * Create a new user and add it to the users list
+     * @param username the new accounts username
+     * @param password the new accounts password
+     * @return if the account was successfully created
+     */
     public static boolean createUser(String username, String password){
         boolean canCreate = !checkUserExists(username);
         if(canCreate){
@@ -122,6 +153,12 @@ public class UserLoader {
         return false;
     }
 
+    /**
+     * Try to log into an user account
+     * @param username the username of the desired account
+     * @param password the password of the desired account
+     * @return optionally the user logged in to
+     */
     public static Optional<User> attemptLogin(String username, String password){
         Optional user = Optional.empty();
         for (User account : users) {
@@ -142,6 +179,9 @@ public class UserLoader {
         return hiscores;
     }
 
+    /**
+     * Write the user and hiscore data to a file
+     */
     public static void updateFiles(){
 
         updateUsersFile();
@@ -151,7 +191,7 @@ public class UserLoader {
 
     private static void updateUsersFile(){
 
-        File target = tryOpenFile("users.csv");
+        File target = tryOpenFile(dir + "usersdata.csv");
         String output = buildOutputToUsersFile();
         writeToFile(target, output);
 
@@ -188,7 +228,7 @@ public class UserLoader {
 
     private static void updateHiscoresFile(){
 
-        File target = tryOpenFile("Hiscores.csv");
+        File target = tryOpenFile(dir + "Hiscores.csv");
         String output = buildOutputToHiscoresFile();
         writeToFile(target, output);
 
