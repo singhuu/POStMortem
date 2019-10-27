@@ -34,6 +34,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "170dp"
         android:textSize="30sp"
+        android:onClick="clickHandler"
         />
 
     <Button
@@ -43,7 +44,8 @@
         android:text="Answer2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "290dp"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:onClick="clickHandler"/>
 
     <Button
         android:id="@+id/button_answer3"
@@ -52,7 +54,8 @@
         android:text="Answer3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "410dp"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:onClick="clickHandler"/>
 
     <Button
         android:id="@+id/button_answer4"
@@ -61,7 +64,8 @@
         android:text="Answer4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "530dp"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:onClick="clickHandler"/>
 
     <Button
         android:id="@+id/button_next"
@@ -70,7 +74,8 @@
         android:text="Next"
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "640dp"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:onClick="clickHandler"/>
 
 
 </RelativeLayout>

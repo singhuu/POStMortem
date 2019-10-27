@@ -1,0 +1,5 @@
+What is the average number of hours of sleep a typical cs student gets?, 0, -4, 5, 8
+Who is the most helpful cs prof?, Stack Overflow, David, Francois, Nancy
+What is the hardest part of a CSC207 assignment?, Cloning repository, design process, initial development, bug fixing
+How many hours does a typical cs student spend procrastinating their assignments?, As many as possible, 0, 24, 168
+
