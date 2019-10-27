@@ -1,9 +1,7 @@
 package com.example.postmortem.MenuSystems;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,10 +9,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.example.postmortem.User;
+import com.example.postmortem.UserLoader;
+
 import java.util.List;
+import java.util.Optional;
 
 class UserSelectMenu extends GameMenu {
+
+    private final int USERNAME_BAR = 1;
+    private final int PASSWORD_BAR = 2;
 
     UserSelectMenu(String title){
         super(title);
@@ -55,6 +59,7 @@ class UserSelectMenu extends GameMenu {
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView.setY(64);
         textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        setColours(textView);
         items.add(textView);
     }
 
@@ -71,36 +76,84 @@ class UserSelectMenu extends GameMenu {
                 attemptLogin(context);
             }
         });
+        setColours(loginButton);
         items.add(loginButton);
 
         //set the properties of the create user button
         Button createButton = new Button(context);
         createButton.setText("Create New User");
         createButton.setTextSize(18);
-        createButton.setY(640);
+        createButton.setY(672);
         createButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptCreateAccount(context);
+                attemptCreateAccount();
             }
         });
+        setColours(createButton);
         items.add(createButton);
     }
 
     private void attemptLogin(AppCompatActivity context){
-        EditText usernameBar = (EditText) items.get(1);
-        String username = usernameBar.getText().toString();
 
-        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
-        intent.putExtra("username", username);
+        Optional<User> user = getUserLoggedIn();
+        if(user.isPresent()){
+            loginSuccess(context, user.get());
+        } else {
+            loginFail();
+        }
+    }
+
+    private Optional<User> getUserLoggedIn() {
+        EditText usernameBar = (EditText) items.get(USERNAME_BAR);
+        EditText passwordBar = (EditText) items.get(PASSWORD_BAR);
+
+        String username = usernameBar.getText().toString();
+        String password = passwordBar.getText().toString();
+
+        return UserLoader.attemptLogin(username, password);
+    }
+
+    private void loginSuccess(AppCompatActivity context, User user){
+
+        Intent intent  = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        intent.putExtra("username", user.getUsername());
 
         context.startActivity(intent);
         context.finish();
+
     }
 
-    private void attemptCreateAccount(AppCompatActivity context){
-        attemptLogin(context);
+    private void loginFail(){
+
+        EditText usernameBar = (EditText) items.get(USERNAME_BAR);
+        EditText passwordBar = (EditText) items.get(PASSWORD_BAR);
+
+        usernameBar.setText("Login failed, try  again");
+        passwordBar.setText("Password");
+
+    }
+
+    private void attemptCreateAccount(){
+
+        EditText usernameBar = (EditText) items.get(USERNAME_BAR);
+        EditText passwordBar = (EditText) items.get(PASSWORD_BAR);
+
+        String username = usernameBar.getText().toString();
+        String password = passwordBar.getText().toString();
+
+        boolean userCreated = UserLoader.createUser(username, password);
+
+        if(userCreated){
+            usernameBar.setText("Account created");
+            passwordBar.setText("Password");
+            UserLoader.updateFiles();
+        } else {
+            usernameBar.setText("Username Taken");
+            passwordBar.setText("Password");
+        }
+
     }
 
 }

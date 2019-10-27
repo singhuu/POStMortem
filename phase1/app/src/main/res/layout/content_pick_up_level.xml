@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".PickUpLevelActivity"
+    tools:context=".LevelSystems.PickUpLevelActivity"
     tools:showIn="@layout/activity_pick_up_level">
 
     <ImageView
@@ -13,16 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/activity_button"
-        app:srcCompat="@mipmap/desk_background_foreground"
+        android:scaleX="30"
+        android:scaleY="2.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="parent"
+        app:srcCompat="@mipmap/desk_background_foreground" />
 
     <GridLayout
         android:id="@+id/buttonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +101,7 @@
         android:background="@color/supremeRed"
         android:fontFamily="sans-serif-medium"
         android:padding="10dp"
-        android:text="NULL"
+        android:text="@string/non_filled_text"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold|italic"

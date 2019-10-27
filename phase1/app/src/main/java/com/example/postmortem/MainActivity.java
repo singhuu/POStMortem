@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     switch (activity) {
 
       case MENU_ACTIVITY:
+        UserLoader.findFilePath(this);
+        UserLoader.load();
         intent  = GameMenu.openMenu(this, GameMenu.LOGIN_MENU);
         break;
 
@@ -68,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     startActivity(intent);
-    finish();
 
   }
 

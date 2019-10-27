@@ -1,5 +1,7 @@
 package com.example.postmortem;
 
+import com.example.postmortem.LevelSystems.*;
+
 import java.util.ArrayList;
 
 public class GameManager {
@@ -16,20 +18,29 @@ public class GameManager {
   }
 
   // Creates a level and adds it to level list, returns true if success, false if failed
-  public boolean createLevel(int difficulty, String levelType) {
-    if(levelType.equals("tap")){
-      Level level = new tapLevel(difficulty);
+  public boolean createLevel(int difficulty, LevelType levelType) {
+    Level level;
+
+    switch (levelType){
+
+      case PICKUP:
+        level = new PickUpLevel(difficulty);
+        break;
+
+      case TYPE:
+        level = new TypeLevel(difficulty);
+        break;
+
+      case TAP:
+        level = new TapLevel(difficulty);
+        break;
+
+      default:
+        System.out.println("Unknown level type");
+        return false;
+
     }
-    else if(levelType.equals("type")){
-      Level level = new typeLevel(difficulty);
-    }
-    else if(levelType.equals("pickup")){
-      Level level = new pickupLevel(difficulty);
-    }
-    else{
-      System.out.println("Unknown level type");
-      return false;
-    }
+
     levels.add(level);
     return true;
   }
