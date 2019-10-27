@@ -3,4 +3,5 @@
     <string name="open_instruction">Add you activity to the spinner and the switch statement</string>
     <string name="activity_button">Go</string>
     <string name="title_activity_pick_up_level">PickUpLevelActivity</string>
+    <string name="tap_level_instructions">Tap the laptop as many times as possible before time runs out!</string>
 </resources>
