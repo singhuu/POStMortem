@@ -37,7 +37,7 @@ class MainMenu extends GameMenu {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                start(context);
+                continueGame(context);
             }
         });
         setColours(continueButton);
@@ -111,7 +111,15 @@ class MainMenu extends GameMenu {
         items.add(textView);
     }
 
+    private void continueGame(AppCompatActivity context){
+        //TODO: once the game manager has been completed this can be implemented
+    }
+
     private void start(AppCompatActivity context){
+        //TODO: once the game manager has been completed this can be implemented
+
+        //currently this just send the program to the game over menu
+
         Intent oldIntent = context.getIntent();
         User user = (User) oldIntent.getSerializableExtra("user");
 
