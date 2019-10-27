@@ -58,4 +58,7 @@ public class GameManager {
     activeLevelID = id;
   }
 
+  public Level getRecentLevel(){
+      return levels.get(activeLevelID);
+  }
 }
