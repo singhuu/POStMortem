@@ -47,12 +47,7 @@ public class UserLoader {
         File file = new File(filePath);
         try{
 
-            boolean created = file.createNewFile();
-            if (created){
-                created = !created;
-            } else {
-                created = !created;
-            }
+            file.createNewFile();
 
         } catch (IOException e){
             e.printStackTrace();

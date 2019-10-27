@@ -1,11 +1,14 @@
 package com.example.postmortem.MenuSystems;
 
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.postmortem.User;
 
 import java.util.List;
 
@@ -107,9 +110,21 @@ public class GameOverMenu extends GameMenu {
 
     private void restart(AppCompatActivity context){
 
+        Intent oldIntent = context.getIntent();
+        User user = (User) oldIntent.getSerializableExtra("user");
+
+        Intent newIntent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        newIntent.putExtra("user", user);
+
+        context.startActivity(newIntent);
+        context.finish();
+
     }
 
     private void quit(AppCompatActivity context){
+
+        context.finish();
+        System.exit(0);
 
     }
 
