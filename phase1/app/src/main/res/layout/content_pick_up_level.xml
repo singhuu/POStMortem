@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".PickUpLevelActivity"
+    tools:context=".LevelSystems.PickUpLevelActivity"
     tools:showIn="@layout/activity_pick_up_level">
 
     <ImageView

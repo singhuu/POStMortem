@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PickUpLevelActivity">
+    tools:context=".LevelSystems.PickUpLevelActivity">
 
     <include layout="@layout/content_pick_up_level" />
 

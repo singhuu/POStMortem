@@ -1,4 +1,4 @@
-package com.example.postmortem;
+package com.example.postmortem.LevelSystems;
 
 import android.os.Bundle;
 
@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import com.example.postmortem.R;
 
 public class PickUpLevelActivity extends AppCompatActivity {
     PickUpLevel level;

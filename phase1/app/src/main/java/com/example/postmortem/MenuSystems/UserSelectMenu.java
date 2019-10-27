@@ -55,6 +55,7 @@ class UserSelectMenu extends GameMenu {
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView.setY(64);
         textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        setColours(textView);
         items.add(textView);
     }
 
@@ -71,13 +72,14 @@ class UserSelectMenu extends GameMenu {
                 attemptLogin(context);
             }
         });
+        setColours(loginButton);
         items.add(loginButton);
 
         //set the properties of the create user button
         Button createButton = new Button(context);
         createButton.setText("Create New User");
         createButton.setTextSize(18);
-        createButton.setY(640);
+        createButton.setY(672);
         createButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +87,7 @@ class UserSelectMenu extends GameMenu {
                 attemptCreateAccount(context);
             }
         });
+        setColours(createButton);
         items.add(createButton);
     }
 

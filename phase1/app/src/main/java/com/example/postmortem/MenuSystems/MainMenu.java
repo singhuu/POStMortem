@@ -1,9 +1,8 @@
 package com.example.postmortem.MenuSystems;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postmortem.MainActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class MainMenu extends GameMenu {
@@ -44,13 +42,14 @@ class MainMenu extends GameMenu {
                 start(context);
             }
         });
+        setColours(continueButton);
         items.add(continueButton);
 
         //set the properties of the start button
         Button startButton = new Button(context);
         startButton.setText("Start");
         startButton.setTextSize(18);
-        startButton.setY(384);
+        startButton.setY(416);
         startButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,13 +57,14 @@ class MainMenu extends GameMenu {
                 start(context);
             }
         });
+        setColours(startButton);
         items.add(startButton);
 
         //set the properties of the logout button
         Button logoutButton = new Button(context);
         logoutButton.setText("Logout");
         logoutButton.setTextSize(18);
-        logoutButton.setY(512);
+        logoutButton.setY(576);
         logoutButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,13 +72,14 @@ class MainMenu extends GameMenu {
                 logout(context);
             }
         });
+        setColours(logoutButton);
         items.add(logoutButton);
 
         //set the properties of the exit button
         Button exitButton = new Button(context);
         exitButton.setText("Quit");
         exitButton.setTextSize(18);
-        exitButton.setY(640);
+        exitButton.setY(736);
         exitButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +87,7 @@ class MainMenu extends GameMenu {
                 quit(context);
             }
         });
+        setColours(exitButton);
         items.add(exitButton);
     }
 
@@ -106,6 +108,7 @@ class MainMenu extends GameMenu {
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView.setY(64);
         textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        setColours(textView);
         items.add(textView);
     }
 
