@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.postmortem.R;
 
 public class PickUpLevelActivity extends AppCompatActivity {
-    PickUpLevel level = new PickUpLevel(-1);
+    PickUpLevel level;
     Button[] selectButtons;
 
     @Override
@@ -18,22 +18,26 @@ public class PickUpLevelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_up_level);
 
-        level.difficulty = 1; //TODO temp value to be passed in as extra
+        level = new PickUpLevel(1); //TODO temp value to be passed in as extra
 
         selectButtons = getButtons();
         assignButtonVals(selectButtons);
 
-        TextView searchPrompt = findViewById(R.id.searchPrompt);
-        String searchStr = level.createSearchString();
-        searchPrompt.setText(searchStr);
+        updateSearchPrompt();
 
+    }
+
+    private void updateSearchPrompt(){
+        TextView searchPrompt = findViewById(R.id.searchPrompt);
+        String searchStr = "Find the " + level.getTarget() + "!";
+        searchPrompt.setText(searchStr);
     }
 
     //TODO need to make sure at least one button has a target
     private void assignButtonVals(Button[] selectButtons) {
-        String[] possibleButtonVals = PickUpLevel.possibleObjects;
+        String[] selectables = level.getSelectables();
         for(int i = 0; i < selectButtons.length; i++){
-            String newButtonVal = possibleButtonVals[(int)(Math.random() * possibleButtonVals.length)];
+            String newButtonVal = selectables[i];
             selectButtons[i].setText(newButtonVal);
         }
     }
@@ -60,6 +64,7 @@ public class PickUpLevelActivity extends AppCompatActivity {
         if(correctSelect){
             level.numCorrect += 1;
             assignButtonVals(selectButtons);
+            updateSearchPrompt();
         }else{
             //TODO display x on screen
         }
