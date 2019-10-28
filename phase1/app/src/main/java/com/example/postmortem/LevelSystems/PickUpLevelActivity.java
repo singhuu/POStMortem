@@ -41,8 +41,22 @@ public class PickUpLevelActivity extends AppCompatActivity {
     private void assignButtonVals(Button[] selectButtons) {
         String[] selectables = level.getSelectables();
         for(int i = 0; i < selectButtons.length; i++){
-            String newButtonVal = selectables[i];
-            selectButtons[i].setText(newButtonVal);
+            selectButtons[i].setContentDescription(selectables[i]);
+            assignButtonImage(selectButtons[i], selectables[i]);
+        }
+    }
+
+    private void assignButtonImage(Button button, String buttonVal){
+        switch(buttonVal){
+            case "Laptop":
+                button.setBackgroundResource(R.mipmap.laptop_open);
+                break;
+
+            case "Backpack":
+                button.setBackgroundResource(R.mipmap.desk_background_foreground);
+
+            default:
+                button.setBackgroundResource(R.drawable.ic_launcher_foreground);
         }
     }
 
@@ -61,7 +75,7 @@ public class PickUpLevelActivity extends AppCompatActivity {
 
     public void clickHandler(View target){
         Button clickedButton = (Button) target;
-        String clickedVal = (String) clickedButton.getText();
+        String clickedVal = (String) clickedButton.getContentDescription();
 
         boolean correctSelect = level.checkSelectVal(clickedVal);
 
