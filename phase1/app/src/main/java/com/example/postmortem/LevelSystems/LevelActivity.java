@@ -1,7 +1,7 @@
 package com.example.postmortem.LevelSystems;
 
-import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,10 +19,17 @@ public abstract class LevelActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(layout);
 
-    ActionBar actionBar = getActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
-
     this.setup();
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    if (keyCode == KeyEvent.KEYCODE_BACK ) {
+      // do something on back.
+      return true;
+    }
+
+    return super.onKeyDown(keyCode, event);
   }
 
   /**
