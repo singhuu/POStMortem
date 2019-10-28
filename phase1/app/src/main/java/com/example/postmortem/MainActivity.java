@@ -8,6 +8,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.LevelSystems.TapLevelActivity;
 import com.example.postmortem.MenuSystems.GameMenu;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,12 +16,13 @@ public class MainActivity extends AppCompatActivity {
   /**
    * The spinner menu items
    */
-  public final static String MENU_ACTIVITY = "menu activity";
+  public final static String MENU_ACTIVITY = "Menu Activity";
+  public final static String TAP_LEVEL = "Tap Level";
 
   /**
    * The spinners array
    */
-  private final String[] activities = {MENU_ACTIVITY, "nihil"};
+  private final String[] activities = {MENU_ACTIVITY, TAP_LEVEL};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         UserLoader.findFilePath(this);
         UserLoader.load();
         intent  = GameMenu.openMenu(this, GameMenu.LOGIN_MENU);
+        break;
+
+      case TAP_LEVEL:
+        intent = new Intent(this, TapLevelActivity.class);
         break;
 
       default:
