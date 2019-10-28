@@ -39,6 +39,10 @@ public class User implements Serializable {
     return this.hiScore;
   }
 
+  public int getScore(){
+    return tapScore + typeScore + pickupScore;
+  }
+
   public void setScore(int score, LevelType game) {
     switch (game){
       case TAP:

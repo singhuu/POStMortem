@@ -174,6 +174,38 @@ public class UserLoader {
         return hiscores;
     }
 
+    public static void updateHiscores(String username, int score){
+
+        List<String[]> newHiscores = new ArrayList<>();
+        int i = 0;
+        boolean added = false;
+
+        if(hiscores.size() == 0){
+            String[] newElement = new String[2];
+            newElement[0] = username;
+            newElement[1] = Integer.toString(score);
+            newHiscores.add(newElement);
+        }
+
+        while(i < hiscores.size() && newHiscores.size() < 5){
+            String[] hiscore = hiscores.get(i);
+
+            if(Integer.parseInt(hiscore[1]) < score && !added){
+                String[] newElement = new String[2];
+                newElement[0] = username;
+                newElement[1] = Integer.toString(score);
+                newHiscores.add(newElement);
+            }
+
+            if(newHiscores.size() < 5){
+                newHiscores.add(hiscore);
+            }
+        }
+
+        hiscores = newHiscores;
+
+    }
+
     /**
      * Write the user and hiscore data to a file
      */
