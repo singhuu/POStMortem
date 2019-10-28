@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class PickUpLevel extends Level {
-    static final String[] possibleObjects = {"Deodorant", "Laptop", "Phone", "Pencil", "Tissue",
-                                            "Wallet", "Notebook", "Gym Bag", "Glasses", "Backpack"};
+    static final String[] possibleObjects = {"Deodorant", "Laptop", "Phone", "Pencil", "TCard",
+                                            "Wallet", "Notebook", "Gym Bag", "Glasses", "Snack"};
 
     private String targetObject;
     private String[] selectables;

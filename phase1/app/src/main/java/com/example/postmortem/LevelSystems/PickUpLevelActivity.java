@@ -44,16 +44,50 @@ public class PickUpLevelActivity extends AppCompatActivity {
             selectButtons[i].setContentDescription(selectables[i]);
             assignButtonImage(selectButtons[i], selectables[i]);
         }
+        System.out.println(selectables.toString());
     }
 
     private void assignButtonImage(Button button, String buttonVal){
         switch(buttonVal){
+            case "Deodorant":
+                button.setBackgroundResource(R.mipmap.deodorant);
+                break;
+
             case "Laptop":
                 button.setBackgroundResource(R.mipmap.laptop_open);
                 break;
 
-            case "Backpack":
-                button.setBackgroundResource(R.mipmap.desk_background_foreground);
+            case "Phone":
+                button.setBackgroundResource(R.mipmap.phone);
+                break;
+
+            case "Pencil":
+                button.setBackgroundResource(R.mipmap.pencil);
+                break;
+
+            case "TCard":
+                button.setBackgroundResource(R.mipmap.tcard);
+                break;
+
+            case "Wallet":
+                button.setBackgroundResource(R.mipmap.wallet);
+                break;
+
+            case "Notebook":
+                button.setBackgroundResource(R.mipmap.notebook);
+                break;
+
+            case "Gym Bag":
+                button.setBackgroundResource(R.mipmap.gymbag);
+                break;
+
+            case "Glasses":
+                button.setBackgroundResource(R.mipmap.glasses);
+                break;
+
+            case "Snack":
+                button.setBackgroundResource(R.mipmap.tasty_snack);
+                break;
 
             default:
                 button.setBackgroundResource(R.drawable.ic_launcher_foreground);
