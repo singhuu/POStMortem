@@ -2,7 +2,9 @@ package com.example.postmortem;
 
 import com.example.postmortem.LevelSystems.LevelType;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
   private String username;
   private String password;

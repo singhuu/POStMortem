@@ -1,15 +1,13 @@
 package com.example.postmortem.MenuSystems;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.postmortem.MainActivity;
+import com.example.postmortem.User;
 
 import java.util.List;
 
@@ -39,7 +37,7 @@ class MainMenu extends GameMenu {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                start(context);
+                continueGame(context);
             }
         });
         setColours(continueButton);
@@ -93,7 +91,8 @@ class MainMenu extends GameMenu {
 
     private void createTextViews(AppCompatActivity context) {
         Intent intent = context.getIntent();
-        String username = intent.getStringExtra("username");
+        User user = (User) intent.getSerializableExtra("user");
+        String username = user.getUsername();
 
         //set the properties of the user text view
         TextView userText = new TextView(context);
@@ -112,9 +111,24 @@ class MainMenu extends GameMenu {
         items.add(textView);
     }
 
+    private void continueGame(AppCompatActivity context){
+        //TODO: once the game manager has been completed this can be implemented
+    }
+
     private void start(AppCompatActivity context){
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
+        //TODO: once the game manager has been completed this can be implemented
+
+        //currently this just send the program to the game over menu
+
+        Intent oldIntent = context.getIntent();
+        User user = (User) oldIntent.getSerializableExtra("user");
+
+        Intent newIntent = GameMenu.openMenu(context, GameMenu.GAME_OVER_MENU);
+        newIntent.putExtra("user", user);
+
+        context.startActivity(newIntent);
+        context.finish();
+
     }
 
     private void logout(AppCompatActivity context){

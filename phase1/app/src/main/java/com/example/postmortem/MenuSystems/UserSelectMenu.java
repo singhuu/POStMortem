@@ -117,8 +117,8 @@ class UserSelectMenu extends GameMenu {
 
     private void loginSuccess(AppCompatActivity context, User user){
 
-        Intent intent  = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
-        intent.putExtra("username", user.getUsername());
+        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        intent.putExtra("user", user);
 
         context.startActivity(intent);
         context.finish();
