@@ -12,6 +12,7 @@ import com.example.postmortem.R;
 public class PickUpLevelActivity extends AppCompatActivity {
     PickUpLevel level;
     Button[] selectButtons;
+    TextView scoreText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,9 @@ public class PickUpLevelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pick_up_level);
 
         level = new PickUpLevel(1); //TODO temp value to be passed in as extra
+
+        scoreText = findViewById(R.id.score);
+        scoreText.setText("0");
 
         selectButtons = getButtons();
         assignButtonVals(selectButtons);
@@ -62,11 +66,12 @@ public class PickUpLevelActivity extends AppCompatActivity {
         boolean correctSelect = level.checkSelectVal(clickedVal);
 
         if(correctSelect){
-            level.numCorrect += 1;
+            level.increaseScore();
+            scoreText.setText(level.getScore() + "");
             assignButtonVals(selectButtons);
             updateSearchPrompt();
         }else{
-            //TODO display x on screen
+            //TODO display x on screen and cease checks for indeterminate time
         }
 
     }

@@ -10,7 +10,7 @@ public class PickUpLevel extends Level {
 
     private String targetObject;
     private String[] selectables;
-    int numCorrect = 0;
+    private int numCorrect = 0;
 
     public PickUpLevel(int difficulty){
         super(difficulty);
@@ -55,7 +55,11 @@ public class PickUpLevel extends Level {
 
     @Override
     public int getScore() {
-        return 0;
+        return this.numCorrect;
+    }
+
+    public void increaseScore(){
+        this.numCorrect += 1;
     }
 
     boolean checkSelectVal(String val){
