@@ -12,9 +12,13 @@ public class GameManager {
   // Stores the levels of the game
   static ArrayList<Level> levels;
 
+  // Current active level
+  int activeLevelID;
+
   public GameManager() {
     users = new ArrayList<>();
     levels = new ArrayList<>();
+    activeLevelID = 0;
   }
 
   // Creates a level and adds it to level list, returns true if success, false if failed
@@ -42,6 +46,19 @@ public class GameManager {
     }
 
     levels.add(level);
+    activeLevelID = levels.indexOf(level);
     return true;
+  }
+
+  public int getCurrentID(){
+    return activeLevelID;
+  }
+
+  public void setCurrentID(int id){
+    activeLevelID = id;
+  }
+
+  public Level getRecentLevel(){
+      return levels.get(activeLevelID);
   }
 }
