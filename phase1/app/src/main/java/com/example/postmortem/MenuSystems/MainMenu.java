@@ -58,11 +58,26 @@ class MainMenu extends GameMenu {
         setColours(startButton);
         items.add(startButton);
 
+        //create and set the properties of the options button
+        Button optionsButton = new Button(context);
+        optionsButton.setText("Options");
+        optionsButton.setTextSize(18);
+        optionsButton.setY(576);
+        optionsButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openOntions(context);
+            }
+        });
+        setColours(optionsButton);
+        items.add(optionsButton);
+
         //set the properties of the logout button
         Button logoutButton = new Button(context);
         logoutButton.setText("Logout");
         logoutButton.setTextSize(18);
-        logoutButton.setY(576);
+        logoutButton.setY(736);
         logoutButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +92,7 @@ class MainMenu extends GameMenu {
         Button exitButton = new Button(context);
         exitButton.setText("Quit");
         exitButton.setTextSize(18);
-        exitButton.setY(736);
+        exitButton.setY(896);
         exitButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +144,11 @@ class MainMenu extends GameMenu {
         context.startActivity(newIntent);
         context.finish();
 
+    }
+
+    private void openOntions(AppCompatActivity context){
+        Intent intent = GameMenu.openMenu(context, GameMenu.OPTIONS_MENU);
+        context.startActivity(intent);
     }
 
     private void logout(AppCompatActivity context){

@@ -1,6 +1,5 @@
 package com.example.postmortem.MenuSystems;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
@@ -17,6 +16,7 @@ public abstract class GameMenu {
     public static final String MAIN_MENU = "Main Menu";
     public static final String LOGIN_MENU = "Login or Create a New User";
     public static final String GAME_OVER_MENU = "Game Over";
+    public static final String OPTIONS_MENU = "Options";
 
     public static final String MENU_TYPE = "menu_type";
 
@@ -51,6 +51,10 @@ public abstract class GameMenu {
 
             case GAME_OVER_MENU:
                 menu = new GameOverMenu(menu_type);
+                break;
+
+            case OPTIONS_MENU:
+                menu = new OptionMenu(menu_type);
                 break;
 
             default:
