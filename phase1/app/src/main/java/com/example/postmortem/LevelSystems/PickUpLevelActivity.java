@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.example.postmortem.R;
 
-public class PickUpLevelActivity extends AppCompatActivity {
+public class PickUpLevelActivity extends LevelActivity {
     PickUpLevel level;
     Button[] selectButtons;
     TextView scoreText;
@@ -29,6 +29,7 @@ public class PickUpLevelActivity extends AppCompatActivity {
 
         updateSearchPrompt();
 
+        startTimer(10);
     }
 
     private void updateSearchPrompt(){
