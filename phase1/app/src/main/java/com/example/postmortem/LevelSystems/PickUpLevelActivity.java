@@ -1,5 +1,6 @@
 package com.example.postmortem.LevelSystems;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 
 public class PickUpLevelActivity extends LevelActivity {
     PickUpLevel level;
     Button[] selectButtons;
     TextView scoreText;
+    TextView timerText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +28,16 @@ public class PickUpLevelActivity extends LevelActivity {
         scoreText = findViewById(R.id.score);
         scoreText.setText("0");
 
+        timeLeft = 30; //TODO temporary until timeLeft is passed in
+        timerText = findViewById(R.id.timer);
+        timerText.setText(timeLeft + "");
+
         selectButtons = getButtons();
         assignButtonVals(selectButtons);
 
         updateSearchPrompt();
 
-        startTimer(10);
+        startTimer(timeLeft);
     }
 
     private void updateSearchPrompt(){
@@ -125,4 +133,14 @@ public class PickUpLevelActivity extends LevelActivity {
 
     }
 
+    @Override
+    public void countTickHandler() {
+        timerText.setText(timeLeft + "");
+    }
+
+    @Override
+    public void countFinishHandler() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
