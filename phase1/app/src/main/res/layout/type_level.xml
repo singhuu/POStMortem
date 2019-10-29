@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:text="Next"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "640dp"
+        android:layout_marginTop = "630dp"
         android:textSize="30sp"
         android:onClick="clickHandler"/>
 

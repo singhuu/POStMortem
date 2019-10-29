@@ -1,0 +1,5 @@
+What is 2 + 2? 4, 8, 6, -4
+How many hours does a typical cs student spend procrastinating their assignments?, As many as possible, 0, 24, 168
+What is the acronym for the principles of design? SOLID, SIMON, KANYE, CLEAN
+What is the principle of design that states that a class should have a single purpose? Single Responsibility Principle, The Goat Principle, The Single Purpose Principle, The One Goal Principle
+Who is the water type starter Pokemon from gen 4? Piplup, Squirtle, Frokie, Oshawatt
