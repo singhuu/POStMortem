@@ -12,6 +12,8 @@ public class Question {
     public Question(String question, ArrayList<String> answers) {
         this.question = question;
         this.answers = answers;
+        this.correctAnswer = answers.get(0);
+        randomizeAnswerOrder();
 
     }
 

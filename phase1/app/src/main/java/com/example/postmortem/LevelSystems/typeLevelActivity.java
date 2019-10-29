@@ -5,16 +5,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.postmortem.R;
 
 
 
-public class typeLevelActivity extends AppCompatActivity {
+public class typeLevelActivity extends LevelActivity {
 
   TypeLevel level = new TypeLevel(1);
   Button[] selectButtons;
+  private boolean clickedAnswer = false;
   /** Chooses how to display this level when it is created in the app */
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -28,7 +27,7 @@ public class typeLevelActivity extends AppCompatActivity {
     TextView title = findViewById(R.id.textView4);
     TextView question_text = findViewById(R.id.textView5);
 
-    String a = "question 1/1";
+    String a = "Question " + level.getCurrentQuestionNum();
     title.setText(a);
     String text_1 = level.getCurrentQuestion().getQuestion();
     question_text.setText(text_1);
@@ -59,10 +58,11 @@ public class typeLevelActivity extends AppCompatActivity {
   public void clickHandler(View target) {
     Button clickedButton = (Button) target;
     String clickedVal = (String) clickedButton.getText();
-    System.out.println(clickedVal);
+    //System.out.println(clickedVal);
 
     /** if the button is one of the answers, show the color to indicate which button is correct */
    if (clickedButton != selectButtons[4]) {
+     clickedAnswer = true;
      if(level.checkAnswer(clickedVal)) {
        level.score = level.score + 1;
      }
@@ -76,10 +76,35 @@ public class typeLevelActivity extends AppCompatActivity {
        }
      }
    }
-
-    /** have to implement the next button */
+    /** goes to the next question */
    else {
+      if(clickedAnswer) {
+        level.nextQuestion();
+        assignButtonVals(selectButtons);
+        TextView title = findViewById(R.id.textView4);
+        TextView question_text = findViewById(R.id.textView5);
 
+        String a = "Question " + level.getCurrentQuestionNum();
+        title.setText(a);
+        String text_1 = level.getCurrentQuestion().getQuestion();
+        question_text.setText(text_1);
+        for(int i =0; i < selectButtons.length - 1; i++) {
+          selectButtons[i].setEnabled(true);
+          selectButtons[i].setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
+        clickedAnswer = false;
+      }
    }
+  }
+
+
+/** have to implement*/
+  public void countTickHandler() {
+
+  }
+
+  public void countFinishHandler() {
+
   }
 }
