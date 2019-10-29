@@ -1,6 +1,7 @@
 package com.example.postmortem.MenuSystems;
 
 import android.content.Intent;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -38,14 +39,15 @@ class UserSelectMenu extends GameMenu {
     private void createUserFields(AppCompatActivity context) {
         //set the properties of the username edittext
         EditText usernameBar = new EditText(context);
-        usernameBar.setText("username");
+        usernameBar.setHint(EditText.AUTOFILL_HINT_NAME);
         usernameBar.setY(256);
         usernameBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         items.add(usernameBar);
 
         //set the properties of the password edittext
         EditText passwordBar = new EditText(context);
-        passwordBar.setText("Password");
+        passwordBar.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        passwordBar.setHint(EditText.AUTOFILL_HINT_PASSWORD);
         passwordBar.setY(384);
         passwordBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         items.add(passwordBar);
