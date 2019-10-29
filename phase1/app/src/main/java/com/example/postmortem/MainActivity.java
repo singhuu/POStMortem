@@ -1,5 +1,6 @@
 package com.example.postmortem;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.LevelSystems.PickUpLevel;
 import com.example.postmortem.LevelSystems.PickUpLevelActivity;
 import com.example.postmortem.LevelSystems.TapLevelActivity;
+import com.example.postmortem.LevelSystems.typeLevelActivity;
 import com.example.postmortem.MenuSystems.GameMenu;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
+  private static Context mContext;
   /**
    * The spinner menu items
    */
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
+    mContext = this;
     setUpSpinner();
   }
 
@@ -43,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spinner.setAdapter(adapter);
 
+  }
+
+  public static Context getmContext() {
+    return mContext;
   }
 
   public void transitionToActivity(View view) {
