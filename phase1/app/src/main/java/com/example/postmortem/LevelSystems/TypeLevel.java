@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TypeLevel extends Level {
-    private String timerString = "00:30";
-
     private Question currentQuestion;
     private int currentQuestionNum = 0;
 

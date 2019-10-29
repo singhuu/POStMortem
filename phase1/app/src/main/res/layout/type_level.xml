@@ -6,15 +6,46 @@
 
     >
 
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:background="@color/supremeRed"
+        android:fontFamily="sans-serif-medium"
+        android:padding="10dp"
+        android:text="@string/non_filled_text"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold|italic"
+        android:layout_centerHorizontal="true"
+        />
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Question 1/x"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "15dp"
-        android:textSize="50sp"
+        android:layout_marginTop = "50dp"
+        android:textSize="30sp"
+        android:background="@color/supremeRed"
+        android:textColor="@android:color/white"
         />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@color/supremeRed"
+        android:fontFamily="sans-serif-medium"
+        android:padding="10dp"
+        android:text="@string/non_filled_text"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold|italic"
+         />
 
     <TextView
         android:id="@+id/textView5"
@@ -24,6 +55,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "100dp"
         android:textSize="25sp"
+        android:background="@color/supremeRed"
+        android:textColor="@android:color/white"
         />
 
     <Button
@@ -32,9 +65,11 @@
         android:layout_height="wrap_content"
         android:text="Answer1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "170dp"
-        android:textSize="30sp"
+        android:layout_marginTop = "190dp"
+        android:textSize="25sp"
         android:onClick="clickHandler"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
         />
 
     <Button
@@ -43,9 +78,11 @@
         android:layout_height="wrap_content"
         android:text="Answer2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "290dp"
-        android:textSize="30sp"
-        android:onClick="clickHandler"/>
+        android:layout_marginTop = "310dp"
+        android:textSize="25sp"
+        android:onClick="clickHandler"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/button_answer3"
@@ -53,9 +90,11 @@
         android:layout_height="wrap_content"
         android:text="Answer3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "410dp"
-        android:textSize="30sp"
-        android:onClick="clickHandler"/>
+        android:layout_marginTop = "430dp"
+        android:textSize="25sp"
+        android:onClick="clickHandler"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/button_answer4"
@@ -63,9 +102,11 @@
         android:layout_height="wrap_content"
         android:text="Answer4"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "530dp"
-        android:textSize="30sp"
-        android:onClick="clickHandler"/>
+        android:layout_marginTop = "550dp"
+        android:textSize="25sp"
+        android:onClick="clickHandler"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/button_next"
@@ -75,7 +116,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "630dp"
         android:textSize="30sp"
-        android:onClick="clickHandler"/>
+        android:onClick="clickHandler"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"/>
 
 
 </RelativeLayout>

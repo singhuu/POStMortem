@@ -1,10 +1,12 @@
 package com.example.postmortem.LevelSystems;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 
 
@@ -14,6 +16,7 @@ public class typeLevelActivity extends LevelActivity {
   TypeLevel level = new TypeLevel(1);
   Button[] selectButtons;
   private boolean clickedAnswer = false;
+  TextView timerText;
   /** Chooses how to display this level when it is created in the app */
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -31,6 +34,17 @@ public class typeLevelActivity extends LevelActivity {
     title.setText(a);
     String text_1 = level.getCurrentQuestion().getQuestion();
     question_text.setText(text_1);
+
+    //need to change based off of difficulty
+    timeLeft = 30;
+    timerText = findViewById(R.id.timer);
+    timerText.setText(timeLeft + 1 + " Seconds Remaining");
+    startTimer(timeLeft);
+
+
+    TextView textView = findViewById(R.id.score);
+    textView.setText("Score = " + level.getScore());
+
   }
 
   private Button[] getButtons() {
@@ -65,6 +79,8 @@ public class typeLevelActivity extends LevelActivity {
      clickedAnswer = true;
      if(level.checkAnswer(clickedVal)) {
        level.score = level.score + 1;
+       TextView textView = findViewById(R.id.score);
+       textView.setText("Score = " + level.getScore());
      }
      for (int i = 0; i < selectButtons.length - 1; i++) {
        //button shouldn't be clickable anymore
@@ -90,7 +106,7 @@ public class typeLevelActivity extends LevelActivity {
         question_text.setText(text_1);
         for(int i =0; i < selectButtons.length - 1; i++) {
           selectButtons[i].setEnabled(true);
-          selectButtons[i].setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+          selectButtons[i].setBackgroundColor(getResources().getColor(R.color.colorAccent));
         }
 
         clickedAnswer = false;
@@ -101,10 +117,11 @@ public class typeLevelActivity extends LevelActivity {
 
 /** have to implement*/
   public void countTickHandler() {
-
+    timerText.setText(timeLeft + 1 + "");
   }
 
   public void countFinishHandler() {
-
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
   }
 }
