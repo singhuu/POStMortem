@@ -8,6 +8,8 @@ public class PickUpLevel extends Level {
     static final String[] possibleObjects = {"Deodorant", "Laptop", "Phone", "Pencil", "TCard",
                                             "Wallet", "Notebook", "Gym Bag", "Glasses", "Snack"};
 
+    static final int WRONG_CHOICE_TIME = 1;
+
     private String targetObject;
     private String[] selectables;
     private int numCorrect = 0;

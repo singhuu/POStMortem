@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class LevelActivity extends AppCompatActivity {
   protected int timeLeft;
-  protected Level level; //TODO is this necessary? Different classes in subclasses allow for logic function calls
+  protected Level level;
   protected static int difficulty;
   protected CountDownTimer countTimer = null;
 

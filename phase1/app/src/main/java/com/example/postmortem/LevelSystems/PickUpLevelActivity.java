@@ -1,12 +1,14 @@
 package com.example.postmortem.LevelSystems;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.postmortem.MainActivity;
@@ -17,6 +19,7 @@ public class PickUpLevelActivity extends LevelActivity {
     Button[] selectButtons;
     TextView scoreText;
     TextView timerText;
+    ImageView wrongChoiceX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class PickUpLevelActivity extends LevelActivity {
         timeLeft = 30; //TODO temporary until timeLeft is passed in
         timerText = findViewById(R.id.timer);
         timerText.setText(timeLeft + 1 + "");
+
+        wrongChoiceX = findViewById(R.id.wrongChoiceX);
 
         selectButtons = getButtons();
         assignButtonVals(selectButtons);
@@ -116,25 +121,32 @@ public class PickUpLevelActivity extends LevelActivity {
     }
 
     public void clickHandler(View target){
-        Button clickedButton = (Button) target;
-        String clickedVal = (String) clickedButton.getContentDescription();
+        if(level.wrongChoiceCountdown == 0){
+            Button clickedButton = (Button) target;
+            String clickedVal = (String) clickedButton.getContentDescription();
 
-        boolean correctSelect = level.checkSelectVal(clickedVal);
+            boolean correctSelect = level.checkSelectVal(clickedVal);
 
-        if(correctSelect){
-            level.increaseScore();
-            scoreText.setText(level.getScore() + "");
-            assignButtonVals(selectButtons);
-            updateSearchPrompt();
-        }else{
-            //TODO display x on screen and cease checks for indeterminate time
+            if(correctSelect){
+                level.increaseScore();
+                scoreText.setText(level.getScore() + "");
+                assignButtonVals(selectButtons);
+                updateSearchPrompt();
+            }else{
+                level.wrongChoiceCountdown = PickUpLevel.WRONG_CHOICE_TIME;
+                wrongChoiceX.setVisibility(View.VISIBLE);
+            }
         }
-
     }
 
     @Override
-    public void countTickHandler() {
+    public void countTickHandler() { //TODO image stays when continuously clicking
         timerText.setText(timeLeft + 1 + "");
+
+        if(level.wrongChoiceCountdown != 0)
+            level.wrongChoiceCountdown -= 1;
+        else
+            wrongChoiceX.setVisibility(View.INVISIBLE);
     }
 
     @Override
