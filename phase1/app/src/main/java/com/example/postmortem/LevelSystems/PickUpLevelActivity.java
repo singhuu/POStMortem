@@ -30,7 +30,7 @@ public class PickUpLevelActivity extends LevelActivity {
 
         timeLeft = 30; //TODO temporary until timeLeft is passed in
         timerText = findViewById(R.id.timer);
-        timerText.setText(timeLeft + "");
+        timerText.setText(timeLeft + 1 + "");
 
         selectButtons = getButtons();
         assignButtonVals(selectButtons);
@@ -53,7 +53,6 @@ public class PickUpLevelActivity extends LevelActivity {
             selectButtons[i].setContentDescription(selectables[i]);
             assignButtonImage(selectButtons[i], selectables[i]);
         }
-        System.out.println(selectables.toString());
     }
 
     private void assignButtonImage(Button button, String buttonVal){
@@ -135,7 +134,7 @@ public class PickUpLevelActivity extends LevelActivity {
 
     @Override
     public void countTickHandler() {
-        timerText.setText(timeLeft + "");
+        timerText.setText(timeLeft + 1 + "");
     }
 
     @Override
