@@ -1,24 +1,32 @@
 package com.example.postmortem.LevelSystems;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 
 public class TapLevelActivity extends LevelActivity {
+  TextView timerText;
 
-  public TapLevelActivity() {
-    super(R.layout.tap_level, new TapLevel(difficulty));
-  }
-
-  /**
-   * Perform initial setup of layout. This includes setting the value of textboxes, buttons, etc.
-   */
   @Override
-  protected void setup() {
-    TextView textView = findViewById(R.id.textViewTapImage);
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.tap_level);
+
+    super.level = new TapLevel(1); //TODO temp value to be passed in as extra
+
+    TextView textView = findViewById(R.id.score);
     textView.setText("0");
+
+    timeLeft = 30; //TODO temporary until timeLeft is passed in
+    timerText = findViewById(R.id.timer);
+    timerText.setText(timeLeft + 1 + " Seconds Remaining");
+
+    startTimer(10);
   }
 
   public void pressButton(View target) {
@@ -26,7 +34,7 @@ public class TapLevelActivity extends LevelActivity {
     TapLevel tapLevel = (TapLevel) super.level;
     tapLevel.incrementTimesPressed();
     int timesPressed = tapLevel.getTimesPressed();
-    TextView textView = findViewById(R.id.textViewTapImage);
+    TextView textView = findViewById(R.id.score);
     textView.setText(Integer.toString(timesPressed));
 
     // now switch image in button
@@ -38,5 +46,16 @@ public class TapLevelActivity extends LevelActivity {
       // set it to closed
       imageButton.setImageResource(R.mipmap.laptop_closed_foreground);
     }
+  }
+
+  @Override
+  public void countTickHandler() {
+    timerText.setText(timeLeft + 1 + " Seconds Remaining");
+  }
+
+  @Override
+  public void countFinishHandler() {
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
   }
 }
