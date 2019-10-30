@@ -1,6 +1,8 @@
 package com.example.postmortem.MenuSystems;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -119,7 +121,7 @@ class OptionMenu extends GameMenu {
         donateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                donate();
+                donate(context);
             }
         });
         setColours(donateButton);
@@ -147,8 +149,10 @@ class OptionMenu extends GameMenu {
 
     }
 
-    private void donate(){
-
+    private void donate(AppCompatActivity context){
+        Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("https://www.paypal.com/ca/home"));
+        context.startActivity(intent);
     }
 
     private void cancel(AppCompatActivity context){
@@ -182,7 +186,8 @@ class OptionMenu extends GameMenu {
 
     private void showConfirmDialog(final AppCompatActivity context, final int timesPressed) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Are you sure you wish to disable ads").setTitle("Confirm");
+        String message = buildMessageString(timesPressed);
+        builder.setMessage(message).setTitle("Confirm");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -198,6 +203,17 @@ class OptionMenu extends GameMenu {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private String buildMessageString(int repititions){
+        StringBuilder message = new StringBuilder();
+        message.append("Are you sure ");
+        for(int i = 0; i < repititions; i++){
+            message.append("you're sure ");
+        }
+        message.append("that you want to disable ads?");
+
+        return message.toString();
     }
 
     private void disableAds(){
