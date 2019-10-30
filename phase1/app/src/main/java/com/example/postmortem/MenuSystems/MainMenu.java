@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.postmortem.GameManager;
 import com.example.postmortem.User;
 
 import java.util.List;
@@ -67,7 +69,7 @@ class MainMenu extends GameMenu {
         optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openOntions(context);
+                openOptions(context);
             }
         });
         setColours(optionsButton);
@@ -133,6 +135,7 @@ class MainMenu extends GameMenu {
     private void start(AppCompatActivity context){
         //TODO: once the game manager has been completed this can be implemented
 
+        /*
         //currently this just send the program to the game over menu
 
         Intent oldIntent = context.getIntent();
@@ -142,11 +145,15 @@ class MainMenu extends GameMenu {
         newIntent.putExtra("user", user);
 
         context.startActivity(newIntent);
-        context.finish();
+        context.finish();*/
+
+        //Creates gameManager and start first round of random levels
+        GameManager manager = new GameManager();
+        manager.createLevel(1, context);
 
     }
 
-    private void openOntions(AppCompatActivity context){
+    private void openOptions(AppCompatActivity context){
         Intent intent = GameMenu.openMenu(context, GameMenu.OPTIONS_MENU);
         context.startActivity(intent);
     }

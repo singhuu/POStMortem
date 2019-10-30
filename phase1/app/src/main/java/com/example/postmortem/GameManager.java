@@ -1,64 +1,86 @@
 package com.example.postmortem;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.view.Menu;
+
 import com.example.postmortem.LevelSystems.*;
+import com.example.postmortem.MenuSystems.MenuActivity;
 
 import java.util.ArrayList;
 
-public class GameManager {
+public class GameManager implements Parcelable {
 
-  // Stores the users of the game
-  static ArrayList<User> users;
-
-  // Stores the levels of the game
-  static ArrayList<Level> levels;
-
-  // Current active level
-  int activeLevelID;
+  private int currLevelType = -1;
 
   public GameManager() {
-    users = new ArrayList<>();
-    levels = new ArrayList<>();
-    activeLevelID = 0;
   }
 
+  protected GameManager(Parcel in) {
+    currLevelType = in.readInt();
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(currLevelType);
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  public static final Creator<GameManager> CREATOR = new Creator<GameManager>() {
+    @Override
+    public GameManager createFromParcel(Parcel in) {
+      return new GameManager(in);
+    }
+
+    @Override
+    public GameManager[] newArray(int size) {
+      return new GameManager[size];
+    }
+  };
+
   // Creates a level and adds it to level list, returns true if success, false if failed
-  public boolean createLevel(int difficulty, LevelType levelType) {
-    Level level;
+  //TODO need to add way to end level selection and go to scoremenu
+  public void createLevel(int difficulty, Context context) {
+    Intent newLevelIntent = null;
 
+    int levelType = (int)(Math.random()* 3);
+    while(levelType == currLevelType){
+      levelType = (int)(Math.random()* 3);
+    }
+
+    currLevelType = levelType;
     switch (levelType){
-
-      case PICKUP:
-        level = new PickUpLevel(difficulty);
+      case 0:
+        newLevelIntent = new Intent(context, PickUpLevelActivity.class);
         break;
 
-      case TYPE:
-        level = new TypeLevel(difficulty);
+      case 1:
+        newLevelIntent = new Intent(context, TapLevelActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         break;
 
-      case TAP:
-        level = new TapLevel(difficulty);
+      case 2:
+        newLevelIntent = new Intent(context, typeLevelActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         break;
 
       default:
         System.out.println("Unknown level type");
-        return false;
-
     }
 
-    levels.add(level);
-    activeLevelID = levels.indexOf(level);
-    return true;
-  }
-
-  public int getCurrentID(){
-    return activeLevelID;
-  }
-
-  public void setCurrentID(int id){
-    activeLevelID = id;
-  }
-
-  public Level getRecentLevel(){
-      return levels.get(activeLevelID);
+    try{
+      newLevelIntent.putExtra("DIFFICULTY", difficulty);
+      newLevelIntent.putExtra("GAME_MANAGER", this);
+      context.startActivity(newLevelIntent);
+    }
+    catch (NullPointerException e){
+      //TODO handle error
+    }
   }
 }

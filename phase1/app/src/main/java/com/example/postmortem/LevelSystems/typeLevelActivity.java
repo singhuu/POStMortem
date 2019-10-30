@@ -22,6 +22,9 @@ public class typeLevelActivity extends LevelActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.type_level);
 
+    gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
+    getIntent().getIntExtra("DIFFICULTY", difficulty);
+
     level.createQuestions();
 
     selectButtons = getButtons();
@@ -120,7 +123,6 @@ public class typeLevelActivity extends LevelActivity {
   }
 
   public void countFinishHandler() {
-    Intent intent = new Intent(this, MainActivity.class);
-    startActivity(intent);
+    gameManager.createLevel(level.difficulty, this);
   }
 }

@@ -3,9 +3,11 @@ package com.example.postmortem.LevelSystems;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import com.example.postmortem.LevelSystems.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,7 +28,10 @@ public class PickUpLevelActivity extends LevelActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_up_level);
 
-        level = new PickUpLevel(1); //TODO temp value to be passed in as extra
+        gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
+
+        getIntent().getIntExtra("DIFFICULTY", difficulty);
+        level = new PickUpLevel(difficulty); //TODO temp value to be passed in as extra
 
         scoreText = findViewById(R.id.score);
         scoreText.setText("0");
@@ -51,7 +56,6 @@ public class PickUpLevelActivity extends LevelActivity {
         searchPrompt.setText(searchStr);
     }
 
-    //TODO need to make sure at least one button has a target
     private void assignButtonVals(Button[] selectButtons) {
         String[] selectables = level.getSelectables();
         for(int i = 0; i < selectButtons.length; i++){
@@ -151,7 +155,6 @@ public class PickUpLevelActivity extends LevelActivity {
 
     @Override
     public void countFinishHandler() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        gameManager.createLevel(level.difficulty, this);
     }
 }

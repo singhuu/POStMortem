@@ -17,7 +17,10 @@ public class TapLevelActivity extends LevelActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.tap_level);
 
-    super.level = new TapLevel(1); //TODO temp value to be passed in as extra
+    gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
+
+    getIntent().getIntExtra("DIFFICULTY", difficulty);
+    level = new TapLevel(1); //TODO temp value to be passed in as extra
 
     TextView textView = findViewById(R.id.score);
     textView.setText("0");
@@ -55,7 +58,6 @@ public class TapLevelActivity extends LevelActivity {
 
   @Override
   public void countFinishHandler() {
-    Intent intent = new Intent(this, MainActivity.class);
-    startActivity(intent);
+    gameManager.createLevel(level.difficulty, this);
   }
 }

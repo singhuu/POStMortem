@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.KeyEvent;
 
+import com.example.postmortem.GameManager;
 import com.example.postmortem.MainActivity;
 import com.example.postmortem.MenuSystems.GameMenu;
 import com.example.postmortem.MenuSystems.GameOverMenu;
@@ -15,20 +16,18 @@ import androidx.appcompat.app.AppCompatActivity;
 public abstract class LevelActivity extends AppCompatActivity {
   protected int timeLeft;
   protected Level level;
+  protected GameManager gameManager;
   protected static int difficulty;
   protected CountDownTimer countTimer = null;
 
   /*LevelActivity(int layout, Level level) {
     this.layout = layout;
     this.level = level;
-  }
+  } */
 
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(layout);
-
-    this.setup();
-  }*/
+  }
 
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event)  {
