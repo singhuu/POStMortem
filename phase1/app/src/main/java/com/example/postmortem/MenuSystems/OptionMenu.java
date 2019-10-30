@@ -1,5 +1,6 @@
 package com.example.postmortem.MenuSystems;
 
+import android.content.DialogInterface;
 import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -11,11 +12,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
 class OptionMenu extends GameMenu {
+
+    private final int ADS_BOX = 3;
 
     OptionMenu(String title){
         super(title);
@@ -153,6 +157,56 @@ class OptionMenu extends GameMenu {
 
     private void toggleAds(AppCompatActivity context, boolean checked){
 
+        if(checked){
+            enableAds();
+        }else {
+            tryDisableAds(context, 0);
+        }
+
+    }
+
+    private void enableAds(){
+
+
+    }
+
+    private void tryDisableAds(final AppCompatActivity context, final int timesPressed){
+
+        if(timesPressed < 10){
+            showConfirmDialog(context, timesPressed);
+        }else {
+            disableAds();
+        }
+
+    }
+
+    private void showConfirmDialog(final AppCompatActivity context, final int timesPressed) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Are you sure you wish to disable ads").setTitle("Confirm");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tryDisableAds(context, timesPressed + 1);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                unDisableAds();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void disableAds(){
+
+    }
+
+    private void unDisableAds(){
+        CheckBox adsBox = (CheckBox) items.get(ADS_BOX);
+        adsBox.setChecked(true);
     }
 
 }
