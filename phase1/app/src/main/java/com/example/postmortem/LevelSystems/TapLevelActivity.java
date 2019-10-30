@@ -1,12 +1,10 @@
 package com.example.postmortem.LevelSystems;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 
 public class TapLevelActivity extends LevelActivity {
@@ -29,7 +27,7 @@ public class TapLevelActivity extends LevelActivity {
     timerText = findViewById(R.id.timer);
     timerText.setText(timeLeft + 1 + " Seconds Remaining");
 
-    startTimer(10);
+    startTimer(30); //TODO temp until timeLeft passed in
   }
 
   public void pressButton(View target) {

@@ -1,17 +1,14 @@
 package com.example.postmortem.LevelSystems;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 
 
-
-public class typeLevelActivity extends LevelActivity {
+public class TypeLevelActivity extends LevelActivity {
 
   TypeLevel level = new TypeLevel(1);
   Button[] selectButtons;

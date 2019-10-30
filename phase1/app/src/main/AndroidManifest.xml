@@ -27,7 +27,7 @@
         <activity android:name=".LevelSystems.TapLevel" />
         <activity android:name=".LevelSystems.TapLevelActivity" />
         <activity android:name=".LevelSystems.PickUpLevelActivity" />
-        <activity android:name=".LevelSystems.typeLevelActivity" />
+        <activity android:name=".LevelSystems.TypeLevelActivity" />
     </application>
 
 </manifest>

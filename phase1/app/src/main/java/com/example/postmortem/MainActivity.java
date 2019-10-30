@@ -9,10 +9,9 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.postmortem.LevelSystems.PickUpLevel;
 import com.example.postmortem.LevelSystems.PickUpLevelActivity;
 import com.example.postmortem.LevelSystems.TapLevelActivity;
-import com.example.postmortem.LevelSystems.typeLevelActivity;
+import com.example.postmortem.LevelSystems.TypeLevelActivity;
 import com.example.postmortem.MenuSystems.GameMenu;
 
 
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         break;
 
       case TYPE_LEVEL:
-        intent = new Intent(this, typeLevelActivity.class);
+        intent = new Intent(this, TypeLevelActivity.class);
         break;
 
       default:
