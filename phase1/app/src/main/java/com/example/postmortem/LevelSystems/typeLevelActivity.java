@@ -72,7 +72,6 @@ public class typeLevelActivity extends LevelActivity {
   public void clickHandler(View target) {
     Button clickedButton = (Button) target;
     String clickedVal = (String) clickedButton.getText();
-    //System.out.println(clickedVal);
 
     /** if the button is one of the answers, show the color to indicate which button is correct */
    if (clickedButton != selectButtons[4]) {

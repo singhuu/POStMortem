@@ -26,11 +26,12 @@ public class MainActivity extends AppCompatActivity {
   public final static String MENU_ACTIVITY = "Menu Activity";
   public final static String TAP_LEVEL = "Tap Level";
   public final static String PICKUP_LEVEL = "Pickup Level";
+  public final static String TYPE_LEVEL = "Type Level";
 
   /**
    * The spinners array
    */
-  private final String[] activities = {MENU_ACTIVITY, TAP_LEVEL, PICKUP_LEVEL};
+  private final String[] activities = {MENU_ACTIVITY, TAP_LEVEL, PICKUP_LEVEL, TYPE_LEVEL};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
       case TAP_LEVEL:
         intent = new Intent(this, TapLevelActivity.class);
+        break;
+
+      case TYPE_LEVEL:
+        intent = new Intent(this, typeLevelActivity.class);
         break;
 
       default:
