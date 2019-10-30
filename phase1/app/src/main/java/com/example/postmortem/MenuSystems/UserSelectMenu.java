@@ -132,8 +132,10 @@ class UserSelectMenu extends GameMenu {
         EditText usernameBar = (EditText) items.get(USERNAME_BAR);
         EditText passwordBar = (EditText) items.get(PASSWORD_BAR);
 
-        usernameBar.setText("Login failed, try  again");
-        passwordBar.setText("Password");
+        usernameBar.setText("");
+        usernameBar.setHint("Login failed, try  again");
+
+        passwordBar.setText("");
 
     }
 
@@ -148,12 +150,14 @@ class UserSelectMenu extends GameMenu {
         boolean userCreated = UserLoader.createUser(username, password);
 
         if(userCreated){
-            usernameBar.setText("Account created");
-            passwordBar.setText("Password");
+            usernameBar.setHint("Account created");
+            usernameBar.setText("");
+            passwordBar.setText("");
             UserLoader.updateFiles();
         } else {
-            usernameBar.setText("Username Taken");
-            passwordBar.setText("Password");
+            usernameBar.setHint("Username Taken");
+            usernameBar.setText("");
+            passwordBar.setText("");
         }
 
     }
