@@ -14,18 +14,37 @@ public class GameManager implements Parcelable {
   private int currLevelType = -1;
   private User activeUser;
 
+  private int levels;
+  private boolean runningAds;
+  private int difficulty;
+
   public GameManager() {
+    this.levels = 3;
+    this.difficulty = 1;
+    this.runningAds = true;
   }
 
+  /** Parcel Methods */
+
   protected GameManager(Parcel in) {
-    currLevelType = in.readInt();
-    activeUser = (User) in.readSerializable();
+    this.currLevelType = in.readInt();
+    this.activeUser = (User) in.readSerializable();
+    this.levels = in.readInt();
+    this.difficulty = in.readInt();
+    this.runningAds = in.readInt() == 1;
   }
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(currLevelType);
     dest.writeSerializable(activeUser);
+    dest.writeInt(levels);
+    dest.writeInt(difficulty);
+    if(runningAds){
+      dest.writeInt(1);
+    } else {
+      dest.writeInt(0);
+    }
   }
 
   @Override
@@ -45,12 +64,38 @@ public class GameManager implements Parcelable {
     }
   };
 
+  /** GameManger methods */
+
   public User getActiveUser() {
     return activeUser;
   }
 
   public void setActiveUser(User activeUser) {
     this.activeUser = activeUser;
+  }
+
+  public boolean isRunningAds() {
+    return runningAds;
+  }
+
+  public void setRunningAds(boolean runningAds){
+    this.runningAds = runningAds;
+  }
+
+  public int getLevels(){
+    return levels;
+  }
+
+  public void setLevels(int levels) {
+    this.levels = levels;
+  }
+
+  public int getDifficulty(){
+    return difficulty;
+  }
+
+  public void setDifficulty(int difficulty) {
+    this.difficulty = difficulty;
   }
 
   // Creates a level and adds it to level list, returns true if success, false if failed

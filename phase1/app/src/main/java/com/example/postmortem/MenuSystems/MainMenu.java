@@ -165,8 +165,11 @@ class MainMenu extends GameMenu {
     }
 
     private void openOptions(AppCompatActivity context){
+
         Intent intent = GameMenu.openMenu(context, GameMenu.OPTIONS_MENU);
+        intent.putExtra(GameManager.INTENT_NAME, manager);
         context.startActivity(intent);
+        context.finish();
     }
 
     private void logout(AppCompatActivity context){

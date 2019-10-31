@@ -17,11 +17,22 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.GameManager;
+
 import java.util.List;
 
 class OptionMenu extends GameMenu {
 
     private final int ADS_BOX = 3;
+    private final int DIFFICULTY_SELECTOR = 2;
+    private final int LEVEL_CHOICE = 1;
+
+    private final String EASY_DIFFICULTY = "minor";
+    private final String MEDIUM_DIFFICULTY = "major";
+    private final String HARD_DIFFICULTY =  "specialist";
+    private final String[] DIFFICULTIES = {EASY_DIFFICULTY, MEDIUM_DIFFICULTY, HARD_DIFFICULTY};
+
+    private GameManager manager;
 
     OptionMenu(String title){
         super(title);
@@ -30,11 +41,17 @@ class OptionMenu extends GameMenu {
     @Override
     public List<View> buildMenuItems(final AppCompatActivity context){
 
+        getGameManager(context);
         createTextViews(context);
         createSpinner(context);
         createButtons(context);
 
         return items;
+    }
+
+    private void getGameManager(AppCompatActivity context){
+        Intent intent = context.getIntent();
+        manager = intent.getParcelableExtra(GameManager.INTENT_NAME);
     }
 
     private void createTextViews(AppCompatActivity context) {
@@ -64,10 +81,9 @@ class OptionMenu extends GameMenu {
     private void createSpinner(AppCompatActivity context) {
         //create and set the properties of the difficulty spinner
         Spinner difficultySpinner = new Spinner(context);
-        String[] difficulties = {"easy", "medium", "hard"};
 
         ArrayAdapter adapter = new ArrayAdapter(
-                context, android.R.layout.simple_spinner_item, difficulties);
+                context, android.R.layout.simple_spinner_item, DIFFICULTIES);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         difficultySpinner.setAdapter(adapter);
@@ -147,6 +163,80 @@ class OptionMenu extends GameMenu {
 
     private void applySettings(AppCompatActivity context){
 
+        int levels = getLevels();
+        boolean runningAds = getAdsEnabled();
+        int difficulty = getDifficulty();
+
+        if(levels < 3){
+            displayPopupMessage(context);
+        } else {
+            proceedToApplication(context, levels, runningAds, difficulty);
+        }
+
+
+    }
+
+    private void proceedToApplication(AppCompatActivity context, int levels, boolean runningAds, int difficulty){
+        manager.setDifficulty(difficulty);
+        manager.setLevels(levels);
+        manager.setRunningAds(runningAds);
+        startActivity(context);
+    }
+
+    private void startActivity(AppCompatActivity context){
+        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        intent.putExtra(GameManager.INTENT_NAME, manager);
+
+        context.startActivity(intent);
+        context.finish();
+    }
+
+    private void displayPopupMessage(AppCompatActivity context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Must have 3 or more levels").setTitle("Problem");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //left intentionally blank
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private int getLevels(){
+        EditText levelField = (EditText) items.get(LEVEL_CHOICE);
+        int levels = Integer.parseInt(levelField.getText().toString());
+        return levels;
+    }
+
+    private boolean getAdsEnabled(){
+        CheckBox adsBox = (CheckBox) items.get(ADS_BOX);
+        return adsBox.isChecked();
+    }
+
+    private int getDifficulty(){
+        Spinner difficultySpinner = (Spinner) items.get(DIFFICULTY_SELECTOR);
+        String diffString = difficultySpinner.getSelectedItem().toString();
+        int difficulty = 1;
+        switch(diffString){
+            case EASY_DIFFICULTY:
+                difficulty = 1;
+                break;
+
+            case MEDIUM_DIFFICULTY:
+                difficulty = 2;
+                break;
+
+            case HARD_DIFFICULTY:
+                difficulty = 3;
+                break;
+
+        }
+
+        return difficulty;
+
     }
 
     private void donate(AppCompatActivity context){
@@ -156,21 +246,19 @@ class OptionMenu extends GameMenu {
     }
 
     private void cancel(AppCompatActivity context){
+        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        intent.putExtra(GameManager.INTENT_NAME, manager);
+
+        context.startActivity(intent);
         context.finish();
     }
 
     private void toggleAds(AppCompatActivity context, boolean checked){
 
-        if(checked){
-            enableAds();
-        }else {
+        if(!checked){
+            //make it difficult to disable the ads
             tryDisableAds(context, 0);
         }
-
-    }
-
-    private void enableAds(){
-
 
     }
 
