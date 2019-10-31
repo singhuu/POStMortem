@@ -107,4 +107,8 @@ public class TypeLevel extends Level {
     public int getCurrentQuestionNum() {
         return currentQuestionNum;
     }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
 }

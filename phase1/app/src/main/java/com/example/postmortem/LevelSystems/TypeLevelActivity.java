@@ -13,12 +13,14 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.postmortem.R;
 
 
+
 public class TypeLevelActivity extends LevelActivity {
 
-  TypeLevel level = new TypeLevel(1);
+
   Button[] selectButtons;
   private boolean clickedAnswer = false;
   TextView timerText;
+  TypeLevel level = new TypeLevel(difficulty);
   /** Chooses how to display this level when it is created in the app */
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -26,6 +28,8 @@ public class TypeLevelActivity extends LevelActivity {
 
     gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
     getIntent().getIntExtra("DIFFICULTY", difficulty);
+
+    level.setDifficulty(difficulty);
 
     level.createQuestions();
 
@@ -35,21 +39,34 @@ public class TypeLevelActivity extends LevelActivity {
     TextView title = findViewById(R.id.textView4);
     TextView question_text = findViewById(R.id.textView5);
 
-    String a = "Question " + level.getCurrentQuestionNum();
+    String a = "Question " + (level.getCurrentQuestionNum() + 1);
     title.setText(a);
     String text_1 = level.getCurrentQuestion().getQuestion();
     question_text.setText(text_1);
 
-    //need to change based off of difficulty
-    timeLeft = 30;
-    timerText = findViewById(R.id.timer);
-    timerText.setText(timeLeft + 1 + " Seconds Remaining");
-    startTimer(timeLeft);
-
+    assignTimerLength();
 
     TextView textView = findViewById(R.id.score);
-    textView.setText("Score = " + level.getScore());
+    textView.setText(level.getScore() + "");
 
+  }
+
+  private void assignTimerLength() {
+    //need to change based off of difficulty
+    timeLeft = 30;
+    if(difficulty == 1) {
+      timeLeft = 30;
+    }
+    else if(difficulty == 2) {
+      timeLeft = 25;
+    }
+    else if(difficulty == 3) {
+      timeLeft = 20;
+    }
+
+    timerText = findViewById(R.id.timer);
+    timerText.setText(timeLeft + 1 + "");
+    startTimer(timeLeft);
   }
 
   private Button[] getButtons() {
@@ -82,9 +99,9 @@ public class TypeLevelActivity extends LevelActivity {
    if (clickedButton != selectButtons[4]) {
      clickedAnswer = true;
      if(level.checkAnswer(clickedVal)) {
-       level.score = level.score + 1;
+       level.score = level.score + 25;
        TextView textView = findViewById(R.id.score);
-       textView.setText("Score = " + level.getScore());
+       textView.setText(level.getScore() + "");
      }
      for (int i = 0; i < selectButtons.length - 1; i++) {
        //button shouldn't be clickable anymore
