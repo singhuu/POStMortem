@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.GameManager;
 import com.example.postmortem.LevelSystems.LevelType;
 import com.example.postmortem.User;
 import com.example.postmortem.UserLoader;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class GameOverMenu extends GameMenu {
 
+    private GameManager manager;
     private User user;
 
     GameOverMenu(String title){
@@ -25,8 +27,7 @@ public class GameOverMenu extends GameMenu {
     @Override
     public List<View> buildMenuItems(final AppCompatActivity context){
 
-        Intent intent = context.getIntent();
-        user = (User) intent.getSerializableExtra("user");
+        getGameManager(context);
         updateUserHiscore();
 
         createTextViews(context);
@@ -34,6 +35,12 @@ public class GameOverMenu extends GameMenu {
 
         return items;
 
+    }
+
+    private void getGameManager(AppCompatActivity context){
+        Intent intent = context.getIntent();
+        manager = intent.getParcelableExtra(GameManager.INTENT_NAME);
+        user = manager.getActiveUser();
     }
 
     private void createTextViews(AppCompatActivity context) {

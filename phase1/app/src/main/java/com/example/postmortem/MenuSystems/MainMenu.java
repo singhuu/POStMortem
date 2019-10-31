@@ -160,7 +160,7 @@ class MainMenu extends GameMenu {
         context.finish();*/
 
         //Creates gameManager and start first round of random levels
-        manager.createLevel(1, context);
+        manager.start(context);
 
     }
 

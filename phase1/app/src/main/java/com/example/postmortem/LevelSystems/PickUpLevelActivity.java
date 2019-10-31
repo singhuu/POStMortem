@@ -163,7 +163,7 @@ public class PickUpLevelActivity extends LevelActivity {
     @Override
     public void countFinishHandler() {
         dialogBox();
-        gameManager.createLevel(level.difficulty, this);
+        gameManager.play(this);
 
     }
 

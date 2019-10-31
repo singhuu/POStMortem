@@ -61,7 +61,7 @@ public class TapLevelActivity extends LevelActivity {
 
   @Override
   public void countFinishHandler() {
-    gameManager.createLevel(level.difficulty, this);
+    gameManager.play(this);
     dialogBox();
   }
 

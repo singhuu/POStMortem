@@ -143,7 +143,7 @@ public class TypeLevelActivity extends LevelActivity {
 
   public void countFinishHandler() {
     dialogBox();
-    gameManager.createLevel(level.difficulty, this);
+    gameManager.play(this);
   }
 
   // Dialog Box that shows an AD after the level is done

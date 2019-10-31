@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.postmortem.LevelSystems.*;
+import com.example.postmortem.MenuSystems.GameMenu;
 
 public class GameManager implements Parcelable {
 
@@ -98,9 +101,34 @@ public class GameManager implements Parcelable {
     this.difficulty = difficulty;
   }
 
+  /**
+   * Starts a new game based on the setting chosen by the user
+   * @param context the current context of the app
+   */
+  public void start(AppCompatActivity context){
+    play(context);
+  }
+
+  public void play(AppCompatActivity context){
+    if(levels > 0){
+      levels--;
+      createLevel(context);
+    } else {
+      gameOver(context);
+    }
+  }
+
+  private void gameOver(AppCompatActivity context){
+    Intent intent = GameMenu.openMenu(context, GameMenu.GAME_OVER_MENU);
+    intent.putExtra(INTENT_NAME, this);
+
+    context.startActivity(intent);
+    context.finish();
+  }
+
   // Creates a level and adds it to level list, returns true if success, false if failed
   //TODO need to add way to end level selection and go to scoremenu
-  public void createLevel(int difficulty, Context context) {
+  private void createLevel(AppCompatActivity context) {
     Intent newLevelIntent = null;
 
     int levelType = (int)(Math.random()* 3);
@@ -132,6 +160,7 @@ public class GameManager implements Parcelable {
       newLevelIntent.putExtra("DIFFICULTY", difficulty);
       newLevelIntent.putExtra("GAME_MANAGER", this);
       context.startActivity(newLevelIntent);
+      context.finish();
     }
     catch (NullPointerException e){
       //TODO handle error
