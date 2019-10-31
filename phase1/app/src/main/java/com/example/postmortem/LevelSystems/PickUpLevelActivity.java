@@ -1,10 +1,15 @@
 package com.example.postmortem.LevelSystems;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+
 import com.example.postmortem.LevelSystems.*;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Parcelable;
@@ -12,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
@@ -48,9 +54,10 @@ public class PickUpLevelActivity extends LevelActivity {
         updateSearchPrompt();
 
         startTimer(timeLeft);
+
     }
 
-    private void updateSearchPrompt(){
+    private void updateSearchPrompt() {
         TextView searchPrompt = findViewById(R.id.searchPrompt);
         String searchStr = "Find the " + level.getTarget() + "!";
         searchPrompt.setText(searchStr);
@@ -58,14 +65,14 @@ public class PickUpLevelActivity extends LevelActivity {
 
     private void assignButtonVals(Button[] selectButtons) {
         String[] selectables = level.getSelectables();
-        for(int i = 0; i < selectButtons.length; i++){
+        for (int i = 0; i < selectButtons.length; i++) {
             selectButtons[i].setContentDescription(selectables[i]);
             assignButtonImage(selectButtons[i], selectables[i]);
         }
     }
 
-    private void assignButtonImage(Button button, String buttonVal){
-        switch(buttonVal){
+    private void assignButtonImage(Button button, String buttonVal) {
+        switch (buttonVal) {
             case "Deodorant":
                 button.setBackgroundResource(R.mipmap.deodorant);
                 break;
@@ -111,7 +118,7 @@ public class PickUpLevelActivity extends LevelActivity {
         }
     }
 
-    private Button[] getButtons(){
+    private Button[] getButtons() {
         Button[] buttons = new Button[6];
 
         buttons[0] = findViewById(R.id.button1);
@@ -124,19 +131,19 @@ public class PickUpLevelActivity extends LevelActivity {
         return buttons;
     }
 
-    public void clickHandler(View target){
-        if(level.wrongChoiceCountdown == 0){
+    public void clickHandler(View target) {
+        if (level.wrongChoiceCountdown == 0) {
             Button clickedButton = (Button) target;
             String clickedVal = (String) clickedButton.getContentDescription();
 
             boolean correctSelect = level.checkSelectVal(clickedVal);
 
-            if(correctSelect){
+            if (correctSelect) {
                 level.increaseScore();
                 scoreText.setText(level.getScore() + "");
                 assignButtonVals(selectButtons);
                 updateSearchPrompt();
-            }else{
+            } else {
                 level.wrongChoiceCountdown = PickUpLevel.WRONG_CHOICE_TIME;
                 wrongChoiceX.setVisibility(View.VISIBLE);
             }
@@ -147,7 +154,7 @@ public class PickUpLevelActivity extends LevelActivity {
     public void countTickHandler() { //TODO image stays when continuously clicking
         timerText.setText(timeLeft + 1 + "");
 
-        if(level.wrongChoiceCountdown != 0)
+        if (level.wrongChoiceCountdown != 0)
             level.wrongChoiceCountdown -= 1;
         else
             wrongChoiceX.setVisibility(View.INVISIBLE);
@@ -155,6 +162,36 @@ public class PickUpLevelActivity extends LevelActivity {
 
     @Override
     public void countFinishHandler() {
+        dialogBox();
         gameManager.createLevel(level.difficulty, this);
+
     }
-}
+
+    // Dialog Box that shows an AD after the level is done
+    // Not completely implemented yet, so ignore for now
+    public void dialogBox() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setCancelable(false);
+        dialog.setTitle("GAME OVER");
+        dialog.setMessage("Support us and Donate Maybe?" );
+        dialog.setPositiveButton("Donate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.paypal.com/ca/home"));
+                startActivity(intent);
+            }
+        })
+                .setNegativeButton("Continue Game ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //TODO: IMPLEMENT THIS TO GO TO THE NEXT LEVEL
+                    }
+                });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
+    }
+
+    }
+

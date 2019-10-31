@@ -66,7 +66,7 @@ public class GameManager implements Parcelable {
         break;
 
       case 2:
-        newLevelIntent = new Intent(context, typeLevelActivity.class)
+        newLevelIntent = new Intent(context, TypeLevelActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         break;
 
