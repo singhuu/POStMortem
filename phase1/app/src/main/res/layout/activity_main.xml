@@ -19,28 +19,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.077" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="188dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="128dp"
-        android:onClick="transitionToActivity"
-        android:text="@string/activity_button"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="256dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="32dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

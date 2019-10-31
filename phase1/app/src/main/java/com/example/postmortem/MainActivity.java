@@ -3,15 +3,9 @@ package com.example.postmortem;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.postmortem.LevelSystems.PickUpLevelActivity;
-import com.example.postmortem.LevelSystems.TapLevelActivity;
-import com.example.postmortem.LevelSystems.TypeLevelActivity;
 import com.example.postmortem.MenuSystems.GameMenu;
 
 
@@ -19,83 +13,35 @@ import com.example.postmortem.MenuSystems.GameMenu;
 public class MainActivity extends AppCompatActivity {
 
   private static Context mContext;
-  /**
-   * The spinner menu items
-   */
-  public final static String MENU_ACTIVITY = "Menu Activity";
-  public final static String TAP_LEVEL = "Tap Level";
-  public final static String PICKUP_LEVEL = "Pickup Level";
-  public final static String TYPE_LEVEL = "Type Level";
-
-  /**
-   * The spinners array
-   */
-  private final String[] activities = {MENU_ACTIVITY, TAP_LEVEL, PICKUP_LEVEL, TYPE_LEVEL};
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     mContext = this;
-    setUpSpinner();
+
+    initializeGame();
+    startGame();
+
   }
 
-  private void setUpSpinner() {
+  private void startGame() {
+    GameManager gameManager = new GameManager();
 
-    Spinner spinner = findViewById(R.id.spinner);
-    ArrayAdapter adapter = new ArrayAdapter(
-            this, android.R.layout.simple_spinner_item, activities);
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    spinner.setAdapter(adapter);
+    Intent intent = GameMenu.openMenu(this, GameMenu.LOGIN_MENU);
+    intent.putExtra(GameManager.INTENT_NAME, gameManager);
 
+    startActivity(intent);
+  }
+
+  private void initializeGame() {
+    UserLoader.findFilePath(this);
+    UserLoader.load();
   }
 
   public static Context getmContext() {
     return mContext;
   }
 
-  public void transitionToActivity(View view) {
-
-    Spinner selector = findViewById(R.id.spinner);
-    String choice = selector.getSelectedItem().toString();
-
-    goToActivity(choice);
-
-  }
-
-  private void goToActivity(String activity) {
-
-    Intent intent;
-
-    // pick the activity to go to
-    switch (activity) {
-
-      case MENU_ACTIVITY:
-        UserLoader.findFilePath(this);
-        UserLoader.load();
-        intent  = GameMenu.openMenu(this, GameMenu.LOGIN_MENU);
-        break;
-
-      case PICKUP_LEVEL:
-        intent = new Intent(this, PickUpLevelActivity.class);
-        break;
-
-      case TAP_LEVEL:
-        intent = new Intent(this, TapLevelActivity.class);
-        break;
-
-      case TYPE_LEVEL:
-        intent = new Intent(this, TypeLevelActivity.class);
-        break;
-
-      default:
-        intent = new Intent(this, MainActivity.class);
-        break;
-
-    }
-
-    startActivity(intent);
-
-  }
 
 }

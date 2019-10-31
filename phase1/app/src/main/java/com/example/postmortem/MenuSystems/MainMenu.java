@@ -15,18 +15,28 @@ import java.util.List;
 
 class MainMenu extends GameMenu {
 
+    private GameManager manager;
+
     MainMenu(String title){
+
         super(title);
+
     }
 
     @Override
     public List<View> buildMenuItems(final AppCompatActivity context){
 
+        getGameManager(context);
         createTextViews(context);
         createButtons(context);
 
         return items;
 
+    }
+
+    private void getGameManager(AppCompatActivity context){
+        Intent intent = context.getIntent();
+        manager = intent.getParcelableExtra(GameManager.INTENT_NAME);
     }
 
     private void createButtons(final AppCompatActivity context) {
@@ -107,9 +117,11 @@ class MainMenu extends GameMenu {
     }
 
     private void createTextViews(AppCompatActivity context) {
-        Intent intent = context.getIntent();
-        User user = (User) intent.getSerializableExtra("user");
+
+        User user = manager.getActiveUser();
         String username = user.getUsername();
+
+        //String username = "username";
 
         //set the properties of the user text view
         TextView userText = new TextView(context);
@@ -148,7 +160,6 @@ class MainMenu extends GameMenu {
         context.finish();*/
 
         //Creates gameManager and start first round of random levels
-        GameManager manager = new GameManager();
         manager.createLevel(1, context);
 
     }

@@ -4,27 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.Menu;
 
 import com.example.postmortem.LevelSystems.*;
-import com.example.postmortem.MenuSystems.MenuActivity;
-
-import java.util.ArrayList;
 
 public class GameManager implements Parcelable {
 
+  public static final String INTENT_NAME = "manager";
+
   private int currLevelType = -1;
+  private User activeUser;
 
   public GameManager() {
   }
 
   protected GameManager(Parcel in) {
     currLevelType = in.readInt();
+    activeUser = (User) in.readSerializable();
   }
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(currLevelType);
+    dest.writeSerializable(activeUser);
   }
 
   @Override
@@ -43,6 +44,14 @@ public class GameManager implements Parcelable {
       return new GameManager[size];
     }
   };
+
+  public User getActiveUser() {
+    return activeUser;
+  }
+
+  public void setActiveUser(User activeUser) {
+    this.activeUser = activeUser;
+  }
 
   // Creates a level and adds it to level list, returns true if success, false if failed
   //TODO need to add way to end level selection and go to scoremenu

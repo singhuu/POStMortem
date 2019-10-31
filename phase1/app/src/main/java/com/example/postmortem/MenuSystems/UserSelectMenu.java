@@ -8,8 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.GameManager;
 import com.example.postmortem.User;
 import com.example.postmortem.UserLoader;
 
@@ -119,10 +121,14 @@ class UserSelectMenu extends GameMenu {
 
     private void loginSuccess(AppCompatActivity context, User user){
 
-        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
-        intent.putExtra("user", user);
+        Intent oldIntent = context.getIntent();
+        GameManager manager = oldIntent.getParcelableExtra("manager");
 
-        context.startActivity(intent);
+        Intent newIntent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        manager.setActiveUser(user);
+        newIntent.putExtra(GameManager.INTENT_NAME, manager);
+
+        context.startActivity(newIntent);
         context.finish();
 
     }
