@@ -57,7 +57,7 @@ public class PickUpLevel extends Level {
 
     @Override
     public int getScore() {
-        return this.numCorrect;
+        return this.numCorrect * 25;
     }
 
     public void increaseScore(){
