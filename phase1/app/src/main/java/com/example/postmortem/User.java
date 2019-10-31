@@ -13,6 +13,10 @@ public class User implements Serializable {
   private int tapScore;
   private int typeScore;
   private int hiScore;
+  private int currentRunLevels;
+  private int currentRunLevelType;
+  private int currentRunDifficulty;
+  private boolean runningAds;
 
   public User(String username, String password) {
     this.username = username;
@@ -21,6 +25,42 @@ public class User implements Serializable {
     this.tapScore = 0;
     this.typeScore = 0;
     this.hiScore = 0;
+    this.currentRunLevelType = 1;
+    this.currentRunLevels = 0;
+    this.currentRunDifficulty = 1;
+    this.runningAds = true;
+  }
+
+  public boolean isRunningAds() {
+    return runningAds;
+  }
+
+  public void setRunningAds(boolean runningAds){
+    this.runningAds = runningAds;
+  }
+
+  public void setCurrentRunDifficulty(int currentRunDifficulty) {
+    this.currentRunDifficulty = currentRunDifficulty;
+  }
+
+  public int getCurrentRunDifficulty() {
+    return currentRunDifficulty;
+  }
+
+  public void setCurrentRunLevels(int currentRunLevels){
+    this.currentRunLevels = currentRunLevels;
+  }
+
+  public int getCurrentRunLevels(){
+    return currentRunLevels;
+  }
+
+  public int getCurrentRunLevelType() {
+    return currentRunLevelType;
+  }
+
+  public void setCurrentRunLevelType(int currentRunLevelType) {
+    this.currentRunLevelType = currentRunLevelType;
   }
 
   public int getPickupScore() {
@@ -33,10 +73,6 @@ public class User implements Serializable {
 
   public int getTypeScore() {
     return this.typeScore;
-  }
-
-  public int getHiScore() {
-    return this.hiScore;
   }
 
   public int getScore(){

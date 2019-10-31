@@ -1,6 +1,5 @@
 package com.example.postmortem;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -106,7 +105,20 @@ public class GameManager implements Parcelable {
    * @param context the current context of the app
    */
   public void start(AppCompatActivity context){
+
     play(context);
+  }
+
+  public void contineFromSave(AppCompatActivity context){
+    loadSettingsFromUser();
+    int currentLevelType = activeUser.getCurrentRunLevelType();
+    createGivenLevel(context, currentLevelType);
+  }
+
+  private void loadSettingsFromUser(){
+    levels = activeUser.getCurrentRunLevels();
+    difficulty = activeUser.getCurrentRunDifficulty();
+    runningAds = activeUser.isRunningAds();
   }
 
   public void play(AppCompatActivity context){
@@ -127,7 +139,41 @@ public class GameManager implements Parcelable {
   }
 
   // Creates a level and adds it to level list, returns true if success, false if failed
-  //TODO need to add way to end level selection and go to scoremenu
+  private void createGivenLevel(AppCompatActivity context, int levelType) {
+    Intent newLevelIntent = null;
+
+    currLevelType = levelType;
+    switch (levelType){
+      case 0:
+        newLevelIntent = new Intent(context, PickUpLevelActivity.class);
+        break;
+
+      case 1:
+        newLevelIntent = new Intent(context, TapLevelActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        break;
+
+      case 2:
+        newLevelIntent = new Intent(context, TypeLevelActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        break;
+
+      default:
+        System.out.println("Unknown level type");
+    }
+
+    try{
+      newLevelIntent.putExtra("DIFFICULTY", difficulty);
+      newLevelIntent.putExtra("GAME_MANAGER", this);
+      context.startActivity(newLevelIntent);
+      context.finish();
+    }
+    catch (NullPointerException e){
+      //TODO handle error
+    }
+  }
+
+  // Creates a level and adds it to level list, returns true if success, false if failed
   private void createLevel(AppCompatActivity context) {
     Intent newLevelIntent = null;
 

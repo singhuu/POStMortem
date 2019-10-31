@@ -241,7 +241,7 @@ public class UserLoader {
         data.append(",");
         data.append(user.getPassword());
         data.append(",");
-        data.append(user.getHiScore());
+        data.append(user.getHiscore());
         data.append(",");
         data.append(user.getTapScore());
         data.append(",");

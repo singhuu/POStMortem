@@ -141,27 +141,11 @@ class MainMenu extends GameMenu {
     }
 
     private void continueGame(AppCompatActivity context){
-        //TODO: once the game manager has been completed this can be implemented
+        manager.contineFromSave(context);
     }
 
     private void start(AppCompatActivity context){
-        //TODO: once the game manager has been completed this can be implemented
-
-        /*
-        //currently this just send the program to the game over menu
-
-        Intent oldIntent = context.getIntent();
-        User user = (User) oldIntent.getSerializableExtra("user");
-
-        Intent newIntent = GameMenu.openMenu(context, GameMenu.GAME_OVER_MENU);
-        newIntent.putExtra("user", user);
-
-        context.startActivity(newIntent);
-        context.finish();*/
-
-        //Creates gameManager and start first round of random levels
         manager.start(context);
-
     }
 
     private void openOptions(AppCompatActivity context){
