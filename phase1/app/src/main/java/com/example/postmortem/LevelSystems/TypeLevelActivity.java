@@ -117,7 +117,7 @@ public class TypeLevelActivity extends LevelActivity {
         TextView title = findViewById(R.id.textView4);
         TextView question_text = findViewById(R.id.textView5);
 
-        String a = "Question " + level.getCurrentQuestionNum();
+        String a = "Question " + (level.getCurrentQuestionNum() + 1);
         title.setText(a);
         String text_1 = level.getCurrentQuestion().getQuestion();
         question_text.setText(text_1);
