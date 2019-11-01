@@ -1,15 +1,23 @@
 package com.example.postmortem;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postmortem.LevelSystems.*;
 import com.example.postmortem.MenuSystems.GameMenu;
 
 public class GameManager implements Parcelable {
+
+  public static final int PICKUP_LEVEL_TYPE = 0;
+  public static final int TAP_LEVEL_TYPE = 1;
+  public static final int TYPE_LEVEL_TYPE = 2;
 
   public static final String INTENT_NAME = "manager";
 
@@ -105,15 +113,14 @@ public class GameManager implements Parcelable {
   }
 
   /**
-   * Starts a new game based on the setting chosen by the user
+   * Starts a new game based on the settings chosen by the user
    * @param context the current context of the app
    */
   public void start(AppCompatActivity context){
-
     play(context);
   }
 
-  public void contineFromSave(AppCompatActivity context){
+  public void continueFromSave(AppCompatActivity context){
     loadSettingsFromUser();
     int currentLevelType = activeUser.getCurrentRunLevelType();
     createGivenLevel(context, currentLevelType);
@@ -128,7 +135,7 @@ public class GameManager implements Parcelable {
   public void play(AppCompatActivity context){
     if(levels > 0){
       levels--;
-      createLevel(context);
+      createRandomLevel(context);
     } else {
       gameOver(context);
     }
@@ -143,68 +150,49 @@ public class GameManager implements Parcelable {
   }
 
   // Creates a level and adds it to level list, returns true if success, false if failed
-  private void createGivenLevel(AppCompatActivity context, int levelType) {
-    Intent newLevelIntent = null;
+  private void createRandomLevel(AppCompatActivity context) {
 
-    currLevelType = levelType;
+    int newLevelType = decideNewLevelType();
+    createGivenLevel(context, newLevelType);
 
-    updateActiveUser();
-
-    switch (levelType){
-      case 0:
-        newLevelIntent = new Intent(context, PickUpLevelActivity.class);
-        break;
-
-      case 1:
-        newLevelIntent = new Intent(context, TapLevelActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        break;
-
-      case 2:
-        newLevelIntent = new Intent(context, TypeLevelActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        break;
-
-      default:
-        System.out.println("Unknown level type");
-    }
-
-    try{
-      newLevelIntent.putExtra("DIFFICULTY", difficulty);
-      newLevelIntent.putExtra("GAME_MANAGER", this);
-      context.startActivity(newLevelIntent);
-      context.finish();
-    }
-    catch (NullPointerException e){
-      //TODO handle error
-    }
   }
 
-  // Creates a level and adds it to level list, returns true if success, false if failed
-  private void createLevel(AppCompatActivity context) {
-    Intent newLevelIntent = null;
-
+  private int decideNewLevelType() {
     int levelType = (int)(Math.random()* 3);
     while(levelType == currLevelType){
       levelType = (int)(Math.random()* 3);
     }
 
-    currLevelType = levelType;
+    return levelType;
+  }
 
+  // Creates a level and adds it to level list, returns true if success, false if failed
+  private void createGivenLevel(AppCompatActivity context, int levelType) {
+
+    currLevelType = levelType;
+    Intent newLevelIntent = createLevelIntent(context);
+    addExtras(newLevelIntent);
     updateActiveUser();
 
-    switch (levelType){
-      case 0:
-        newLevelIntent = new Intent(context, PickUpLevelActivity.class);
+    tryRunAds(context, newLevelIntent);
+
+  }
+
+  private Intent createLevelIntent(Context context){
+    Intent intent = null;
+
+    switch (currLevelType){
+      case PICKUP_LEVEL_TYPE:
+        intent = new Intent(context, PickUpLevelActivity.class);
         break;
 
-      case 1:
-        newLevelIntent = new Intent(context, TapLevelActivity.class)
+      case TAP_LEVEL_TYPE:
+        intent = new Intent(context, TapLevelActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         break;
 
-      case 2:
-        newLevelIntent = new Intent(context, TypeLevelActivity.class)
+      case TYPE_LEVEL_TYPE:
+        intent = new Intent(context, TypeLevelActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         break;
 
@@ -212,15 +200,12 @@ public class GameManager implements Parcelable {
         System.out.println("Unknown level type");
     }
 
-    try{
-      newLevelIntent.putExtra("DIFFICULTY", difficulty);
-      newLevelIntent.putExtra("GAME_MANAGER", this);
-      context.startActivity(newLevelIntent);
-      context.finish();
-    }
-    catch (NullPointerException e){
-      //TODO handle error
-    }
+    return  intent;
+  }
+
+  private void addExtras(Intent intent){
+    intent.putExtra("DIFFICULTY", difficulty);
+    intent.putExtra("GAME_MANAGER", this);
   }
 
   private void updateActiveUser(){
@@ -230,4 +215,81 @@ public class GameManager implements Parcelable {
     activeUser.setCurrentRunDifficulty(difficulty);
     UserLoader.updateFiles();
   }
+
+  private void tryRunAds(AppCompatActivity context, Intent intent){
+
+    if(runningAds){
+      showAd(context, intent);
+    } else {
+      dontShowAd(context, intent);
+    }
+
+  }
+
+  private void showAd(final AppCompatActivity context, final Intent intent){
+
+    AlertDialog.Builder builder = createEndPopup(context, intent);
+    builder.setMessage("Level Complete \nPlease Support the devs");
+    builder.setPositiveButton("I support local devs", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        donate(context);
+        //transitionLevel(context, intent);
+      }
+    });
+
+    builder.setNegativeButton("I think local devs should starve", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        transitionLevel(context, intent);
+      }
+    });
+
+
+    AlertDialog dialog = builder.create();
+    dialog.show();
+
+  }
+
+  private void dontShowAd(AppCompatActivity context, Intent intent){
+
+    AlertDialog.Builder builder = createEndPopup(context, intent);
+    AlertDialog dialog = builder.create();
+    dialog.show();
+
+  }
+
+  private void donate(Context context){
+    Intent intent = new Intent(Intent.ACTION_VIEW,
+            Uri.parse("https://www.paypal.com/ca/home"));
+    context.startActivity(intent);
+  }
+
+  private AlertDialog.Builder createEndPopup(final AppCompatActivity context, final Intent intent){
+    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+    //TODO: tell the user what score they got
+    builder.setMessage("Level Complete").setTitle("Level Over");
+    builder.setPositiveButton("Next Level", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        transitionLevel(context, intent);
+      }
+    });
+
+    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+      @Override
+      public void onDismiss(DialogInterface dialogInterface) {
+        transitionLevel(context, intent);
+      }
+    });
+
+    return builder;
+  }
+
+  private void transitionLevel(AppCompatActivity context, Intent intent){
+    context.startActivity(intent);
+    context.finish();
+  }
+
 }

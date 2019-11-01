@@ -1,25 +1,10 @@
 package com.example.postmortem.LevelSystems;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
-
-import com.example.postmortem.LevelSystems.*;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 
 public class PickUpLevelActivity extends LevelActivity {
@@ -162,35 +147,8 @@ public class PickUpLevelActivity extends LevelActivity {
 
     @Override
     public void countFinishHandler() {
-        dialogBox();
         gameManager.play(this);
 
-    }
-
-    // Dialog Box that shows an AD after the level is done
-    // Not completely implemented yet, so ignore for now
-    public void dialogBox() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setCancelable(false);
-        dialog.setTitle("GAME OVER");
-        dialog.setMessage("Support us and Donate Maybe?" );
-        dialog.setPositiveButton("Donate", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://www.paypal.com/ca/home"));
-                startActivity(intent);
-            }
-        })
-                .setNegativeButton("Continue Game ", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //TODO: IMPLEMENT THIS TO GO TO THE NEXT LEVEL
-                    }
-                });
-
-        final AlertDialog alert = dialog.create();
-        alert.show();
     }
 
     }

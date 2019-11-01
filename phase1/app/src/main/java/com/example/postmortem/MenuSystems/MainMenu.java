@@ -141,7 +141,7 @@ class MainMenu extends GameMenu {
     }
 
     private void continueGame(AppCompatActivity context){
-        manager.contineFromSave(context);
+        manager.continueFromSave(context);
     }
 
     private void start(AppCompatActivity context){

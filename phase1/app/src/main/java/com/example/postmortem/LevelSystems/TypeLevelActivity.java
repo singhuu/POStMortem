@@ -1,14 +1,10 @@
 package com.example.postmortem.LevelSystems;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 
 import com.example.postmortem.R;
 
@@ -142,33 +138,6 @@ public class TypeLevelActivity extends LevelActivity {
   }
 
   public void countFinishHandler() {
-    dialogBox();
     gameManager.play(this);
-  }
-
-  // Dialog Box that shows an AD after the level is done
-  // Not completely implemented yet, so ignore for now
-  public void dialogBox() {
-    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-    dialog.setCancelable(false);
-    dialog.setTitle("GAME OVER");
-    dialog.setMessage("Support us and Donate Maybe?" );
-    dialog.setPositiveButton("Donate", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int id) {
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://www.paypal.com/ca/home"));
-        startActivity(intent);
-      }
-    })
-            .setNegativeButton("Continue Game ", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-                //TODO: IMPLEMENT THIS TO GO TO THE NEXT LEVEL
-              }
-            });
-
-    final AlertDialog alert = dialog.create();
-    alert.show();
   }
 }
