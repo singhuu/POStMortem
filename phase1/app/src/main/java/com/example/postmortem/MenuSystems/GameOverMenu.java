@@ -196,14 +196,10 @@ public class GameOverMenu extends GameMenu {
     }
 
     private void restart(AppCompatActivity context){
+        Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
+        intent.putExtra(GameManager.INTENT_NAME, manager);
 
-        Intent oldIntent = context.getIntent();
-        User user = (User) oldIntent.getSerializableExtra("user");
-
-        Intent newIntent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
-        newIntent.putExtra("user", user);
-
-        context.startActivity(newIntent);
+        context.startActivity(intent);
         context.finish();
 
     }

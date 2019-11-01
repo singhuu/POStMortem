@@ -30,7 +30,7 @@ public class GameManager implements Parcelable {
 
   protected GameManager(Parcel in) {
     this.currLevelType = in.readInt();
-    this.activeUser = (User) in.readSerializable();
+    this.activeUser = UserLoader.getUser(in.readString());
     this.levels = in.readInt();
     this.difficulty = in.readInt();
     this.runningAds = in.readInt() == 1;
@@ -39,7 +39,11 @@ public class GameManager implements Parcelable {
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(currLevelType);
-    dest.writeSerializable(activeUser);
+    if(activeUser == null){
+      dest.writeString("null");
+    } else {
+      dest.writeString(activeUser.getUsername());
+    }
     dest.writeInt(levels);
     dest.writeInt(difficulty);
     if(runningAds){
@@ -143,6 +147,9 @@ public class GameManager implements Parcelable {
     Intent newLevelIntent = null;
 
     currLevelType = levelType;
+
+    updateActiveUser();
+
     switch (levelType){
       case 0:
         newLevelIntent = new Intent(context, PickUpLevelActivity.class);
@@ -183,6 +190,9 @@ public class GameManager implements Parcelable {
     }
 
     currLevelType = levelType;
+
+    updateActiveUser();
+
     switch (levelType){
       case 0:
         newLevelIntent = new Intent(context, PickUpLevelActivity.class);
@@ -211,5 +221,13 @@ public class GameManager implements Parcelable {
     catch (NullPointerException e){
       //TODO handle error
     }
+  }
+
+  private void updateActiveUser(){
+    activeUser.setCurrentRunLevels(levels);
+    activeUser.setRunningAds(runningAds);
+    activeUser.setCurrentRunLevelType(currLevelType);
+    activeUser.setCurrentRunDifficulty(difficulty);
+    UserLoader.updateFiles();
   }
 }

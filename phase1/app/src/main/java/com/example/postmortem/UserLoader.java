@@ -29,6 +29,15 @@ public class UserLoader {
         dir = context.getFilesDir().getPath() + System.getProperty("file.separator");
     }
 
+    public static User getUser(String username){
+        for (User user: users) {
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
+        return null;
+    }
+
     /**
      * Load the info from the files
      */
@@ -99,13 +108,20 @@ public class UserLoader {
             int tapScore = Integer.parseInt(userData[3]);
             int typeScore = Integer.parseInt(userData[4]);
             int pickupScore = Integer.parseInt(userData[5]);
-            String currentLevel = userData[6];
+            int levelType = Integer.parseInt(userData[6]);
+            int levelsLeft = Integer.parseInt(userData[7]);
+            int difficulty = Integer.parseInt(userData[8]);
+            boolean runningAds = Boolean.parseBoolean(userData[9]);
 
             User newUser = new User(username, password);
             newUser.setHiscore(hiscore);
             newUser.setScore(tapScore, LevelType.TAP);
             newUser.setScore(typeScore, LevelType.TYPE);
             newUser.setScore(pickupScore, LevelType.PICKUP);
+            newUser.setCurrentRunDifficulty(difficulty);
+            newUser.setCurrentRunLevels(levelsLeft);
+            newUser.setCurrentRunLevelType(levelType);
+            newUser.setRunningAds(runningAds);
             users.add(newUser);
 
         }
@@ -249,7 +265,13 @@ public class UserLoader {
         data.append(",");
         data.append(user.getPickupScore());
         data.append(",");
-        data.append("nihil");//TODO: add the saving and loading of current levels from file
+        data.append(user.getCurrentRunLevelType());
+        data.append(",");
+        data.append(user.getCurrentRunLevels());
+        data.append(",");
+        data.append(user.getCurrentRunDifficulty());
+        data.append(",");
+        data.append(user.isRunningAds());
         return data;
     }
 
