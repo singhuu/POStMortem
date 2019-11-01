@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-
 import com.example.postmortem.R;
 
 public class TapLevelActivity extends LevelActivity {
@@ -19,16 +18,16 @@ public class TapLevelActivity extends LevelActivity {
     gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
 
     getIntent().getIntExtra("DIFFICULTY", difficulty);
-    level = new TapLevel(1); //TODO temp value to be passed in as extra
+    level = new TapLevel(difficulty);
 
     TextView textView = findViewById(R.id.score);
     textView.setText("0");
 
-    timeLeft = 30; //TODO temporary until timeLeft is passed in
+    timeLeft = 30; // TODO temp until timeLeft passed in
     timerText = findViewById(R.id.timer);
     timerText.setText(timeLeft + 1 + " Seconds Remaining");
 
-    startTimer(30); //TODO temp until timeLeft passed in
+    startTimer(30); // TODO temp until timeLeft passed in
   }
 
   public void pressButton(View target) {
