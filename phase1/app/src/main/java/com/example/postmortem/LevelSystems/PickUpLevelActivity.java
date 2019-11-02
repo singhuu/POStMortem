@@ -6,6 +6,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.postmortem.R;
+import com.example.postmortem.UserLoader;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class PickUpLevelActivity extends LevelActivity {
     PickUpLevel level;
@@ -22,12 +28,12 @@ public class PickUpLevelActivity extends LevelActivity {
         gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
 
         getIntent().getIntExtra("DIFFICULTY", difficulty);
-        level = new PickUpLevel(difficulty); //TODO temp value to be passed in as extra
+        level = new PickUpLevel(difficulty);
 
         scoreText = findViewById(R.id.score);
         scoreText.setText("0");
 
-        timeLeft = 30; //TODO temporary until timeLeft is passed in
+        timeLeft = 30 - (10 * difficulty);
         timerText = findViewById(R.id.timer);
         timerText.setText(timeLeft + 1 + "");
 
@@ -147,8 +153,14 @@ public class PickUpLevelActivity extends LevelActivity {
 
     @Override
     public void countFinishHandler() {
+        gameManager.totalScore += level.getScore();
         gameManager.play(this);
 
+    }
+
+    @Override
+    public void saveScore() {
+        UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.PICKUP);
     }
 
     }

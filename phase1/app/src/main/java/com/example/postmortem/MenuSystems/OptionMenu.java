@@ -207,7 +207,14 @@ class OptionMenu extends GameMenu {
 
     private int getLevels(){
         EditText levelField = (EditText) items.get(LEVEL_CHOICE);
-        int levels = Integer.parseInt(levelField.getText().toString());
+
+        int levels;
+        try{
+            levels = Integer.parseInt(levelField.getText().toString());
+        }catch (NumberFormatException e){
+            levels = 3;
+        }
+
         return levels;
     }
 

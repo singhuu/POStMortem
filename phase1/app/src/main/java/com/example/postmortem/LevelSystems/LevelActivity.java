@@ -15,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class LevelActivity extends AppCompatActivity {
   protected int timeLeft;
-  protected Level level;
+  protected static Level level;
   protected GameManager gameManager;
   protected static int difficulty;
   protected CountDownTimer countTimer = null;
+
+  protected String curr_username = "";
 
   /*LevelActivity(int layout, Level level) {
     this.layout = layout;
@@ -27,6 +29,8 @@ public abstract class LevelActivity extends AppCompatActivity {
 
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    curr_username = getIntent().getStringExtra("CURR_USERNAME");
   }
 
   @Override
@@ -56,6 +60,7 @@ public abstract class LevelActivity extends AppCompatActivity {
               }
               /** Same situation as above. Will implement as and when needed */
               public void onFinish() {
+                  saveScore();
                   countFinishHandler();
               }
             };
@@ -65,6 +70,8 @@ public abstract class LevelActivity extends AppCompatActivity {
   public abstract void countTickHandler();
 
   public abstract void countFinishHandler();
+
+  public abstract void saveScore();
 
   /** cancelTimer that cancels the Count Down */
   public void cancelTimer() {

@@ -17,6 +17,6 @@ public class TapLevel extends Level {
   }
 
   public int getScore() {
-    return timesPressed * (100 / super.difficulty);
+    return timesPressed;
   }
 }

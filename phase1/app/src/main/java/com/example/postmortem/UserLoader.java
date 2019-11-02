@@ -19,7 +19,7 @@ public class UserLoader {
     private static List<User> users = new ArrayList<>();
     private static List<String[]> hiscores = new ArrayList<>();
 
-    private static String dir;
+    public static String dir;
 
     /**
      * Finds the directory of the project
@@ -51,7 +51,6 @@ public class UserLoader {
 
     }
 
-
     private static File tryOpenFile(String filePath) {
         File file = new File(filePath);
         try{
@@ -68,7 +67,6 @@ public class UserLoader {
         Scanner scan;
 
         try {
-
             scan = new Scanner(new FileInputStream(file));
 
         } catch (Exception e){
@@ -129,6 +127,7 @@ public class UserLoader {
 
     private static void tryLoadHiscores(){
         File hiscoresFile = tryOpenFile(dir + "Hiscores.csv");
+
         Scanner scan = tryCreateReader(hiscoresFile);
         loadHiscoresFromFile(scan);
     }

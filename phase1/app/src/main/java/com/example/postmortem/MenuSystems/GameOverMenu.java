@@ -136,7 +136,7 @@ public class GameOverMenu extends GameMenu {
         int typeScore = user.getTypeScore();
         int pickupScore = user.getPickupScore();
 
-        int score = user.getScore();
+        int score = tapScore + typeScore + pickupScore; //TODO not using User.getScore()
         int hiscore = user.getHiscore();
 
         StringBuilder userScoreText = new StringBuilder();
@@ -205,10 +205,7 @@ public class GameOverMenu extends GameMenu {
     }
 
     private void quit(AppCompatActivity context){
-
-        context.finish();
-        System.exit(0);
-
+        MainMenu.openMenu(context, MainMenu.MAIN_MENU);
     }
 
 }

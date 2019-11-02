@@ -7,7 +7,12 @@ import android.widget.TextView;
 
 
 import com.example.postmortem.R;
+import com.example.postmortem.UserLoader;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class TypeLevelActivity extends LevelActivity {
@@ -49,7 +54,7 @@ public class TypeLevelActivity extends LevelActivity {
 
   private void assignTimerLength() {
     //need to change based off of difficulty
-    timeLeft = 30;
+    /*timeLeft = 30;
     if(difficulty == 1) {
       timeLeft = 30;
     }
@@ -58,7 +63,9 @@ public class TypeLevelActivity extends LevelActivity {
     }
     else if(difficulty == 3) {
       timeLeft = 20;
-    }
+    }*/
+
+    timeLeft = 30 - (difficulty * 10);
 
     timerText = findViewById(R.id.timer);
     timerText.setText(timeLeft + 1 + "");
@@ -138,6 +145,12 @@ public class TypeLevelActivity extends LevelActivity {
   }
 
   public void countFinishHandler() {
+    gameManager.totalScore += level.getScore();
     gameManager.play(this);
+  }
+
+  @Override
+  public void saveScore() {
+    UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.TYPE);
   }
 }

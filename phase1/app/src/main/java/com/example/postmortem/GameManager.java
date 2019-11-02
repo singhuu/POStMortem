@@ -13,6 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.LevelSystems.*;
 import com.example.postmortem.MenuSystems.GameMenu;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Scanner;
+
 public class GameManager implements Parcelable {
 
   public static final int PICKUP_LEVEL_TYPE = 0;
@@ -27,6 +35,8 @@ public class GameManager implements Parcelable {
   private int levels;
   private boolean runningAds;
   private int difficulty;
+
+  public int totalScore;
 
   public GameManager() {
     this.levels = 3;
@@ -145,9 +155,32 @@ public class GameManager implements Parcelable {
     Intent intent = GameMenu.openMenu(context, GameMenu.GAME_OVER_MENU);
     intent.putExtra(INTENT_NAME, this);
 
+    /*int totalScore = getFinalScore(UserLoader.dir + "sessionScore.csv");
+    intent.putExtra("FINAL_SCORE", totalScore);*/
+
     context.startActivity(intent);
     context.finish();
   }
+
+  /*private int getFinalScore(String dir){
+    File file = new File(dir);
+    Scanner reader = null;
+
+    try {
+      reader = new Scanner(file);
+      totalScore = 0;
+      while(reader.hasNext()){
+        totalScore += reader.nextInt();
+      }
+
+      return totalScore;
+
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+
+    return -1;
+  }*/
 
   // Creates a level and adds it to level list, returns true if success, false if failed
   private void createRandomLevel(AppCompatActivity context) {
@@ -174,7 +207,8 @@ public class GameManager implements Parcelable {
     addExtras(newLevelIntent);
     updateActiveUser();
 
-    tryRunAds(context, newLevelIntent);
+    if(levels != 3) //TODO hard-coded value for now
+      tryRunAds(context, newLevelIntent);
 
   }
 
@@ -200,6 +234,7 @@ public class GameManager implements Parcelable {
         System.out.println("Unknown level type");
     }
 
+    intent.putExtra("CURR_USERNAME", activeUser.getUsername());
     return  intent;
   }
 
@@ -229,7 +264,7 @@ public class GameManager implements Parcelable {
   private void showAd(final AppCompatActivity context, final Intent intent){
 
     AlertDialog.Builder builder = createEndPopup(context, intent);
-    builder.setMessage("Level Complete \nPlease Support the devs");
+    builder.setMessage("Level Complete \nScore: " + totalScore + "\nPlease Support the devs");
     builder.setPositiveButton("I support local devs", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialogInterface, int i) {
@@ -269,8 +304,7 @@ public class GameManager implements Parcelable {
   private AlertDialog.Builder createEndPopup(final AppCompatActivity context, final Intent intent){
     AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-    //TODO: tell the user what score they got
-    builder.setMessage("Level Complete").setTitle("Level Over");
+    builder.setMessage("Level Complete \nScore: " + totalScore);
     builder.setPositiveButton("Next Level", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialogInterface, int i) {
