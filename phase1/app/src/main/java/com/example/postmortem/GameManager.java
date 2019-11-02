@@ -245,6 +245,7 @@ public class GameManager implements Parcelable {
       }
     });
 
+    builder.setCancelable(false); //Removes ability to click off dialog to close
 
     AlertDialog dialog = builder.create();
     dialog.show();
