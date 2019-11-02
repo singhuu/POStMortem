@@ -55,7 +55,9 @@ public abstract class LevelActivity extends AppCompatActivity {
                   countTickHandler();
               }
               /** Same situation as above. Will implement as and when needed */
-              public void onFinish() { countFinishHandler(); }
+              public void onFinish() {
+                  countFinishHandler();
+              }
             };
     countTimer.start();
   }
