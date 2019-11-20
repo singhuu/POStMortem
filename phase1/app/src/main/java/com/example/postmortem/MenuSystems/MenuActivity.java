@@ -2,6 +2,7 @@ package com.example.postmortem.MenuSystems;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,5 +34,16 @@ public class MenuActivity extends AppCompatActivity {
       layout.addView(item);
     }
 
+  }
+
+  //Prevents back key from doing anything
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    if (keyCode == KeyEvent.KEYCODE_BACK ) {
+      // do something on back.
+      return true;
+    }
+
+    return super.onKeyDown(keyCode, event);
   }
 }
