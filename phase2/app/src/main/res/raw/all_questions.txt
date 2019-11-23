@@ -1,0 +1,19 @@
+What is 2 + 2?,4,8,6,-4
+How many hours does a typical cs student spend procrastinating their assignments?,As many as possible,0,24,168
+What is the acronym for the principles of design?,SOLID,SIMON,KANYE,CLEAN
+What is the principle of design that states that a class should have a single purpose?,SRP,TGP,SPP,OGP
+Who is the water type starter Pokemon from gen 4?,Piplup,Squirtle,Frokie,Oshawatt
+Which of these is a primitive type in Java?,int,String,ArrayList,Collection
+What keyword is used to Java to show a variable's value cannot be changed?,final,greatest,protected,private
+What keyword is used to immediately terminate a loop?,break,stop,exit,continue
+What keyword is used to call the parent class?,super,above,parent,father
+How many classes can you extend in Java?,1,4,2,0
+What is UofT's main computer science building?,Bahen,OISE,Mclennen,Medical Sciences Building
+What was the median average for CS Major POST in 2018?,89.2,88.4,85.6,90
+What does UML stand for?,United Modeling Language,United Military Lieutenant,Unholy Marker Lock,Understanding Mike's Loop
+What two main keywords are used to handle Exceptions in Java?,try catch,Try handle,attempt handle,assert manage
+What kind of brackets are used to enclose an if statement in Java?,curly,square,circle,no brackets
+How many subway delays does the TTC average per day?,58,9,72,34
+How tall is the CN tower? (meters),553,788,605,967
+What is the name of Toronto's hockey team?,Leafs,Senators,Beavers,Kings
+What is the name of Toronto's main GO station?,Union,Pearson,Hannibal,Supreme
