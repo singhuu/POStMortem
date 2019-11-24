@@ -34,28 +34,10 @@ public class FileInterface {
      * @return The data stored in the file
      */
     public List<String> readFile() throws IOException{
-        try{
 
-            Scanner scan = tryOpenReader();
-            return readDataFromFile(scan);
+        Scanner scan = new Scanner(new FileInputStream(file));
+        return readDataFromFile(scan);
 
-        } catch (IOException e){
-            throw e;
-        }
-    }
-
-    private Scanner tryOpenReader() throws IOException{
-        Scanner scan;
-
-        try {
-
-            scan = new Scanner(new FileInputStream(file));
-
-        } catch (IOException e){
-            throw e;
-        }
-
-        return scan;
     }
 
     private List<String> readDataFromFile(Scanner scan){
@@ -74,15 +56,12 @@ public class FileInterface {
      * Overwrites the previous information in the file with the new information
      *
      * @param data the information to be written to the file
-     * @throws IOException
+     * @throws IOException if an IOException occurs
      */
     public void writeToFile(String data) throws IOException{
 
-        try(BufferedWriter out = new BufferedWriter(new FileWriter(file))){
-            out.write(data);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        out.write(data);
 
     }
 
