@@ -119,13 +119,16 @@ public class GameManager implements Parcelable {
    * @param context the current context of the app
    */
   public void start(AppCompatActivity context){
-    play(context);
+    Intent intent = createRandomLevel(context);
+    updateActiveUser();
+    transitionLevel(context, intent);
   }
 
   public void continueFromSave(AppCompatActivity context){
     loadSettingsFromUser();
     int currentLevelType = activeUser.getCurrentRunLevelType();
-    createGivenLevel(context, currentLevelType);
+    Intent intent = createGivenLevel(context, currentLevelType);
+    transitionLevel(context, intent);
   }
 
   private void loadSettingsFromUser(){
@@ -137,7 +140,7 @@ public class GameManager implements Parcelable {
   public void play(AppCompatActivity context){
     if(levels > 0){
       levels--;
-      createRandomLevel(context);
+      continuePlaying(context);
     } else {
       gameOver(context);
     }
@@ -154,31 +157,17 @@ public class GameManager implements Parcelable {
     context.finish();
   }
 
-  /*private int getFinalScore(String dir){
-    File file = new File(dir);
-    Scanner reader = null;
-
-    try {
-      reader = new Scanner(file);
-      totalScore = 0;
-      while(reader.hasNext()){
-        totalScore += reader.nextInt();
-      }
-
-      return totalScore;
-
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    }
-
-    return -1;
-  }*/
+  private void continuePlaying(AppCompatActivity context){
+      Intent intent = createRandomLevel(context);
+      updateActiveUser();
+      tryRunAds(context, intent);
+  }
 
   // Creates a level and adds it to level list, returns true if success, false if failed
-  private void createRandomLevel(AppCompatActivity context) {
+  private Intent createRandomLevel(AppCompatActivity context) {
 
     int newLevelType = decideNewLevelType();
-    createGivenLevel(context, newLevelType);
+    return createGivenLevel(context, newLevelType);
 
   }
 
@@ -191,16 +180,19 @@ public class GameManager implements Parcelable {
     return levelType;
   }
 
-  // Creates a level and adds it to level list, returns true if success, false if failed
-  private void createGivenLevel(AppCompatActivity context, int levelType) {
+    /**
+     *  creates and returns an intent to the specified level
+     *
+     * @param context the context of the program
+     * @param levelType the type of level to create
+     */
+  private Intent createGivenLevel(AppCompatActivity context, int levelType) {
 
     currLevelType = levelType;
     Intent newLevelIntent = createLevelIntent(context);
     addExtras(newLevelIntent);
-    updateActiveUser();
 
-    if(levels != 3) //TODO hard-coded value for now
-      tryRunAds(context, newLevelIntent);
+    return newLevelIntent;
 
   }
 
