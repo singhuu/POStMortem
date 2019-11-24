@@ -13,14 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.LevelSystems.*;
 import com.example.postmortem.MenuSystems.GameMenu;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.Scanner;
-
 public class GameManager implements Parcelable {
 
   public static final int PICKUP_LEVEL_TYPE = 0;
