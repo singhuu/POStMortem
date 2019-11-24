@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserFileManager extends FileManager{
+public class UserFileController extends FileController {
     private List<User> users;
 
-    public UserFileManager(String appDataDir){
+    public UserFileController(String appDataDir){
         super(appDataDir, "userdata.csv");
         users = new ArrayList<>();
     }

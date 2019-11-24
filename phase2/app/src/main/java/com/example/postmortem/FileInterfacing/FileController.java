@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class FileManager {
+abstract class FileController {
     FileInterface fileInterface;
 
-    FileManager(String appDataDir, String fileName){
+    FileController(String appDataDir, String fileName){
         String filepath = appDataDir + System.getProperty("file.separator") + fileName;
         this.fileInterface = new FileInterface(filepath);
     }

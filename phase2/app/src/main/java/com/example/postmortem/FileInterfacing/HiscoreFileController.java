@@ -6,11 +6,11 @@ import com.example.postmortem.Hiscore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HiscoreFileManager extends FileManager {
+public class HiscoreFileController extends FileController {
 
     private List<Hiscore> hiscores;
 
-    public HiscoreFileManager(String appDataDir){
+    public HiscoreFileController(String appDataDir){
         super(appDataDir, "Hiscores.csv");
         hiscores = new ArrayList<>();
     }
