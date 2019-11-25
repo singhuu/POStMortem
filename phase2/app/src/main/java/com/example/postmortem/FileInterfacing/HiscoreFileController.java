@@ -1,7 +1,7 @@
 package com.example.postmortem.FileInterfacing;
 
 
-import com.example.postmortem.Hiscore;
+import com.example.postmortem.DataTypes.Hiscore;
 
 import java.util.ArrayList;
 import java.util.List;

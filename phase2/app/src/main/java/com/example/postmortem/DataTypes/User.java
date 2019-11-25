@@ -1,4 +1,4 @@
-package com.example.postmortem;
+package com.example.postmortem.DataTypes;
 
 import com.example.postmortem.LevelSystems.LevelType;
 

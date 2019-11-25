@@ -1,11 +1,10 @@
 package com.example.postmortem.FileInterfacing;
 
 import com.example.postmortem.LevelSystems.LevelType;
-import com.example.postmortem.User;
+import com.example.postmortem.DataTypes.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class UserFileController extends FileController {
 

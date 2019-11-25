@@ -1,4 +1,4 @@
-package com.example.postmortem;
+package com.example.postmortem.DataTypes;
 
 public class Hiscore {
 

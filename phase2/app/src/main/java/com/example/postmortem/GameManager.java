@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.LevelSystems.*;
 import com.example.postmortem.MenuSystems.GameMenu;
 

@@ -1,5 +1,6 @@
-package com.example.postmortem;
+package com.example.postmortem.DataTypes;
 
+import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.FileInterfacing.UserFileController;
 
 import java.util.List;

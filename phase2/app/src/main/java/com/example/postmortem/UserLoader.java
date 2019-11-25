@@ -2,6 +2,7 @@ package com.example.postmortem;
 
 import android.content.Context;
 
+import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.LevelSystems.LevelType;
 
 import java.io.BufferedWriter;

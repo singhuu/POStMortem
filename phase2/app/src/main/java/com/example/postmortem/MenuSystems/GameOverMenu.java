@@ -9,8 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postmortem.GameManager;
-import com.example.postmortem.LevelSystems.LevelType;
-import com.example.postmortem.User;
+import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.UserLoader;
 
 import java.util.List;
