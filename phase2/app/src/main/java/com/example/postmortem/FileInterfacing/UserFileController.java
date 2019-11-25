@@ -8,15 +8,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserFileController extends FileController {
-    private List<User> users;
 
     public UserFileController(String appDataDir){
         super(appDataDir, "userdata.csv");
-        users = new ArrayList<>();
     }
 
     @Override
-    void updateList(List<String[]> loadedData) {
+    List updateList(List<String[]> loadedData) {
+        List<User> users = new ArrayList<>();
         //create the users
         for (String[] userData : loadedData) {
             String username = userData[0];
@@ -42,12 +41,15 @@ public class UserFileController extends FileController {
             users.add(newUser);
 
         }
+
+        return users;
     }
 
     @Override
-    String formatOutputData(){
+    String formatOutputData(List users){
         StringBuilder out = new StringBuilder();
-        for(User user : users) {
+        for(Object obj : users) {
+            User user = (User) obj;
             out.append(createDataFromUser(user));
             out.append("\n");
         }
@@ -80,50 +82,5 @@ public class UserFileController extends FileController {
         return data;
     }
 
-    //TODO: Move everything below this to a separate user manager class
 
-    /**
-     * Try to log into an user account
-     * @param username the username of the desired account
-     * @param password the password of the desired account
-     * @return optionally the user logged in to
-     */
-    public Optional<User> attemptLogin(String username, String password){
-        Optional user = Optional.empty();
-        for (User account : users) {
-            if(loginCorrect(account, username, password)){
-                user = Optional.of(account);
-                break;
-            }
-        }
-
-        return user;
-    }
-
-    private boolean loginCorrect(User user, String username, String password){
-        return user.getUsername().equals(username) && user.getPassword().equals(password);
-    }
-
-    /**
-     * Create a new user and add it to the users list
-     * @param username the new accounts username
-     * @param password the new accounts password
-     * @return if the account was successfully created
-     */
-    public boolean createUser(String username, String password){
-        boolean canCreate = !checkUserExists(username);
-        if(canCreate){
-            users.add(new User(username, password));
-        }
-        return canCreate;
-    }
-
-    private boolean checkUserExists(String username){
-        for(User user: users){
-            if(user.getUsername().equals(username)){
-                return true;
-            }
-        }
-        return false;
-    }
 }

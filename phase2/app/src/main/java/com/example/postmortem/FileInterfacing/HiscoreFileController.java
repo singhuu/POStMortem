@@ -8,15 +8,14 @@ import java.util.List;
 
 public class HiscoreFileController extends FileController {
 
-    private List<Hiscore> hiscores;
-
     public HiscoreFileController(String appDataDir){
         super(appDataDir, "Hiscores.csv");
-        hiscores = new ArrayList<>();
     }
 
     @Override
-    void updateList(List<String[]> loadedData) {
+    List updateList(List<String[]> loadedData) {
+        List<Hiscore> hiscores = new ArrayList<>();
+        //create the hiscores
         for(String[] hiscoreData: loadedData){
             String username = hiscoreData[0];
             int score = Integer.parseInt(hiscoreData[1]);
@@ -24,12 +23,14 @@ public class HiscoreFileController extends FileController {
             Hiscore hiscore = new Hiscore(username, score);
             hiscores.add(hiscore);
         }
+        return hiscores;
     }
 
     @Override
-    String formatOutputData(){
+    String formatOutputData(List hiscores){
         StringBuilder out = new StringBuilder();
-        for(Hiscore hiscore: hiscores) {
+        for(Object obj: hiscores) {
+            Hiscore hiscore = (Hiscore) obj;
             out.append(createDataFromHiscore(hiscore));
             out.append("\n");
         }
@@ -44,9 +45,5 @@ public class HiscoreFileController extends FileController {
         data.append(",");
         data.append(hiscore.getScore());
         return data;
-    }
-
-    public List<Hiscore> getHiscores(){
-        return hiscores;
     }
 }

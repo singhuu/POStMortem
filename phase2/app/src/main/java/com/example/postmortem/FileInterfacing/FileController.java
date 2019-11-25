@@ -17,13 +17,16 @@ abstract class FileController {
     /**
      * Clears the saved object list and replaces it with new instances loaded from the file
      */
-    public void load(){
+    public List load(){
+        List loadedList = null;
         try{
             List<String> fileData = fileInterface.readFile();
             List<String[]> seperatedData = formatReadData(fileData);
-            updateList(seperatedData);
+            loadedList = updateList(seperatedData);
         } catch (IOException e){
             Log.e("IOException" , e.getMessage());
+        }finally{
+            return loadedList;
         }
     }
 
@@ -35,19 +38,19 @@ abstract class FileController {
         return seperatedData;
     }
 
-    abstract void updateList(List<String[]> loadedData);
+    abstract List updateList(List<String[]> loadedData);
 
     /**
      * Overwrites the userdata file with the currently stored user information
      */
-    public void save(){
+    public void save(List objects){
         try{
-        String output = formatOutputData();
+        String output = formatOutputData(objects);
         fileInterface.writeToFile(output);
         } catch (IOException e) {
             Log.e("IOException" , e.getMessage());
         }
     }
 
-    abstract String formatOutputData();
+    abstract String formatOutputData(List objects);
 }
