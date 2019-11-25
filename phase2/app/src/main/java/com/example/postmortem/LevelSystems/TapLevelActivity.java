@@ -3,6 +3,7 @@ package com.example.postmortem.LevelSystems;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.postmortem.R;
@@ -54,6 +55,17 @@ public class TapLevelActivity extends LevelActivity {
       // set it to closed
       imageButton.setImageResource(R.mipmap.laptop_closed_foreground);
     }
+
+    if (timesPressed == 100) {
+      displayMeric();
+    }
+  }
+
+  private void displayMeric() {
+    ImageView meric = findViewById(R.id.mericImage);
+    meric.setVisibility(View.VISIBLE);
+    TextView mericQuote = findViewById(R.id.mericSpeech);
+    mericQuote.setVisibility(View.VISIBLE);
   }
 
   @Override
