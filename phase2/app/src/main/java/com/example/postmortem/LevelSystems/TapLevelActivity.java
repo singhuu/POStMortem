@@ -36,6 +36,11 @@ public class TapLevelActivity extends LevelActivity {
     timerText.setText(timeLeft + 1 + " Seconds Remaining");
 
     startTimer(timeLeft); // TODO temp until timeLeft passed in
+
+    ImageView meric = findViewById(R.id.mericImage);
+    meric.setVisibility(View.INVISIBLE);
+    TextView mericQuote = findViewById(R.id.mericSpeech);
+    mericQuote.setVisibility(View.INVISIBLE);
   }
 
   public void pressButton(View target) {

@@ -93,7 +93,9 @@
         android:width="150dp"
         android:text="Great job, kid. You made POSt for a reason."
         android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/mericImage"
-        tools:layout_editor_absoluteY="641dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.901"
         tools:visibility="invisible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
