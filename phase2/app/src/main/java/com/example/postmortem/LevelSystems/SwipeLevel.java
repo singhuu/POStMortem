@@ -1,7 +1,5 @@
 package com.example.postmortem.LevelSystems;
 
-import android.widget.Button;
-
 public class SwipeLevel extends Level {
     int[][] obstacleTiles;
     int currPlayerCol;
@@ -46,18 +44,6 @@ public class SwipeLevel extends Level {
                 obstacleTiles[rowNum][i] = 0;
 
         }
-
-        /*int numObstacles = 0;
-
-        for(int i = 0; i < obstacleTiles[rowNum].length; i++) {
-            int tileValue = (int) (Math.random() * 2);
-
-            if(numObstacles < 2 && tileValue == 1){
-                obstacleTiles[rowNum][i] = tileValue;
-                numObstacles++;
-            }else
-                obstacleTiles[rowNum][i] = 0;
-        }*/
     }
 
     //Method to adjust player position based on swipe direction

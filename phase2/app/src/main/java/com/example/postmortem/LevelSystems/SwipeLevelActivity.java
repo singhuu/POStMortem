@@ -61,7 +61,7 @@ public class SwipeLevelActivity extends LevelActivity{
 
     //Timer for checking if lane is open immediately after swipe advance
     private void startTileCheckTimer(int cTimeInSeconds) {
-        tileCheckTimer = new CountDownTimer(cTimeInSeconds * 1000, 400) {
+        tileCheckTimer = new CountDownTimer(cTimeInSeconds * 1000, 250) {
             @Override
             public void onTick(long l) {
                 boolean checkResult = level.checkOpenLane();
