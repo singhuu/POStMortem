@@ -32,7 +32,22 @@ public class SwipeLevel extends Level {
     }
 
     public void updateObstacles(int rowNum){
-        int numObstacles = 0;
+        int obstacleLocation1 = (int) (Math.random() * 4);
+        int obstacleLocation2 = (int) (Math.random() * 4);
+
+        for(int i = 0; i < obstacleTiles[rowNum].length; i++) {
+            if(i == obstacleLocation1)
+                obstacleTiles[rowNum][obstacleLocation1] = 1;
+
+            else if(i == obstacleLocation2)
+                obstacleTiles[rowNum][obstacleLocation2] = 1;
+
+            else
+                obstacleTiles[rowNum][i] = 0;
+
+        }
+
+        /*int numObstacles = 0;
 
         for(int i = 0; i < obstacleTiles[rowNum].length; i++) {
             int tileValue = (int) (Math.random() * 2);
@@ -42,7 +57,7 @@ public class SwipeLevel extends Level {
                 numObstacles++;
             }else
                 obstacleTiles[rowNum][i] = 0;
-        }
+        }*/
     }
 
     //Method to adjust player position based on swipe direction
