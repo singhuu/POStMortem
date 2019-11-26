@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postmortem.DataTypes.User;
+import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.LevelSystems.*;
 import com.example.postmortem.MenuSystems.GameMenu;
 
@@ -32,6 +33,12 @@ public class GameManager implements Parcelable {
             return new GameManager[size];
         }
     };
+
+    /**
+     * The manager for the games users
+     */
+    private UserManager userManager;
+
     /**
      * Total Score of the game
      */
@@ -64,6 +71,7 @@ public class GameManager implements Parcelable {
      * </p>
      */
     public GameManager() {
+        this.userManager = UserManager.getManager();
         this.levels = 3;
         this.difficulty = 1;
         this.runningAds = true;
@@ -79,8 +87,10 @@ public class GameManager implements Parcelable {
      * @param in Input of Parcel that initializes the variables
      */
     protected GameManager(Parcel in) {
+        this.userManager = UserManager.getManager();
+
         this.currLevelType = in.readInt();
-        this.activeUser = UserLoader.getUser(in.readString());
+        this.activeUser = userManager.getUser(in.readString());
         this.levels = in.readInt();
         this.difficulty = in.readInt();
         this.runningAds = in.readInt() == 1;
@@ -351,7 +361,8 @@ public class GameManager implements Parcelable {
         activeUser.setRunningAds(runningAds);
         activeUser.setCurrentRunLevelType(currLevelType);
         activeUser.setCurrentRunDifficulty(difficulty);
-        UserLoader.updateFiles();
+
+        userManager.saveState();
     }
 
     /**

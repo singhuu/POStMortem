@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.DataTypes.HiscoreManager;
+import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.MenuSystems.GameMenu;
 
 
@@ -43,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
      * Finds the File Path and Loads the game
      */
     private void initializeGame() {
+        String path = getFilesDir().getPath();
+        UserManager.initialize(path);
+        HiscoreManager.initialize(path);
+
         UserLoader.findFilePath(this);
         UserLoader.load();
     }

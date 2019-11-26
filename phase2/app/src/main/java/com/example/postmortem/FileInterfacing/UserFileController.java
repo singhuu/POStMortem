@@ -9,7 +9,7 @@ import java.util.List;
 public class UserFileController extends FileController {
 
     public UserFileController(String appDataDir){
-        super(appDataDir, "userdata.csv");
+        super(appDataDir, "usersdata.csv");
     }
 
     @Override

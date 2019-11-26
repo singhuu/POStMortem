@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.UserLoader;
@@ -138,7 +139,9 @@ class UserSelectMenu extends GameMenu {
         String username = usernameBar.getText().toString();
         String password = passwordBar.getText().toString();
 
-        return UserLoader.attemptLogin(username, password);
+        UserManager userManager = UserManager.getManager();
+
+        return userManager.attemptLogin(username, password);
     }
 
     /**
@@ -187,7 +190,9 @@ class UserSelectMenu extends GameMenu {
         String username = usernameBar.getText().toString();
         String password = passwordBar.getText().toString();
 
-        boolean userCreated = UserLoader.createUser(username, password);
+        UserManager manager = UserManager.getManager();
+
+        boolean userCreated = manager.createUser(username, password);
 
         if (userCreated) {
             usernameBar.setHint("Account created");

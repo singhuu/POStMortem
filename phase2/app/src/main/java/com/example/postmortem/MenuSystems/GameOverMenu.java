@@ -8,9 +8,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.DataTypes.Hiscore;
+import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.DataTypes.User;
-import com.example.postmortem.UserLoader;
 
 import java.util.List;
 
@@ -116,27 +117,27 @@ public class GameOverMenu extends GameMenu {
      */
     private String getHiscoresText() {
 
-        List<String[]> hiscores = UserLoader.getHighScores();
+        List<Hiscore> hiscores = HiscoreManager.getManager().getHiscores();
         StringBuilder hiscoresText = new StringBuilder();
 
-        int size = hiscores.size();
-
-        for (int i = 0; i < size; i++) {
-
-            StringBuilder formattedHiscore = getFormattedHiscore(hiscores.get(i), i);
-            hiscoresText.append(formattedHiscore);
-
-        }
-
-        for (int i = size; i < 5; i++) {
-
-            hiscoresText.append(i + 1);
-            hiscoresText.append(":  ");
+        int i = 0;
+        for(Hiscore hiscore: hiscores){
+            hiscoresText.append(formatHiscore(i, hiscore));
+            i++;
 
         }
 
         return hiscoresText.toString();
 
+    }
+
+    private StringBuilder formatHiscore(int i, Hiscore hiscore) {
+        StringBuilder hiscoresText = new StringBuilder();
+        hiscoresText.append(i+1);
+        hiscoresText.append(" ");
+        hiscoresText.append(hiscore);
+        hiscoresText.append("\t");
+        return hiscoresText;
     }
 
     /**
@@ -146,6 +147,7 @@ public class GameOverMenu extends GameMenu {
      * @param index   stores the index or position
      * @return a String that contains high score
      */
+    /*
     private StringBuilder getFormattedHiscore(String[] hiscore, int index) {
         StringBuilder formattedHiscore = new StringBuilder();
         formattedHiscore.append(index + 1);
@@ -156,6 +158,8 @@ public class GameOverMenu extends GameMenu {
         formattedHiscore.append("\t");
         return formattedHiscore;
     }
+
+     */
 
     /**
      * Gets user score in text form
@@ -193,9 +197,16 @@ public class GameOverMenu extends GameMenu {
     private void updateUserHiscore() {
         int score = user.getScore();
         if (user.getHiscore() < score) {
+
             user.setHiscore(score);
-            UserLoader.updateHighScores(user.getUsername(), score);
-            UserLoader.updateFiles();
+            Hiscore hiscore = new Hiscore(user.getUsername(), score);
+
+            HiscoreManager hiscoreManager = HiscoreManager.getManager();
+            hiscoreManager.addHiscore(hiscore);
+            hiscoreManager.saveState();
+
+            //UserLoader.updateHighScores(user.getUsername(), score);
+            //UserLoader.updateFiles();
         }
     }
 

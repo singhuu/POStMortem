@@ -21,6 +21,7 @@ public class FileInterface {
         file = new File(filePath);
         try{
 
+            boolean exists = file.exists();
             file.createNewFile();
 
         } catch (IOException e){

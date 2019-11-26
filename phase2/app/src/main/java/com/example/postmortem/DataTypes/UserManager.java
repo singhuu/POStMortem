@@ -7,14 +7,48 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserManager {
+
+    private static UserManager manager;
+
     private UserFileController fileController;
     private List<User> users;
 
-    public UserManager(String appDataDir){
+
+
+    private UserManager(String appDataDir){
         this.fileController = new UserFileController(appDataDir);
+        this.refresh();
+    }
+
+    /**
+     * Sets the directory for the application data and creates the instance of the class
+     *
+     * @param directory the directory of the program files
+     */
+    public static void initialize(String directory){
+        manager = new UserManager(directory);
+    }
+
+    /**
+     * Gets the manager for users
+     * There is only one instance of this class at a time, which can be accessed by many
+     * classes at once
+     *
+     * @return the user manger
+     */
+    public static UserManager getManager(){
+        return manager;
+    }
+
+
+
+    public void refresh(){
         this.users = (List<User>) fileController.load();
     }
 
+    public void saveState(){
+        this.fileController.save(users);
+    }
 
     /**
      * Try to log into an user account
@@ -59,5 +93,14 @@ public class UserManager {
             }
         }
         return false;
+    }
+
+    public User getUser(String username){
+        for (User user: users) {
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
+        return null;
     }
 }
