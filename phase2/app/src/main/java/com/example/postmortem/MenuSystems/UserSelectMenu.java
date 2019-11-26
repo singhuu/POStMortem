@@ -22,7 +22,7 @@ class UserSelectMenu extends GameMenu {
     private final int USERNAME_BAR = 1;
     private final int PASSWORD_BAR = 2;
 
-    UserSelectMenu(String title){
+    UserSelectMenu(String title) {
         super(title);
     }
 
@@ -37,15 +37,18 @@ class UserSelectMenu extends GameMenu {
 
     }
 
+    /**
+     * Sets the properties of the username and password with edit text
+     *
+     * @param context the current state of the program
+     */
     private void createUserFields(AppCompatActivity context) {
-        //set the properties of the username edittext
         EditText usernameBar = new EditText(context);
         usernameBar.setHint(EditText.AUTOFILL_HINT_NAME);
         usernameBar.setY(256);
         usernameBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         items.add(usernameBar);
 
-        //set the properties of the password edittext
         EditText passwordBar = new EditText(context);
         passwordBar.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         passwordBar.setHint(EditText.AUTOFILL_HINT_PASSWORD);
@@ -54,8 +57,13 @@ class UserSelectMenu extends GameMenu {
         items.add(passwordBar);
     }
 
+    /**
+     * Set the properties of the title
+     *
+     * @param context the current state of the program
+     */
     private void createMenuTitle(AppCompatActivity context) {
-        //set the properties of the title
+
         TextView textView = new TextView(context);
         textView.setText(title);
         textView.setTextSize(32);
@@ -66,8 +74,13 @@ class UserSelectMenu extends GameMenu {
         items.add(textView);
     }
 
+    /**
+     * set the properties of the login and the create user button
+     *
+     * @param context the current state of the program
+     */
     private void createButtons(final AppCompatActivity context) {
-        //set the properties of the login button
+
         Button loginButton = new Button(context);
         loginButton.setText("Login");
         loginButton.setTextSize(18);
@@ -98,16 +111,26 @@ class UserSelectMenu extends GameMenu {
         items.add(createButton);
     }
 
-    private void attemptLogin(AppCompatActivity context){
+    /**
+     * Checks if user can login or not
+     *
+     * @param context the current state of the program
+     */
+    private void attemptLogin(AppCompatActivity context) {
 
         Optional<User> user = getUserLoggedIn();
-        if(user.isPresent()){
+        if (user.isPresent()) {
             loginSuccess(context, user.get());
         } else {
             loginFail();
         }
     }
 
+    /**
+     * Gets the user to enter username and password
+     *
+     * @return method to check if user has logged in or not
+     */
     private Optional<User> getUserLoggedIn() {
         EditText usernameBar = (EditText) items.get(USERNAME_BAR);
         EditText passwordBar = (EditText) items.get(PASSWORD_BAR);
@@ -118,7 +141,13 @@ class UserSelectMenu extends GameMenu {
         return UserLoader.attemptLogin(username, password);
     }
 
-    private void loginSuccess(AppCompatActivity context, User user){
+    /**
+     * Method that displays activity if login is success
+     *
+     * @param context the current state of the program
+     * @param user    User object that stores user properties
+     */
+    private void loginSuccess(AppCompatActivity context, User user) {
 
         Intent oldIntent = context.getIntent();
         GameManager manager = oldIntent.getParcelableExtra("manager");
@@ -132,7 +161,10 @@ class UserSelectMenu extends GameMenu {
 
     }
 
-    private void loginFail(){
+    /**
+     * Login fails
+     */
+    private void loginFail() {
 
         EditText usernameBar = (EditText) items.get(USERNAME_BAR);
         EditText passwordBar = (EditText) items.get(PASSWORD_BAR);
@@ -144,7 +176,10 @@ class UserSelectMenu extends GameMenu {
 
     }
 
-    private void attemptCreateAccount(){
+    /**
+     * Creating a new account and checks if username is taken
+     */
+    private void attemptCreateAccount() {
 
         EditText usernameBar = (EditText) items.get(USERNAME_BAR);
         EditText passwordBar = (EditText) items.get(PASSWORD_BAR);
@@ -154,7 +189,7 @@ class UserSelectMenu extends GameMenu {
 
         boolean userCreated = UserLoader.createUser(username, password);
 
-        if(userCreated){
+        if (userCreated) {
             usernameBar.setHint("Account created");
             usernameBar.setText("");
             passwordBar.setText("");

@@ -23,15 +23,39 @@ import java.util.List;
 
 class OptionMenu extends GameMenu {
 
+    /**
+     * Initializes the Ads Box
+     */
     private final int ADS_BOX = 3;
+    /**
+     * Initializes the difficulty
+     */
     private final int DIFFICULTY_SELECTOR = 2;
+    /**
+     * Initializes the level
+     */
     private final int LEVEL_CHOICE = 1;
 
+    /**
+     * Declares the Easy Difficulty
+     */
     private final String EASY_DIFFICULTY = "minor";
+    /**
+     * Declares the Medium Difficulty
+     */
     private final String MEDIUM_DIFFICULTY = "major";
+    /**
+     * Declares the Hard Difficulty
+     */
     private final String HARD_DIFFICULTY =  "specialist";
+    /**
+     * Stores the different difficulties
+     */
     private final String[] DIFFICULTIES = {EASY_DIFFICULTY, MEDIUM_DIFFICULTY, HARD_DIFFICULTY};
 
+    /**
+     * Declare the game manager object
+     */
     private GameManager manager;
 
     OptionMenu(String title){
@@ -49,11 +73,19 @@ class OptionMenu extends GameMenu {
         return items;
     }
 
+    /**
+     * Getter method for the Game Manager where the object gets initialized
+     * @param context the current state of the program
+     */
     private void getGameManager(AppCompatActivity context){
         Intent intent = context.getIntent();
         manager = intent.getParcelableExtra(GameManager.INTENT_NAME);
     }
 
+    /**
+     * Creates the text box
+     * @param context the current state of the program
+     */
     private void createTextViews(AppCompatActivity context) {
         //create and set the properties of the title
         TextView titleText = new TextView(context);
@@ -78,8 +110,12 @@ class OptionMenu extends GameMenu {
         items.add(levelsField);
     }
 
+    /**
+     * Creates and sets the properties of the difficulty spinner
+     * @param context the current state of the program
+     */
     private void createSpinner(AppCompatActivity context) {
-        //create and set the properties of the difficulty spinner
+
         Spinner difficultySpinner = new Spinner(context);
 
         ArrayAdapter adapter = new ArrayAdapter(
@@ -94,6 +130,10 @@ class OptionMenu extends GameMenu {
         items.add(difficultySpinner);
     }
 
+    /**
+     * Creates clickable buttons
+     * @param context the current state of the program
+     */
     private void createButtons(final AppCompatActivity context) {
 
         //create and set the properties of the ads checkbox
@@ -161,6 +201,10 @@ class OptionMenu extends GameMenu {
         items.add(exitButton);
     }
 
+    /**
+     * Enables the application of current settings
+     * @param context the current state of the program
+     */
     private void applySettings(AppCompatActivity context){
 
         int levels = getLevels();
@@ -176,6 +220,13 @@ class OptionMenu extends GameMenu {
 
     }
 
+    /**
+     * Starts the activity
+     * @param context the current state of the program
+     * @param levels the level of the game selected
+     * @param runningAds Ads are running
+     * @param difficulty the difficulty of the level
+     */
     private void proceedToApplication(AppCompatActivity context, int levels, boolean runningAds, int difficulty){
         manager.setDifficulty(difficulty);
         manager.setLevels(levels);
@@ -183,6 +234,10 @@ class OptionMenu extends GameMenu {
         startActivity(context);
     }
 
+    /**
+     * Starts the activity of with the intent
+     * @param context the current state of the program
+     */
     private void startActivity(AppCompatActivity context){
         Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
         intent.putExtra(GameManager.INTENT_NAME, manager);
@@ -191,6 +246,10 @@ class OptionMenu extends GameMenu {
         context.finish();
     }
 
+    /**
+     * Displays the pop up message
+     * @param context the current state of the program
+     */
     private void displayPopupMessage(AppCompatActivity context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Must have 3 or more levels").setTitle("Problem");
@@ -205,6 +264,10 @@ class OptionMenu extends GameMenu {
         dialog.show();
     }
 
+    /**
+     * Getter function that returns the number of levels
+     * @return returns the number of levels
+     */
     private int getLevels(){
         EditText levelField = (EditText) items.get(LEVEL_CHOICE);
 
@@ -218,11 +281,19 @@ class OptionMenu extends GameMenu {
         return levels;
     }
 
+    /**
+     * Getter method that checks if ads are enabled
+     * @return returns true if Ads box is checked or false if not
+     */
     private boolean getAdsEnabled(){
         CheckBox adsBox = (CheckBox) items.get(ADS_BOX);
         return adsBox.isChecked();
     }
 
+    /**
+     * Getter method that checks difficulty
+     * @return integers value of the difficulty
+     */
     private int getDifficulty(){
         Spinner difficultySpinner = (Spinner) items.get(DIFFICULTY_SELECTOR);
         String diffString = difficultySpinner.getSelectedItem().toString();
@@ -246,12 +317,20 @@ class OptionMenu extends GameMenu {
 
     }
 
+    /**
+     * Goes to the donate page
+     * @param context the current state of the program
+     */
     private void donate(AppCompatActivity context){
         Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://www.paypal.com/ca/home"));
         context.startActivity(intent);
     }
 
+    /**
+     * the Cancel Button
+     * @param context the current state of the program
+     */
     private void cancel(AppCompatActivity context){
         Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
         intent.putExtra(GameManager.INTENT_NAME, manager);
@@ -260,6 +339,11 @@ class OptionMenu extends GameMenu {
         context.finish();
     }
 
+    /**
+     * Method helps in toggling ads
+     * @param context the current state of the program
+     * @param checked true if checked and false if not
+     */
     private void toggleAds(AppCompatActivity context, boolean checked){
 
         if(!checked){
@@ -269,6 +353,11 @@ class OptionMenu extends GameMenu {
 
     }
 
+    /**
+     * Press the cancel button 10 times to cancel ad
+     * @param context the current state of the program
+     * @param timesPressed the number of times the cancel button has been pressed
+     */
     private void tryDisableAds(final AppCompatActivity context, final int timesPressed){
 
         if(timesPressed < 10){
@@ -279,6 +368,11 @@ class OptionMenu extends GameMenu {
 
     }
 
+    /**
+     * Displays confirmation dialog that ad has been disabled
+     * @param context the current state of the program
+     * @param timesPressed the number of times the cancel button is pressed
+     */
     private void showConfirmDialog(final AppCompatActivity context, final int timesPressed) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         String message = buildMessageString(timesPressed);
@@ -300,6 +394,11 @@ class OptionMenu extends GameMenu {
         dialog.show();
     }
 
+    /**
+     * Builds strings that go along with the disable alert
+     * @param repititions number of times the message is repeated
+     * @return the message in a string form
+     */
     private String buildMessageString(int repititions){
         StringBuilder message = new StringBuilder();
         message.append("Are you sure ");
@@ -315,6 +414,9 @@ class OptionMenu extends GameMenu {
 
     }
 
+    /**
+     * Method that enables ads again
+     */
     private void unDisableAds(){
         CheckBox adsBox = (CheckBox) items.get(ADS_BOX);
         adsBox.setChecked(true);

@@ -14,6 +14,9 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 
+  /**
+   * GameMenu object that controls the menu
+   */
   private GameMenu menu_controller;
 
   @Override

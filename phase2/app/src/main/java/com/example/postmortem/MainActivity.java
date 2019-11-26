@@ -9,39 +9,52 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.MenuSystems.GameMenu;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
-  private static Context mContext;
+    /**
+     * Main Context variable that modifies the current context if necessary
+     */
+    private static Context mContext;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    mContext = this;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mContext = this;
 
-    initializeGame();
-    startGame();
+        initializeGame();
+        startGame();
 
-  }
+    }
 
-  private void startGame() {
-    GameManager gameManager = new GameManager();
+    /**
+     * Creates and initializes the intents to start the game
+     */
+    private void startGame() {
+        GameManager gameManager = new GameManager();
 
-    Intent intent = GameMenu.openMenu(this, GameMenu.LOGIN_MENU);
-    intent.putExtra(GameManager.INTENT_NAME, gameManager);
+        Intent intent = GameMenu.openMenu(this, GameMenu.LOGIN_MENU);
+        intent.putExtra(GameManager.INTENT_NAME, gameManager);
 
-    startActivity(intent);
-  }
+        startActivity(intent);
+    }
 
-  private void initializeGame() {
-    UserLoader.findFilePath(this);
-    UserLoader.load();
-  }
+    /**
+     * Finds the File Path and Loads the game
+     */
+    private void initializeGame() {
+        UserLoader.findFilePath(this);
+        UserLoader.load();
+    }
 
-  public static Context getmContext() {
-    return mContext;
-  }
+    /**
+     * Getter function that returns the context
+     *
+     * @return mContext, the context in the main activity
+     */
+    public static Context get_m_Context() {
+        return mContext;
+    }
 
 
 }

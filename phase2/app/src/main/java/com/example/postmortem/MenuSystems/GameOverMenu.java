@@ -16,15 +16,21 @@ import java.util.List;
 
 public class GameOverMenu extends GameMenu {
 
+    /**
+     * Game Manager Object that creates an instance of it
+     */
     private GameManager manager;
+    /**
+     * User Object that creates an instance of it
+     */
     private User user;
 
-    GameOverMenu(String title){
+    GameOverMenu(String title) {
         super(title);
     }
 
     @Override
-    public List<View> buildMenuItems(final AppCompatActivity context){
+    public List<View> buildMenuItems(final AppCompatActivity context) {
 
         getGameManager(context);
         updateUserHiscore();
@@ -36,12 +42,22 @@ public class GameOverMenu extends GameMenu {
 
     }
 
-    private void getGameManager(AppCompatActivity context){
+    /**
+     * Getter function of GameManager
+     *
+     * @param context the current state of the program
+     */
+    private void getGameManager(AppCompatActivity context) {
         Intent intent = context.getIntent();
         manager = intent.getParcelableExtra(GameManager.INTENT_NAME);
         user = manager.getActiveUser();
     }
 
+    /**
+     * Creates a text view
+     *
+     * @param context the current state of the program
+     */
     private void createTextViews(AppCompatActivity context) {
         //create and set the properties of the title text view
         TextView titleView = new TextView(context);
@@ -93,23 +109,28 @@ public class GameOverMenu extends GameMenu {
         items.add(hiscoresView);
     }
 
-    private String getHiscoresText(){
+    /**
+     * Getter function that gets high score texts and appends it
+     *
+     * @return high score in String form
+     */
+    private String getHiscoresText() {
 
-        List<String[]> hiscores = UserLoader.getHiscores();
+        List<String[]> hiscores = UserLoader.getHighScores();
         StringBuilder hiscoresText = new StringBuilder();
 
         int size = hiscores.size();
 
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
 
             StringBuilder formattedHiscore = getFormattedHiscore(hiscores.get(i), i);
             hiscoresText.append(formattedHiscore);
 
         }
 
-        for(int i = size; i < 5; i++){
+        for (int i = size; i < 5; i++) {
 
-            hiscoresText.append(i+1);
+            hiscoresText.append(i + 1);
             hiscoresText.append(":  ");
 
         }
@@ -118,9 +139,16 @@ public class GameOverMenu extends GameMenu {
 
     }
 
+    /**
+     * Formats the high score
+     *
+     * @param hiscore String Builder that stores high score
+     * @param index   stores the index or position
+     * @return a String that contains high score
+     */
     private StringBuilder getFormattedHiscore(String[] hiscore, int index) {
         StringBuilder formattedHiscore = new StringBuilder();
-        formattedHiscore.append(index+1);
+        formattedHiscore.append(index + 1);
         formattedHiscore.append(": ");
         formattedHiscore.append(hiscore[0]);
         formattedHiscore.append(' ');
@@ -129,7 +157,13 @@ public class GameOverMenu extends GameMenu {
         return formattedHiscore;
     }
 
-    private String getUserScoreText(AppCompatActivity context){
+    /**
+     * Gets user score in text form
+     *
+     * @param context the current state of the program
+     * @return the user score in string form
+     */
+    private String getUserScoreText(AppCompatActivity context) {
 
         int tapScore = user.getTapScore();
         int typeScore = user.getTypeScore();
@@ -153,15 +187,23 @@ public class GameOverMenu extends GameMenu {
         return userScoreText.toString();
     }
 
-    private void updateUserHiscore(){
+    /**
+     * Updates user high score
+     */
+    private void updateUserHiscore() {
         int score = user.getScore();
-        if(user.getHiscore() < score){
+        if (user.getHiscore() < score) {
             user.setHiscore(score);
-            UserLoader.updateHiscores(user.getUsername(), score);
+            UserLoader.updateHighScores(user.getUsername(), score);
             UserLoader.updateFiles();
         }
     }
 
+    /**
+     * Creates clickable buttons for restart and quit
+     *
+     * @param context the current state of the program
+     */
     private void createButtons(final AppCompatActivity context) {
         //create and set the properties of the restart button
         Button restart = new Button(context);
@@ -194,7 +236,12 @@ public class GameOverMenu extends GameMenu {
         items.add(quit);
     }
 
-    private void restart(AppCompatActivity context){
+    /**
+     * Restart the game
+     *
+     * @param context the current state of the program
+     */
+    private void restart(AppCompatActivity context) {
         Intent intent = GameMenu.openMenu(context, GameMenu.MAIN_MENU);
         intent.putExtra(GameManager.INTENT_NAME, manager);
 
@@ -203,7 +250,12 @@ public class GameOverMenu extends GameMenu {
 
     }
 
-    private void quit(AppCompatActivity context){
+    /**
+     * Quit the game
+     *
+     * @param context the current state of the program
+     */
+    private void quit(AppCompatActivity context) {
         MainMenu.openMenu(context, MainMenu.MAIN_MENU);
     }
 

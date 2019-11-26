@@ -14,28 +14,45 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TypeLevel extends Level {
-    private Question currentQuestion;
-    private int currentQuestionNum = 0;
 
+    /**
+     * Question object that stores the current Question
+     */
+    private Question currentQuestion;
+    /**
+     * Integer variable that stores the id of the current question
+     */
+    private int currentQuestionNum = 0;
+    /**
+     * Stores the score
+     */
     public int score = 0;
 
+    /**
+     * ArrayList that stores all the questions
+     */
     private ArrayList<Question> allQuestions;
 
-    //pulls from text file
-    //android.content.res.Resources res = getBaseContext().getResources();
-
-    /** Initiates the TypeLevel and sets the difficulty using the Level constructor*/
+    /**
+     * Initiates the TypeLevel and sets the difficulty using the Level constructor
+     */
     public TypeLevel(int difficulty) {
         super(difficulty);
     }
 
-
+    /**
+     * Getter method that the returns score
+     *
+     * @return score variable
+     */
     public int getScore() {
         return score;
     }
 
-    /** using data from a text file pull the questions and answers and create those questions
-     * only pull 4 questions randomly from the file  */
+    /**
+     * using data from a text file pull the questions and answers and create those questions
+     * only pull 4 questions randomly from the file
+     */
     public void createQuestions() {
         /** pulls questions from text file and creates the question objects, then stores them in the class
          */
@@ -48,16 +65,15 @@ public class TypeLevel extends Level {
         InputStream is;
         BufferedReader reader;
 
-        is = MainActivity.getmContext().getResources().openRawResource(R.raw.all_questions);
+        is = MainActivity.get_m_Context().getResources().openRawResource(R.raw.all_questions);
         reader = new BufferedReader(new InputStreamReader(is));
         if (is != null) {
             try {
                 //cycles all lines of text file if possible
-                while((s = reader.readLine()) != null) {
+                while ((s = reader.readLine()) != null) {
                     formatQues.add(s);
                 }
-            }
-            catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -67,7 +83,7 @@ public class TypeLevel extends Level {
         Collections.shuffle(formatQues);
         //cycles through questions in formatques when they are in string form and adds them to database of questions
 
-        for(int i =0; i < formatQues.size(); i ++) {
+        for (int i = 0; i < formatQues.size(); i++) {
             String[] l = formatQues.get(i).split(",", -1);
             ArrayList<String> e = new ArrayList<>();
             e.add(l[1]);
@@ -83,6 +99,12 @@ public class TypeLevel extends Level {
         this.currentQuestion = ques.get(currentQuestionNum);
     }
 
+    /**
+     * Functions checks if the answer is true
+     *
+     * @param answer Answer selected by the user
+     * @return true if the answer is true and false if not
+     */
     public boolean checkAnswer(String answer) {
         if (answer.equals(getCurrentQuestion().getCorrectAnswer())) {
             return true;
@@ -90,24 +112,41 @@ public class TypeLevel extends Level {
         return false;
     }
 
+    /**
+     * Getter method that returns the current Question
+     *
+     * @return currentQuestion Question object that returns the current Question
+     */
     public Question getCurrentQuestion() {
         return this.currentQuestion;
     }
 
+    /**
+     * Goes to the next Question
+     */
     public void nextQuestion() {
-        if(currentQuestionNum == (allQuestions.size() - 1)){
+        if (currentQuestionNum == (allQuestions.size() - 1)) {
             currentQuestionNum = 0;
-        }
-        else {
-            currentQuestionNum+=1;
+        } else {
+            currentQuestionNum += 1;
         }
         this.currentQuestion = allQuestions.get(currentQuestionNum);
     }
 
+    /**
+     * Getter method that gets the question number
+     *
+     * @return
+     */
     public int getCurrentQuestionNum() {
         return currentQuestionNum;
     }
 
+    /**
+     * Getter method that gets your difficulty
+     *
+     * @param difficulty
+     */
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }

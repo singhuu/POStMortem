@@ -12,7 +12,9 @@ import java.util.List;
 
 public abstract class GameMenu {
 
-    /** Menu Invariants, Types and Keys */
+    /**
+     * Menu Invariants, Types and Keys
+     */
     public static final String MAIN_MENU = "Main Menu";
     public static final String LOGIN_MENU = "Login or Create a New User";
     public static final String GAME_OVER_MENU = "Game Over";
@@ -20,27 +22,42 @@ public abstract class GameMenu {
 
     public static final String MENU_TYPE = "menu_type";
 
-    /** Menu items */
+    /**
+     * Menu items
+     */
     protected List<View> items;
 
 
     protected String title;
 
-    public GameMenu(String title){
+    public GameMenu(String title) {
         this.title = title;
         this.items = new ArrayList<>();
     }
 
-    public static Intent openMenu(AppCompatActivity packageContext, String menu_type){
+    /**
+     * Starts the opening menu
+     *
+     * @param packageContext the current context of the app
+     * @param menu_type      String that stores the type of menu
+     * @return the operation to be performed
+     */
+    public static Intent openMenu(AppCompatActivity packageContext, String menu_type) {
         Intent intent = new Intent(packageContext, MenuActivity.class);
         intent.putExtra(MENU_TYPE, menu_type);
         return intent;
     }
 
-    static GameMenu createMenu(String menu_type){
+    /**
+     * Creates an object of the menu depending on the type
+     *
+     * @param menu_type String value that stores the menu
+     * @return the initialized gameMenu object
+     */
+    static GameMenu createMenu(String menu_type) {
         GameMenu menu;
 
-        switch (menu_type){
+        switch (menu_type) {
             case MAIN_MENU:
                 menu = new MainMenu(menu_type);
                 break;
@@ -66,11 +83,19 @@ public abstract class GameMenu {
 
     }
 
-    protected void setColours(TextView view){
+    /**
+     * Sets the colours of the menu
+     *
+     * @param view TextView object of the current view
+     */
+    protected void setColours(TextView view) {
         view.setBackgroundColor(Color.rgb(208, 33, 32));
         view.setTextColor(Color.rgb(255, 255, 255));
     }
 
+    /**
+     * Abstract Method that builds the menu items
+     */
     public abstract List<View> buildMenuItems(AppCompatActivity context);
 
 }

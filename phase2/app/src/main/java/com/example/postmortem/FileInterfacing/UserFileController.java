@@ -57,6 +57,11 @@ public class UserFileController extends FileController {
 
     }
 
+    /**
+     * Creates the data for the User
+     * @param user User object that stores data
+     * @return data that is appended
+     */
     private  StringBuilder createDataFromUser(User user){
         StringBuilder data = new StringBuilder();
         data.append(user.getUsername());

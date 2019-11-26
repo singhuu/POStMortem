@@ -14,67 +14,91 @@ import com.example.postmortem.MenuSystems.MenuActivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class LevelActivity extends AppCompatActivity {
-  protected int timeLeft;
-  protected static Level level;
-  protected GameManager gameManager;
-  protected static int difficulty;
-  protected CountDownTimer countTimer = null;
 
-  protected String curr_username = "";
+    /**
+     * The Time Left in the countdown
+     */
+    protected int timeLeft;
+    /**
+     * Level Object that stores information about level
+     */
+    protected static Level level;
+    /**
+     * GameManager Object
+     */
+    protected GameManager gameManager;
+    /**
+     * static variable that stores the difficulty
+     */
+    protected static int difficulty;
+    /**
+     * CountDownTimer object that stores the timer
+     * Initialized to null
+     */
+    protected CountDownTimer countTimer = null;
+    /**
+     * Stores the current username
+     * Initialized to ""
+     */
+    protected String curr_username = "";
 
-  /*LevelActivity(int layout, Level level) {
-    this.layout = layout;
-    this.level = level;
-  } */
+    /**
+     * creates a Bundle and initializes the current username
+     *
+     * @param savedInstanceState a mapping from String keys to various Parcelable values
+     */
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    curr_username = getIntent().getStringExtra("CURR_USERNAME");
-  }
-
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event)  {
-    if (keyCode == KeyEvent.KEYCODE_BACK ) {
-      // do something on back.
-      return true;
+        curr_username = getIntent().getStringExtra("CURR_USERNAME");
     }
 
-    return super.onKeyDown(keyCode, event);
-  }
+    /**
+     * Creates a trigger for the event
+     *
+     * @param keyCode code of the Key
+     * @param event   current event of the KeyEvent object
+     * @return either true or waits for key down
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // do something on back.
+            return true;
+        }
 
-  /**
-   * Perform initial setup of layout.
-   * This includes setting the value of text boxes, buttons, etc.
-   */
-  //protected abstract void setup();
+        return super.onKeyDown(keyCode, event);
+    }
 
-  /** Start timer function in SECONDS Devs reading this, Enter Time in Seconds */
-  public void startTimer(int cTimeInSeconds) {
-    countTimer =
-            new CountDownTimer(cTimeInSeconds * 1000, 1000) {
-              /** Left empty for now, I do not know what to do with this just yet */
-              public void onTick(long millisUntilFinished) {
-                  timeLeft -=1;
-                  countTickHandler();
-              }
-              /** Same situation as above. Will implement as and when needed */
-              public void onFinish() {
-                  saveScore();
-                  countFinishHandler();
-              }
-            };
-    countTimer.start();
-  }
+    /**
+     * Start timer function in SECONDS
+     */
+    public void startTimer(int cTimeInSeconds) {
+        countTimer =
+                new CountDownTimer(cTimeInSeconds * 1000, 1000) {
+                    public void onTick(long millisUntilFinished) {
+                        timeLeft -= 1;
+                        countTickHandler();
+                    }
 
-  public abstract void countTickHandler();
+                    public void onFinish() {
+                        saveScore();
+                        countFinishHandler();
+                    }
+                };
+        countTimer.start();
+    }
 
-  public abstract void countFinishHandler();
+    public abstract void countTickHandler();
 
-  public abstract void saveScore();
+    public abstract void countFinishHandler();
 
-  /** cancelTimer that cancels the Count Down */
-  public void cancelTimer() {
-    if (countTimer != null) countTimer.cancel();
-  }
+    public abstract void saveScore();
+
+    /**
+     * cancelTimer that cancels the Count Down
+     */
+    public void cancelTimer() {
+        if (countTimer != null) countTimer.cancel();
+    }
 }

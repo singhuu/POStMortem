@@ -15,16 +15,19 @@ import java.util.List;
 
 class MainMenu extends GameMenu {
 
+    /**
+     * GameManager object is declared
+     */
     private GameManager manager;
 
-    MainMenu(String title){
+    MainMenu(String title) {
 
         super(title);
 
     }
 
     @Override
-    public List<View> buildMenuItems(final AppCompatActivity context){
+    public List<View> buildMenuItems(final AppCompatActivity context) {
 
         getGameManager(context);
         createTextViews(context);
@@ -34,11 +37,21 @@ class MainMenu extends GameMenu {
 
     }
 
-    private void getGameManager(AppCompatActivity context){
+    /**
+     * Getter function that initializes game manager
+     *
+     * @param context the current state of the program
+     */
+    private void getGameManager(AppCompatActivity context) {
         Intent intent = context.getIntent();
         manager = intent.getParcelableExtra(GameManager.INTENT_NAME);
     }
 
+    /**
+     * Sets the properties of Continue, Start, Options, Logout and Exit buttons
+     *
+     * @param context the current state of the program
+     */
     private void createButtons(final AppCompatActivity context) {
         //set the properties of the continue button
         Button continueButton = new Button(context);
@@ -70,7 +83,6 @@ class MainMenu extends GameMenu {
         setColours(startButton);
         items.add(startButton);
 
-        //create and set the properties of the options button
         Button optionsButton = new Button(context);
         optionsButton.setText("Options");
         optionsButton.setTextSize(18);
@@ -85,7 +97,6 @@ class MainMenu extends GameMenu {
         setColours(optionsButton);
         items.add(optionsButton);
 
-        //set the properties of the logout button
         Button logoutButton = new Button(context);
         logoutButton.setText("Logout");
         logoutButton.setTextSize(18);
@@ -100,7 +111,6 @@ class MainMenu extends GameMenu {
         setColours(logoutButton);
         items.add(logoutButton);
 
-        //set the properties of the exit button
         Button exitButton = new Button(context);
         exitButton.setText("Quit");
         exitButton.setTextSize(18);
@@ -116,20 +126,21 @@ class MainMenu extends GameMenu {
         items.add(exitButton);
     }
 
+    /**
+     * Sets the properties of the user and title text view
+     *
+     * @param context the current state of the program
+     */
     private void createTextViews(AppCompatActivity context) {
 
         User user = manager.getActiveUser();
         String username = user.getUsername();
 
-        //String username = "username";
-
-        //set the properties of the user text view
         TextView userText = new TextView(context);
         userText.setText(username);
         userText.setX(832);
         items.add(userText);
 
-        //set the properties of the title text view
         TextView textView = new TextView(context);
         textView.setText(title);
         textView.setTextSize(32);
@@ -140,15 +151,30 @@ class MainMenu extends GameMenu {
         items.add(textView);
     }
 
-    private void continueGame(AppCompatActivity context){
+    /**
+     * Continues the game from previous save
+     *
+     * @param context the current state of the program
+     */
+    private void continueGame(AppCompatActivity context) {
         manager.continueFromSave(context);
     }
 
-    private void start(AppCompatActivity context){
+    /**
+     * Starts the game
+     *
+     * @param context the current state of the program
+     */
+    private void start(AppCompatActivity context) {
         manager.start(context);
     }
 
-    private void openOptions(AppCompatActivity context){
+    /**
+     * Opens the options menu
+     *
+     * @param context the current state of the program
+     */
+    private void openOptions(AppCompatActivity context) {
 
         Intent intent = GameMenu.openMenu(context, GameMenu.OPTIONS_MENU);
         intent.putExtra(GameManager.INTENT_NAME, manager);
@@ -156,7 +182,12 @@ class MainMenu extends GameMenu {
         context.finish();
     }
 
-    private void logout(AppCompatActivity context){
+    /**
+     * The Logout button
+     *
+     * @param context the current state of the program
+     */
+    private void logout(AppCompatActivity context) {
         Intent intent = GameMenu.openMenu(context, GameMenu.LOGIN_MENU);
         intent.putExtra(GameManager.INTENT_NAME, manager);
 
@@ -164,7 +195,12 @@ class MainMenu extends GameMenu {
         context.finish();
     }
 
-    private void quit(AppCompatActivity context){
+    /**
+     * the quit button
+     *
+     * @param context the current state of the program
+     */
+    private void quit(AppCompatActivity context) {
         context.finish();
         System.exit(0);
     }

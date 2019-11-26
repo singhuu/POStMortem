@@ -14,10 +14,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class PickUpLevelActivity extends LevelActivity {
+
+    /**
+     * PickUpLevel Object that stores data of level
+     */
     PickUpLevel level;
+    /**
+     * List that stores the buttons
+     */
     Button[] selectButtons;
+    /**
+     * Stores the text of score
+     */
     TextView scoreText;
+    /**
+     * Stores the text of timer
+     */
     TextView timerText;
+    /**
+     * ImageView that displays the wrongChoiceX
+     */
     ImageView wrongChoiceX;
 
     @Override
@@ -48,12 +64,19 @@ public class PickUpLevelActivity extends LevelActivity {
 
     }
 
+    /**
+     * Updates the name of the object to be found out
+     */
     private void updateSearchPrompt() {
         TextView searchPrompt = findViewById(R.id.searchPrompt);
         String searchStr = "Find the " + level.getTarget() + "!";
         searchPrompt.setText(searchStr);
     }
 
+    /**
+     * Assigns the button to various choices
+     * @param selectButtons
+     */
     private void assignButtonVals(Button[] selectButtons) {
         String[] selectables = level.getSelectables();
         for (int i = 0; i < selectButtons.length; i++) {
@@ -62,6 +85,11 @@ public class PickUpLevelActivity extends LevelActivity {
         }
     }
 
+    /**
+     * Assigns the image to the choices
+     * @param button Button object
+     * @param buttonVal Value of the button
+     */
     private void assignButtonImage(Button button, String buttonVal) {
         switch (buttonVal) {
             case "Deodorant":
@@ -109,6 +137,10 @@ public class PickUpLevelActivity extends LevelActivity {
         }
     }
 
+    /**
+     * Assigns ids to various buttons
+     * @return list of buttons
+     */
     private Button[] getButtons() {
         Button[] buttons = new Button[6];
 
@@ -122,6 +154,10 @@ public class PickUpLevelActivity extends LevelActivity {
         return buttons;
     }
 
+    /**
+     * Listens and handles for a click
+     * @param target
+     */
     public void clickHandler(View target) {
         if (level.wrongChoiceCountdown == 0) {
             Button clickedButton = (Button) target;
@@ -141,8 +177,11 @@ public class PickUpLevelActivity extends LevelActivity {
         }
     }
 
+    /**
+     * Handles the count tick
+     */
     @Override
-    public void countTickHandler() { //TODO image stays when continuously clicking
+    public void countTickHandler() {
         timerText.setText(timeLeft + 1 + "");
 
         if (level.wrongChoiceCountdown != 0)
@@ -151,6 +190,9 @@ public class PickUpLevelActivity extends LevelActivity {
             wrongChoiceX.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * updates total score
+     */
     @Override
     public void countFinishHandler() {
         gameManager.totalScore += level.getScore();
@@ -158,6 +200,9 @@ public class PickUpLevelActivity extends LevelActivity {
 
     }
 
+    /**
+     * Saves the score
+     */
     @Override
     public void saveScore() {
         UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.PICKUP);
