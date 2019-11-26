@@ -198,7 +198,7 @@ class UserSelectMenu extends GameMenu {
             usernameBar.setHint("Account created");
             usernameBar.setText("");
             passwordBar.setText("");
-            UserLoader.updateFiles();
+            manager.saveState();
         } else {
             usernameBar.setHint("Username Taken");
             usernameBar.setText("");

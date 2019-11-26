@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 abstract class FileController {
@@ -18,7 +19,7 @@ abstract class FileController {
      * Clears the saved object list and replaces it with new instances loaded from the file
      */
     public List load(){
-        List loadedList = null;
+        List loadedList = new LinkedList<>();
         try{
             List<String> fileData = fileInterface.readFile();
             List<String[]> seperatedData = formatReadData(fileData);

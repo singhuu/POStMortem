@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
         String path = getFilesDir().getPath();
         UserManager.initialize(path);
         HiscoreManager.initialize(path);
-
-        UserLoader.findFilePath(this);
-        UserLoader.load();
     }
 
     /**

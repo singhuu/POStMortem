@@ -40,6 +40,10 @@ public class UserManager {
         return manager;
     }
 
+    public List<User> getUsers(){
+        return users;
+    }
+
 
 
     public void refresh(){
@@ -48,6 +52,7 @@ public class UserManager {
 
     public void saveState(){
         this.fileController.save(users);
+        //refresh();
     }
 
     /**

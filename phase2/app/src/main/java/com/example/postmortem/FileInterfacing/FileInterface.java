@@ -22,7 +22,8 @@ public class FileInterface {
         try{
 
             boolean exists = file.exists();
-            file.createNewFile();
+            boolean create = file.createNewFile();
+            int wait = 0;
 
         } catch (IOException e){
             e.printStackTrace();
@@ -63,6 +64,8 @@ public class FileInterface {
 
         BufferedWriter out = new BufferedWriter(new FileWriter(file));
         out.write(data);
+        out.flush();
+        out.close();
 
     }
 

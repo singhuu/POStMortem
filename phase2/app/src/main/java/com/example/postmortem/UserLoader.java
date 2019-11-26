@@ -3,6 +3,7 @@ package com.example.postmortem;
 import android.content.Context;
 
 import com.example.postmortem.DataTypes.User;
+import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.LevelSystems.LevelType;
 
 import java.io.BufferedWriter;
@@ -319,7 +320,8 @@ public class UserLoader {
      */
     private static String buildOutputToUsersFile() {
         StringBuilder out = new StringBuilder();
-        for (User user : users) {
+        List<User> usersList = UserManager.getManager().getUsers();
+        for (User user : usersList) {
             out.append(createDataFromUser(user));
             out.append("\n");
         }
