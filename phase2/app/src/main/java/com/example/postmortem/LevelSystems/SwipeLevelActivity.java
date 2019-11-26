@@ -7,15 +7,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.postmortem.R;
 import com.example.postmortem.UserLoader;
-
-import java.util.ArrayList;
 
 public class SwipeLevelActivity extends LevelActivity{
     SwipeLevel level;
@@ -23,8 +18,8 @@ public class SwipeLevelActivity extends LevelActivity{
     TextView scoreText;
     TextView timerText;
 
-    Button[][] routeButtons;
-    Button[] playerButtons;
+    TextView[][] obstacleTiles;
+    TextView[] playerTiles;
 
     CountDownTimer tileCheckTimer;
 
@@ -49,10 +44,10 @@ public class SwipeLevelActivity extends LevelActivity{
         timerText = findViewById(R.id.timer);
         timerText.setText(timeLeft + 1 + "");
 
-        routeButtons = getRouteButtons();
-        updateRouteButtons();
+        obstacleTiles = getObstacleTiles();
+        updateObstacleTiles();
 
-        playerButtons = getPlayerButtons();
+        playerTiles = getPlayerTiles();
 
         startTileCheckTimer(timeLeft);
         startTimer(timeLeft);
@@ -71,7 +66,7 @@ public class SwipeLevelActivity extends LevelActivity{
             public void onTick(long l) {
                 boolean checkResult = level.checkOpenLane();
                 if(checkResult){
-                    updateRouteButtons();
+                    updateObstacleTiles();
                     scoreText.setText(Integer.toString(level.getScore()));
                 }
             }
@@ -85,54 +80,54 @@ public class SwipeLevelActivity extends LevelActivity{
         tileCheckTimer.start();
     }
 
-    private Button[][] getRouteButtons() {
-        Button[][] buttons = new Button[3][3];
+    private TextView[][] getObstacleTiles() {
+        TextView[][] obstacleTiles = new TextView[3][3];
 
-        buttons[0][0] = findViewById(R.id.button1);
-        buttons[0][1] = findViewById(R.id.button2);
-        buttons[0][2] = findViewById(R.id.button3);
+        obstacleTiles[0][0] = findViewById(R.id.obstacleTile1);
+        obstacleTiles[0][1] = findViewById(R.id.obstacleTile2);
+        obstacleTiles[0][2] = findViewById(R.id.obstacleTile3);
 
-        buttons[1][0] = findViewById(R.id.button4);
-        buttons[1][1] = findViewById(R.id.button5);
-        buttons[1][2] = findViewById(R.id.button6);
+        obstacleTiles[1][0] = findViewById(R.id.obstacleTile4);
+        obstacleTiles[1][1] = findViewById(R.id.obstacleTile5);
+        obstacleTiles[1][2] = findViewById(R.id.obstacleTile6);
 
-        buttons[2][0] = findViewById(R.id.button7);
-        buttons[2][1] = findViewById(R.id.button8);
-        buttons[2][2] = findViewById(R.id.button9);
+        obstacleTiles[2][0] = findViewById(R.id.obstacleTile7);
+        obstacleTiles[2][1] = findViewById(R.id.obstacleTile8);
+        obstacleTiles[2][2] = findViewById(R.id.obstacleTile9);
 
-        for(int i = 0; i < buttons.length; i++)
+        for(int i = 0; i <  obstacleTiles.length; i++)
             level.updateObstacles(i);
 
-        return buttons;
+        return  obstacleTiles;
     }
 
-    private Button[] getPlayerButtons(){
-        playerButtons = new Button[3];
+    private TextView[] getPlayerTiles(){
+        playerTiles = new TextView[3];
 
-        playerButtons[0] = findViewById(R.id.playerButton1);
-        playerButtons[1] = findViewById(R.id.playerButton2);
-        playerButtons[2] = findViewById(R.id.playerButton3);
+        playerTiles[0] = findViewById(R.id.playerTile1);
+        playerTiles[1] = findViewById(R.id.playerTile2);
+        playerTiles[2] = findViewById(R.id.playerTile3);
 
-        playerButtons[1].setText("P");
+        playerTiles[1].setText("P");
 
-        return playerButtons;
+        return playerTiles;
     }
 
-    private void updateRouteButtons(){
-        for(int i = 0; i < routeButtons.length; i++){
-            for(int j = 0; j < routeButtons[i].length; j++){
+    private void updateObstacleTiles(){
+        for(int i = 0; i < obstacleTiles.length; i++){
+            for(int j = 0; j < obstacleTiles[i].length; j++){
                 String routeSpotValue = Integer.toString(level.obstacleTiles[i][j]);
-                routeButtons[i][j].setText(routeSpotValue);
+                obstacleTiles[i][j].setText(routeSpotValue);
             }
         }
     }
 
-    private void updatePlayerButtons(){
+    private void updatePlayerTiles(){
         for(int i = 0; i < 3; i++){
             if(level.currPlayerCol == i)
-                playerButtons[i].setText("P");
+                playerTiles[i].setText("P");
             else
-                playerButtons[i].setText("");
+                playerTiles[i].setText("");
         }
     }
 
@@ -165,7 +160,7 @@ public class SwipeLevelActivity extends LevelActivity{
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
             level.checkSwipe(velocityX);
-            updatePlayerButtons();
+            updatePlayerTiles();
             return true;
         }
 

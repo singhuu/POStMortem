@@ -56,6 +56,6 @@ public class SwipeLevel extends Level {
 
     @Override
     public int getScore() {
-        return this.rowsPassed * 5;
+        return this.rowsPassed * 10;
     }
 }
