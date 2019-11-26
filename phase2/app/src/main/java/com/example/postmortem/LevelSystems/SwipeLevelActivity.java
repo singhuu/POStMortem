@@ -1,10 +1,12 @@
 package com.example.postmortem.LevelSystems;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GestureDetectorCompat;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,7 +17,7 @@ import com.example.postmortem.UserLoader;
 
 import java.util.ArrayList;
 
-public class SwipeLevelActivity extends LevelActivity {
+public class SwipeLevelActivity extends LevelActivity{
     SwipeLevel level;
 
     TextView scoreText;
@@ -26,10 +28,14 @@ public class SwipeLevelActivity extends LevelActivity {
 
     CountDownTimer tileCheckTimer;
 
+    GestureDetectorCompat mDetector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_level);
+
+        mDetector = new GestureDetectorCompat(this, new SwipeLevelGestureListener());
 
         //gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
 
@@ -50,6 +56,12 @@ public class SwipeLevelActivity extends LevelActivity {
 
         startTileCheckTimer(timeLeft);
         startTimer(timeLeft);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
     //Timer for checking if lane is open immediately after swipe advance
@@ -115,6 +127,15 @@ public class SwipeLevelActivity extends LevelActivity {
         }
     }
 
+    private void updatePlayerButtons(){
+        for(int i = 0; i < 3; i++){
+            if(level.currPlayerCol == i)
+                playerButtons[i].setText("P");
+            else
+                playerButtons[i].setText("");
+        }
+    }
+
     @Override
     public void countTickHandler() {
         timerText.setText(timeLeft + 1 + "");
@@ -129,5 +150,24 @@ public class SwipeLevelActivity extends LevelActivity {
     @Override
     public void saveScore() {
         UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.PICKUP);
+    }
+
+    //Class to register swipe events
+    public class SwipeLevelGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        //Here because all gestures start with an onDown()
+        @Override
+        public boolean onDown(MotionEvent event){
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+            level.checkSwipe(velocityX);
+            updatePlayerButtons();
+            return true;
+        }
+
     }
 }

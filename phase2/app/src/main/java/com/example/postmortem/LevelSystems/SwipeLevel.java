@@ -31,10 +31,6 @@ public class SwipeLevel extends Level {
         updateObstacles(0);
     }
 
-    public void setPlayerCol(int playerCol){
-        this.currPlayerCol =  playerCol;
-    }
-
     public void updateObstacles(int rowNum){
         int numObstacles = 0;
 
@@ -47,6 +43,15 @@ public class SwipeLevel extends Level {
             }else
                 obstacleTiles[rowNum][i] = 0;
         }
+    }
+
+    //Method to adjust player position based on swipe direction
+    public void checkSwipe(float velX){
+        if(velX < 0 && currPlayerCol != 0)
+            currPlayerCol -= 1;
+
+        else if(velX > 0 && currPlayerCol != 2)
+            currPlayerCol += 1;
     }
 
     @Override
