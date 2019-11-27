@@ -34,7 +34,7 @@ public class UserSelectMenuActivity extends AppCompatActivity {
       // check login credentials
       UserManager userManager = UserManager.getManager();
       if (true) {
-        // TODO MAKE PROPER LOGIN CHECK ONCE USER MANAGER GETS FIGURED OUT
+        // TODO MAKE PROPER LOGIN CHECK
         acceptLogin(target);
       } else {
         constructErrorDialog(target, "Username or password incorrect.");
@@ -56,7 +56,14 @@ public class UserSelectMenuActivity extends AppCompatActivity {
     if (uname.getText().toString().isEmpty() | pword.getText().toString().isEmpty()) {
       constructErrorDialog(target, "Username or password blank.");
     } else {
+      UserManager userManager = UserManager.getManager();
       // TODO MAKE PROPER USER LOADER CHECK
+      // TODO CONFIRM THAT USER IS NOT ALREADY CREATED
+      if () {
+        //create user, since not already created
+      } else {
+        constructErrorDialog(target, "User already created.");
+      }
     }
   }
 
