@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                android:text="Levels to play (min 3):" />
+                android:text="Levels to play:" />
 
             <EditText
                 android:id="@+id/levelsToPlay"
@@ -89,7 +89,7 @@
                 android:text="Ads:" />
 
             <Switch
-                android:id="@+id/ads_enabled"
+                android:id="@+id/adsEnabled"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center_vertical"
