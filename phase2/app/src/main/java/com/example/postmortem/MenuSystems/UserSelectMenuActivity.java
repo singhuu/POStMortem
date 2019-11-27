@@ -30,24 +30,20 @@ public class UserSelectMenuActivity extends AppCompatActivity {
   }
 
   public void login(View target) {
+    EditText uname = (EditText) findViewById(R.id.usernameField);
+    EditText pword = (EditText) findViewById(R.id.passwordField);
 
-      // check login credentials
-    Optional<User> user = getUserLoggedIn();
-    if (user.isPresent()) {
-      acceptLogin(user.get());
+    if (uname.getText().toString().isEmpty() | pword.getText().toString().isEmpty()) {
+      constructDialog(target, "Error","Username or password blank.");
     } else {
-      constructErrorDialog(target, "Username or password incorrect.");
+      // check login credentials
+      Optional<User> user = userManager.attemptLogin(uname.getText().toString(), pword.getText().toString());
+      if (user.isPresent()) {
+        acceptLogin(user.get());
+      } else {
+        constructDialog(target, "Error","Username or password incorrect.");
+      }
     }
-  }
-
-  private Optional<User> getUserLoggedIn(){
-    EditText usernameField = findViewById(R.id.usernameField);
-    EditText passwordField =  findViewById(R.id.passwordField);
-
-    String username = usernameField.getText().toString();
-    String password = passwordField.getText().toString();
-
-    return userManager.attemptLogin(username, password);
   }
 
   public void acceptLogin(User user) {
@@ -56,41 +52,28 @@ public class UserSelectMenuActivity extends AppCompatActivity {
     Intent intent = new Intent(this, MainMenuActivity.class);
     intent.putExtra(GameManager.INTENT_NAME, gameManager);
     startActivity(intent);
-    finish();
   }
 
   public void createUser(View target) {
+    EditText uname = (EditText) findViewById(R.id.usernameField);
+    EditText pword = (EditText) findViewById(R.id.passwordField);
 
-    EditText usernameField = findViewById(R.id.usernameField);
-    EditText passwordField =  findViewById(R.id.passwordField);
-
-    boolean created = tryCreateAccount();
-    if (created) {
-      usernameField.setHint("Account created");
-      usernameField.setText("");
-      passwordField.setText("");
-      userManager.saveState();
+    if (uname.getText().toString().isEmpty() | pword.getText().toString().isEmpty()) {
+      constructDialog(target, "Error","Username or password blank.");
     } else {
-      constructErrorDialog(target, "User already exists.");
+      if (userManager.createUser(uname.getText().toString(), pword.getText().toString())) {
+        //create user, since not already created
+        constructDialog(target, "Success", "New user created.");
+      } else {
+        constructDialog(target, "Error","User already created.");
+      }
     }
   }
 
-  private boolean tryCreateAccount(){
-
-    EditText usernameField = findViewById(R.id.usernameField);
-    EditText passwordField =  findViewById(R.id.passwordField);
-
-    String username = usernameField.getText().toString();
-    String password = passwordField.getText().toString();
-
-    return userManager.createUser(username, password);
-
-  }
-
-  public void constructErrorDialog(View target, String message) {
+  public void constructDialog(View target, String title, String message) {
     // code modded from https://medium.com/@suragch/making-an-alertdialog-in-android-2045381e2edb
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("Error");
+    builder.setTitle(title);
     builder.setMessage(message);
     builder.setPositiveButton("OK", null);
     AlertDialog dialog = builder.create();

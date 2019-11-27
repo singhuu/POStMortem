@@ -1,17 +1,12 @@
 package com.example.postmortem.LevelSystems;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.KeyEvent;
 
-import com.example.postmortem.GameManager;
-import com.example.postmortem.MainActivity;
-import com.example.postmortem.MenuSystems.GameMenu;
-import com.example.postmortem.MenuSystems.GameOverMenu;
-import com.example.postmortem.MenuSystems.MenuActivity;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.postmortem.GameManager;
 
 public abstract class LevelActivity extends AppCompatActivity {
 

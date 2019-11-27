@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.DataTypes.UserManager;
-import com.example.postmortem.LevelSystems.*;
-import com.example.postmortem.MenuSystems.GameMenu;
+import com.example.postmortem.LevelSystems.PickUpLevelActivity;
+import com.example.postmortem.LevelSystems.TapLevelActivity;
+import com.example.postmortem.LevelSystems.TypeLevelActivity;
+import com.example.postmortem.MenuSystems.GameOverMenuActivity;
 
 public class GameManager implements Parcelable {
 
@@ -250,7 +252,7 @@ public class GameManager implements Parcelable {
      * @param context the current state of the app
      */
     private void gameOver(AppCompatActivity context) {
-        Intent intent = GameMenu.openMenu(context, GameMenu.GAME_OVER_MENU);
+        Intent intent = new Intent(context, GameOverMenuActivity.class);
         intent.putExtra(INTENT_NAME, this);
 
         context.startActivity(intent);

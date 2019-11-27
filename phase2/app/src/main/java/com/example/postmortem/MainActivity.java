@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.UserManager;
-import com.example.postmortem.MenuSystems.GameMenu;
+import com.example.postmortem.MenuSystems.UserSelectMenuActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,10 +34,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void startGame() {
         GameManager gameManager = new GameManager();
-
-        Intent intent = GameMenu.openMenu(this, GameMenu.LOGIN_MENU);
+        Intent intent = new Intent(this, UserSelectMenuActivity.class);
         intent.putExtra(GameManager.INTENT_NAME, gameManager);
-
         startActivity(intent);
     }
 
