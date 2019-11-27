@@ -178,6 +178,6 @@ public class TypeLevelActivity extends LevelActivity {
      */
     @Override
     public void saveScore() {
-        UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.TYPE);
+        gameManager.getActiveUser().setScore(level.getScore(), LevelType.TYPE);
     }
 }

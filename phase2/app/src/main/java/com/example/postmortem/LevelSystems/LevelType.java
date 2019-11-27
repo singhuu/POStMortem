@@ -4,6 +4,7 @@ public enum LevelType {
 
     PICKUP,
     TAP,
-    TYPE
+    TYPE,
+    SWIPE
 
 }

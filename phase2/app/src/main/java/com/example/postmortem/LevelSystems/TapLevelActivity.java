@@ -107,7 +107,7 @@ public class TapLevelActivity extends LevelActivity {
      */
     @Override
     public void saveScore() {
-        UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.TAP);
+        gameManager.getActiveUser().setScore(level.getScore(), LevelType.TAP);
     }
 
 }

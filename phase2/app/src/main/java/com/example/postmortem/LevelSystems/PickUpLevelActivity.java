@@ -205,7 +205,7 @@ public class PickUpLevelActivity extends LevelActivity {
      */
     @Override
     public void saveScore() {
-        UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.PICKUP);
+        gameManager.getActiveUser().setScore(level.getScore(), LevelType.PICKUP);
     }
 
     }
