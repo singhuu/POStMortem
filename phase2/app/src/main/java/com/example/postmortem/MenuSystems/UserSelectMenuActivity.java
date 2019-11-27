@@ -52,6 +52,7 @@ public class UserSelectMenuActivity extends AppCompatActivity {
 
   public void acceptLogin(User user) {
     // login accepted, advance to main menu screen
+    gameManager.setActiveUser(user);
     Intent intent = new Intent(this, MainMenuActivity.class);
     intent.putExtra(GameManager.INTENT_NAME, gameManager);
     startActivity(intent);
