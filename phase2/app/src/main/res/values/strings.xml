@@ -6,4 +6,7 @@
     <string name="tap_level_instructions">Tap the laptop as many times as possible before time runs out!</string>
     <string name="non_filled_text">NULL</string>
     <string name="swipe_prompt">Swipe To Avoid!</string>
+    <string name="difficulty1">CS Minor</string>
+    <string name="difficulty2">CS Major</string>
+    <string name="difficulty3">CS Specialist</string>
 </resources>
