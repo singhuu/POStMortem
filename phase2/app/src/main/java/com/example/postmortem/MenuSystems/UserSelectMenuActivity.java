@@ -8,13 +8,17 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
 
+import java.util.Optional;
+
 public class UserSelectMenuActivity extends AppCompatActivity {
 
   GameManager gameManager;
+  UserManager userManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -22,49 +26,64 @@ public class UserSelectMenuActivity extends AppCompatActivity {
     setContentView(R.layout.user_select_menu);
     Bundle extras = getIntent().getExtras();
     gameManager = (GameManager) extras.get(GameManager.INTENT_NAME);
+    userManager = UserManager.getManager();
   }
 
   public void login(View target) {
-    EditText uname = (EditText) findViewById(R.id.usernameField);
-    EditText pword = (EditText) findViewById(R.id.passwordField);
 
-    if (uname.getText().toString().isEmpty() | pword.getText().toString().isEmpty()) {
-      constructErrorDialog(target, "Username or password blank.");
-    } else {
       // check login credentials
-      UserManager userManager = UserManager.getManager();
-      if (true) {
-        // TODO MAKE PROPER LOGIN CHECK
-        acceptLogin(target);
-      } else {
-        constructErrorDialog(target, "Username or password incorrect.");
-      }
+    Optional<User> user = getUserLoggedIn();
+    if (user.isPresent()) {
+      acceptLogin(user.get());
+    } else {
+      constructErrorDialog(target, "Username or password incorrect.");
     }
   }
 
-  public void acceptLogin(View target) {
+  private Optional<User> getUserLoggedIn(){
+    EditText usernameField = findViewById(R.id.usernameField);
+    EditText passwordField =  findViewById(R.id.passwordField);
+
+    String username = usernameField.getText().toString();
+    String password = passwordField.getText().toString();
+
+    return userManager.attemptLogin(username, password);
+  }
+
+  public void acceptLogin(User user) {
     // login accepted, advance to main menu screen
     Intent intent = new Intent(this, MainMenuActivity.class);
     intent.putExtra(GameManager.INTENT_NAME, gameManager);
     startActivity(intent);
+    finish();
   }
 
   public void createUser(View target) {
-    EditText uname = (EditText) findViewById(R.id.usernameField);
-    EditText pword = (EditText) findViewById(R.id.passwordField);
 
-    if (uname.getText().toString().isEmpty() | pword.getText().toString().isEmpty()) {
-      constructErrorDialog(target, "Username or password blank.");
+    EditText usernameField = findViewById(R.id.usernameField);
+    EditText passwordField =  findViewById(R.id.passwordField);
+
+    boolean created = tryCreateAccount();
+    if (created) {
+      usernameField.setHint("Account created");
+      usernameField.setText("");
+      passwordField.setText("");
+      userManager.saveState();
     } else {
-      UserManager userManager = UserManager.getManager();
-      // TODO MAKE PROPER USER LOADER CHECK
-      // TODO CONFIRM THAT USER IS NOT ALREADY CREATED
-      if () {
-        //create user, since not already created
-      } else {
-        constructErrorDialog(target, "User already created.");
-      }
+      constructErrorDialog(target, "User already exists.");
     }
+  }
+
+  private boolean tryCreateAccount(){
+
+    EditText usernameField = findViewById(R.id.usernameField);
+    EditText passwordField =  findViewById(R.id.passwordField);
+
+    String username = usernameField.getText().toString();
+    String password = passwordField.getText().toString();
+
+    return userManager.createUser(username, password);
+
   }
 
   public void constructErrorDialog(View target, String message) {
