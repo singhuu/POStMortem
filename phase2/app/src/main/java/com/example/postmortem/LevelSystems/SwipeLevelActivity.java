@@ -1,16 +1,14 @@
 package com.example.postmortem.LevelSystems;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GestureDetectorCompat;
-
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
+import androidx.core.view.GestureDetectorCompat;
+
 import com.example.postmortem.R;
-import com.example.postmortem.UserLoader;
 
 public class SwipeLevelActivity extends LevelActivity{
     SwipeLevel level;
@@ -144,6 +142,7 @@ public class SwipeLevelActivity extends LevelActivity{
 
     @Override
     public void saveScore() {
+        // TODO IMPLEMENT LEVELTYPE.SWIPE
         gameManager.getActiveUser().setScore(level.getScore(), LevelType.TAP);
     }
 
