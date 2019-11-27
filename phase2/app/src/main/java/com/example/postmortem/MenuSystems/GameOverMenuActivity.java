@@ -1,23 +1,31 @@
 package com.example.postmortem.MenuSystems;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
 
 public class GameOverMenuActivity extends AppCompatActivity {
+
+  GameManager gameManager;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.game_over_menu);
+    Bundle extras = getIntent().getExtras();
+    gameManager = (GameManager) extras.get(GameManager.INTENT_NAME);
     populateCurrentScores();
     populateHighScores();
   }
 
   private void populateCurrentScores() {
     // TODO ADD FUNCTIONALITY
+
   }
 
   private void populateHighScores() {
@@ -25,14 +33,15 @@ public class GameOverMenuActivity extends AppCompatActivity {
   }
 
   public void restart(View target) {
-    // TODO ADD FUNCTIONALITY
+    gameManager.start(this);
   }
 
   /**
-   * Exit the game, return to Android.
+   * Return to main menu.
    */
   public void quit(View target) {
-    this.finish();
-    System.exit(0);
+    Intent intent = new Intent(this, MainMenuActivity.class);
+    intent.putExtra(GameManager.INTENT_NAME, gameManager);
+    startActivity(intent);
   }
 }
