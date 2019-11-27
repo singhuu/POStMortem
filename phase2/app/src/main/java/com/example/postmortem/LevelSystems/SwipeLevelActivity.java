@@ -1,14 +1,16 @@
 package com.example.postmortem.LevelSystems;
 
+import androidx.core.view.GestureDetectorCompat;
+
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import androidx.core.view.GestureDetectorCompat;
-
 import com.example.postmortem.R;
+import com.example.postmortem.UserLoader;
 
 public class SwipeLevelActivity extends LevelActivity{
     SwipeLevel level;
@@ -22,6 +24,8 @@ public class SwipeLevelActivity extends LevelActivity{
     CountDownTimer tileCheckTimer;
 
     GestureDetectorCompat mDetector;
+
+    private boolean playerWalking = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,9 @@ public class SwipeLevelActivity extends LevelActivity{
 
         timeLeft = 30 - (10 * difficulty);
         timerText = findViewById(R.id.timer);
-        timerText.setText(timeLeft + 1 + "");
+
+        String timerValue = timeLeft + 1 + "";
+        timerText.setText(timerValue);
 
         obstacleTiles = getObstacleTiles();
         updateObstacleTiles();
@@ -65,7 +71,10 @@ public class SwipeLevelActivity extends LevelActivity{
                 boolean checkResult = level.checkOpenLane();
                 if(checkResult){
                     updateObstacleTiles();
-                    scoreText.setText(Integer.toString(level.getScore()));
+                    updatePlayerTiles();
+
+                    String scoreValue = level.getScore() + "";
+                    scoreText.setText(scoreValue);
                 }
             }
 
@@ -79,7 +88,7 @@ public class SwipeLevelActivity extends LevelActivity{
     }
 
     private TextView[][] getObstacleTiles() {
-        TextView[][] obstacleTiles = new TextView[3][3];
+        TextView[][] obstacleTiles = new TextView[5][3];
 
         obstacleTiles[0][0] = findViewById(R.id.obstacleTile1);
         obstacleTiles[0][1] = findViewById(R.id.obstacleTile2);
@@ -92,6 +101,14 @@ public class SwipeLevelActivity extends LevelActivity{
         obstacleTiles[2][0] = findViewById(R.id.obstacleTile7);
         obstacleTiles[2][1] = findViewById(R.id.obstacleTile8);
         obstacleTiles[2][2] = findViewById(R.id.obstacleTile9);
+
+        obstacleTiles[3][0] = findViewById(R.id.obstacleTile10);
+        obstacleTiles[3][1] = findViewById(R.id.obstacleTile11);
+        obstacleTiles[3][2] = findViewById(R.id.obstacleTile12);
+
+        obstacleTiles[4][0] = findViewById(R.id.obstacleTile13);
+        obstacleTiles[4][1] = findViewById(R.id.obstacleTile14);
+        obstacleTiles[4][2] = findViewById(R.id.obstacleTile15);
 
         for(int i = 0; i <  obstacleTiles.length; i++)
             level.updateObstacles(i);
@@ -106,7 +123,7 @@ public class SwipeLevelActivity extends LevelActivity{
         playerTiles[1] = findViewById(R.id.playerTile2);
         playerTiles[2] = findViewById(R.id.playerTile3);
 
-        playerTiles[1].setText("P");
+        updatePlayerTiles();
 
         return playerTiles;
     }
@@ -114,24 +131,38 @@ public class SwipeLevelActivity extends LevelActivity{
     private void updateObstacleTiles(){
         for(int i = 0; i < obstacleTiles.length; i++){
             for(int j = 0; j < obstacleTiles[i].length; j++){
-                String routeSpotValue = Integer.toString(level.obstacleTiles[i][j]);
-                obstacleTiles[i][j].setText(routeSpotValue);
+                if(level.obstacleTiles[i][j] == 1){
+                    obstacleTiles[i][j].setBackgroundResource(R.drawable.tree_sprite);
+                }
+
+                else
+                    obstacleTiles[i][j].setBackgroundResource(android.R.color.transparent);
             }
         }
     }
 
     private void updatePlayerTiles(){
-        for(int i = 0; i < 3; i++){
-            if(level.currPlayerCol == i)
-                playerTiles[i].setText("P");
-            else
-                playerTiles[i].setText("");
+        for(int i = 0; i < playerTiles.length; i++){
+            if(level.currPlayerCol == i){
+                if(playerWalking){
+                    playerTiles[i].setBackgroundResource(R.drawable.sans_back_walk);
+                    playerWalking = false;
+                }
+                else{
+                    playerTiles[i].setBackgroundResource(R.drawable.sans_back_neutral);
+                    playerWalking = true;
+                }
+            }else{
+                playerTiles[i].setBackgroundResource(android.R.color.transparent);
+            }
+
         }
     }
 
     @Override
     public void countTickHandler() {
-        timerText.setText(timeLeft + 1 + "");
+        String timerValue = timeLeft + 1 + "";
+        timerText.setText(timerValue);
     }
 
     @Override
@@ -142,8 +173,7 @@ public class SwipeLevelActivity extends LevelActivity{
 
     @Override
     public void saveScore() {
-        // TODO IMPLEMENT LEVELTYPE.SWIPE
-        gameManager.getActiveUser().setScore(level.getScore(), LevelType.TAP);
+        UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.PICKUP);
     }
 
     //Class to register swipe events

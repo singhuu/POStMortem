@@ -9,12 +9,13 @@ public class SwipeLevel extends Level {
     public SwipeLevel(int difficulty) {
         super(difficulty);
 
-        obstacleTiles = new int[3][3];
+        obstacleTiles = new int[5][3];
         currPlayerCol = 1;
     }
 
     public boolean checkOpenLane(){
-        if(obstacleTiles[2][currPlayerCol] == 0){
+        int finalRowNum = obstacleTiles.length - 1;
+        if(obstacleTiles[finalRowNum][currPlayerCol] == 0){
             moveForward();
             rowsPassed++;
             return true;
@@ -23,6 +24,8 @@ public class SwipeLevel extends Level {
     }
 
     private void moveForward(){
+        obstacleTiles[4] = obstacleTiles[3].clone();
+        obstacleTiles[3] = obstacleTiles[2].clone();
         obstacleTiles[2] = obstacleTiles[1].clone();
         obstacleTiles[1] = obstacleTiles[0].clone();
 
