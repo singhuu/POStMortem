@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.DataTypes.Hiscore;
+import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
@@ -48,12 +50,16 @@ public class GameOverMenuActivity extends AppCompatActivity {
 
   private void populateHighScores() {
     StringBuilder scores = new StringBuilder();
-    List<String[]> hiscores = UserLoader.getHighScores();
-    for (int i = 0; i < 5 | i < hiscores.size(); i++) {
-      scores.append("#" + i + 1 + ": " + hiscores.get(i)[0] + " - " + hiscores.get(i)[1]);
-      if (i != 5 | i != hiscores.size()) {
-        scores.append("\n");
-      }
+
+    List<Hiscore> hiscores = HiscoreManager.getManager().getHiscores();
+    int i = 0;
+    for(Hiscore hiscore: hiscores){
+      scores.append("#");
+      scores.append(i+1);
+      scores.append(": ");
+      scores.append(hiscore);
+      scores.append("\n");
+      i++;
     }
 
     TextView hiScores = findViewById(R.id.highScores);
