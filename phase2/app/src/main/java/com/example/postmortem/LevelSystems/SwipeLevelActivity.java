@@ -75,6 +75,9 @@ public class SwipeLevelActivity extends LevelActivity{
 
                     String scoreValue = level.getScore() + "";
                     scoreText.setText(scoreValue);
+                }else if(!playerWalking){
+                    playerTiles[level.currPlayerCol].setBackgroundResource(R.drawable.sans_back_neutral);
+                    playerWalking = false;
                 }
             }
 
