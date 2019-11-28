@@ -34,19 +34,22 @@ public class UserSelectMenuActivity extends AppCompatActivity {
   }
 
   public void login(View target) {
-    EditText uname = (EditText) findViewById(R.id.usernameField);
-    EditText pword = (EditText) findViewById(R.id.passwordField);
+    EditText usernameField = findViewById(R.id.usernameField);
+    EditText passwordField = findViewById(R.id.passwordField);
 
-    if (uname.getText().toString().isEmpty() | pword.getText().toString().isEmpty()) {
-      constructDialog("Error","Username or password blank.");
-    } else {
-      // check login credentials
-      Optional<User> user = userManager.attemptLogin(uname.getText().toString(), pword.getText().toString());
-      if (user.isPresent()) {
-        acceptLogin(user.get());
-      } else {
-        constructDialog("Error","Username or password incorrect.");
-      }
+    String username = usernameField.getText().toString();
+    String password = passwordField.getText().toString();
+
+    tryLogin(username, password);
+  }
+
+  private void tryLogin(String username, String password){
+    try{
+      User user = validator.login(username, password);
+      acceptLogin(user);
+    } catch(AccountException e){
+      String message = e.getMessage();
+      constructDialog("Error", message);
     }
   }
 
@@ -66,20 +69,6 @@ public class UserSelectMenuActivity extends AppCompatActivity {
     String password = passwordField.getText().toString();
 
     tryCreateUser(username, password);
-
-    /*
-    if (usernameField.getText().toString().isEmpty() | passwordField.getText().toString().isEmpty()) {
-      constructDialog(target, "Error","Username or password blank.");
-    } else {
-      if (userManager.createUser(usernameField.getText().toString(), passwordField.getText().toString())) {
-        //create user, since not already created
-        constructDialog(target, "Success", "New user created.");
-      } else {
-        constructDialog(target, "Error","User already created.");
-      }
-    }
-
-     */
   }
 
   private void tryCreateUser(String username, String password){
