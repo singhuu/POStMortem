@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-
+        SoundManager sm = new SoundManager(mContext);
         initializeGame();
         startGame();
-
+        sm.startMainMusic();
     }
 
     /**
