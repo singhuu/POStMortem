@@ -38,7 +38,7 @@ public class OptionMenuActivity extends AppCompatActivity {
     int levels = Integer.valueOf(levelsToPlay.getText().toString());
 
     // check if levels >= 3
-    if (levels <= 3) {
+    if (levels < 3) {
       invalidLevelNum(target);
       return;
     }

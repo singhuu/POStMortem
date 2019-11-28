@@ -10,6 +10,8 @@ import android.os.Parcelable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.postmortem.DataTypes.Hiscore;
+import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.LevelSystems.PickUpLevelActivity;
@@ -206,6 +208,7 @@ public class GameManager implements Parcelable {
      * @param context the current context of the app
      */
     public void start(AppCompatActivity context) {
+        levels--;
         Intent intent = createRandomLevel(context);
         updateActiveUser();
         transitionLevel(context, intent);
@@ -252,11 +255,27 @@ public class GameManager implements Parcelable {
      * @param context the current state of the app
      */
     private void gameOver(AppCompatActivity context) {
+        updateHiscores();
+        endGame(context);
+    }
+
+    private void endGame(AppCompatActivity context) {
         Intent intent = new Intent(context, GameOverMenuActivity.class);
         intent.putExtra(INTENT_NAME, this);
 
         context.startActivity(intent);
         context.finish();
+    }
+
+    private void updateHiscores() {
+        if(activeUser.getScore() > activeUser.getHiscore()) {
+            activeUser.setHiscore(activeUser.getScore());
+            Hiscore hiscore = new Hiscore(activeUser.getUsername(), activeUser.getScore());
+            HiscoreManager hiscoreManager = HiscoreManager.getManager();
+            hiscoreManager.addHiscore(hiscore);
+            hiscoreManager.saveState();
+            userManager.saveState();
+        }
     }
 
     /**
