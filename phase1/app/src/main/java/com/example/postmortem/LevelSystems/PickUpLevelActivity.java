@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.postmortem.R;
+import com.example.postmortem.SoundManager;
 import com.example.postmortem.UserLoader;
 
 import java.io.BufferedWriter;
@@ -19,6 +20,7 @@ public class PickUpLevelActivity extends LevelActivity {
     TextView scoreText;
     TextView timerText;
     ImageView wrongChoiceX;
+    private SoundManager sm = new SoundManager(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,8 +137,10 @@ public class PickUpLevelActivity extends LevelActivity {
                 assignButtonVals(selectButtons);
                 updateSearchPrompt();
             } else {
+                sm.playBooEffect();
                 level.wrongChoiceCountdown = PickUpLevel.WRONG_CHOICE_TIME;
                 wrongChoiceX.setVisibility(View.VISIBLE);
+
             }
         }
     }

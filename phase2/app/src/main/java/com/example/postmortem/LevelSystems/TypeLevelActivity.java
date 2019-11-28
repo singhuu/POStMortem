@@ -6,7 +6,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
+import com.example.postmortem.SoundManager;
 import com.example.postmortem.UserLoader;
 
 import java.io.BufferedWriter;
@@ -16,6 +18,9 @@ import java.io.IOException;
 
 
 public class TypeLevelActivity extends LevelActivity {
+
+
+    private SoundManager sm = new SoundManager(MainActivity.get_m_Context());
 
     /**
      * List that stores the buttons
@@ -125,6 +130,10 @@ public class TypeLevelActivity extends LevelActivity {
                 level.score = level.score + 25;
                 TextView textView = findViewById(R.id.score);
                 textView.setText(level.getScore() + "");
+                sm.playWowEffect();
+            }
+            else {
+                sm.playBooEffect();
             }
             for (int i = 0; i < selectButtons.length - 1; i++) {
                 //button shouldn't be clickable anymore

@@ -6,7 +6,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
+import com.example.postmortem.SoundManager;
 import com.example.postmortem.UserLoader;
 
 import java.io.BufferedWriter;
@@ -21,6 +23,7 @@ public class TapLevelActivity extends LevelActivity {
      * TextView object that stores the timer text
      */
     TextView timerText;
+    private SoundManager sm = new SoundManager(MainActivity.get_m_Context());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class TapLevelActivity extends LevelActivity {
 
         if (timesPressed == 100) {
             displayMeric();
+            sm.playWowEffect();
         }
     }
 
