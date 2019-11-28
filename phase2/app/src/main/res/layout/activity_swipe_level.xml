@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".LevelSystems.SwipeLevelActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/activity_button"
+        android:scaleType="centerCrop"
+        android:scaleX="2"
+        android:scaleY="1.75"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.59"
+        android:background="@drawable/paper_background" />
+
     <GridLayout
         android:id="@+id/buttonLayout"
         android:layout_width="wrap_content"
@@ -28,29 +44,33 @@
 
                 <TextView
                     android:id="@+id/obstacleTile1"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile2"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile3"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
             </LinearLayout>
 
@@ -61,29 +81,33 @@
 
                 <TextView
                     android:id="@+id/obstacleTile4"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile5"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile6"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
             </LinearLayout>
 
@@ -94,29 +118,32 @@
 
                 <TextView
                     android:id="@+id/obstacleTile7"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile8"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile9"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
             </LinearLayout>
 
@@ -127,29 +154,33 @@
 
                 <TextView
                     android:id="@+id/obstacleTile10"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile11"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile12"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
             </LinearLayout>
 
@@ -160,29 +191,33 @@
 
                 <TextView
                     android:id="@+id/obstacleTile13"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile14"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/obstacleTile15"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
             </LinearLayout>
 
@@ -194,29 +229,33 @@
 
                 <TextView
                     android:id="@+id/playerTile1"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/playerTile2"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
 
                 <TextView
                     android:id="@+id/playerTile3"
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:layout_height="66dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textStyle="bold"
+                    android:layout_marginRight="40dp"
                     android:background="@null"/>
             </LinearLayout>
         </LinearLayout>
