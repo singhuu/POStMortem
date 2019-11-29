@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.core.view.GestureDetectorCompat;
@@ -12,9 +13,6 @@ import com.example.postmortem.R;
 
 public class SwipeLevelActivity extends LevelActivity {
   SwipeLevel level;
-
-  TextView scoreText;
-  TextView timerText;
 
   TextView[][] obstacleTiles;
   TextView[] playerTiles;
@@ -174,7 +172,13 @@ public class SwipeLevelActivity extends LevelActivity {
     gameManager.getActiveUser().setScore(level.getScore(), LevelType.SWIPE);
   }
 
-  //Class to register swipe events
+    @Override
+    public void cheatClickHandler(View view) {
+        level.score += 100;
+        scoreText.setText(String.format("%d", level.getScore()));
+    }
+
+    //Class to register swipe events
   public class SwipeLevelGestureListener extends GestureDetector.SimpleOnGestureListener {
 
     //Here because all gestures start with an onDown()

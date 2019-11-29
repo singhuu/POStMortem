@@ -17,15 +17,12 @@ public class TypeLevelActivity extends LevelActivity {
   /**
    * List that stores the buttons
    */
-  Button[] selectButtons;
-  /**
-   * Stores TextView of timer
-   */
-  TextView timerText;
+  private Button[] selectButtons;
+
   /**
    * object of TypeLevel
    */
-  TypeLevel level = new TypeLevel(difficulty);
+  private TypeLevel level = new TypeLevel(difficulty);
   private SoundManager sm = new SoundManager(MainActivity.get_m_Context());
   /**
    * Checks if answer is clicked
@@ -122,8 +119,8 @@ public class TypeLevelActivity extends LevelActivity {
       clickedAnswer = true;
       if (level.checkAnswer(clickedVal)) {
         level.setScore(level.getScore() + 25);
-        TextView textView = findViewById(R.id.score);
-        textView.setText(level.getScore() + "");
+
+        scoreText.setText(Integer.toString(level.getScore()));
         sm.playWowEffect();
       }
       else {
@@ -169,7 +166,6 @@ public class TypeLevelActivity extends LevelActivity {
         selectButtons[i].setBackgroundColor(getResources().getColor(R.color.green));
       }
     }
-
   }
 
   /**
@@ -194,5 +190,11 @@ public class TypeLevelActivity extends LevelActivity {
   @Override
   public void saveScore() {
     gameManager.getActiveUser().setScore(level.getScore(), LevelType.TYPE);
+  }
+
+  @Override
+  public void cheatClickHandler(View view) {
+    level.score += 100;
+    scoreText.setText(String.format("%d", level.getScore()));
   }
 }
