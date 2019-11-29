@@ -55,8 +55,8 @@ public class TypeLevelActivity extends LevelActivity {
 
     assignTimerLength();
 
-    TextView textView = findViewById(R.id.score);
-    textView.setText(String.format("%d", level.getScore()));
+    scoreText= findViewById(R.id.score);
+    scoreText.setText(String.format("%d", level.getScore()));
 
   }
 
@@ -115,7 +115,7 @@ public class TypeLevelActivity extends LevelActivity {
     if (clickedButton != selectButtons[4]) {
       clickedAnswer = true;
       if (level.checkAnswer(clickedVal)) {
-        level.score = level.score + 25;
+        level.score += 25;
 
         scoreText.setText(String.format("%d", level.getScore()));
         sm.playWowEffect();
