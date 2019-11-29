@@ -9,13 +9,6 @@ import android.widget.TextView;
 import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 import com.example.postmortem.SoundManager;
-import com.example.postmortem.UserLoader;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 public class TapLevelActivity extends LevelActivity {
 

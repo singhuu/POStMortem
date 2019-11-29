@@ -41,7 +41,7 @@ public class User implements Serializable {
     /**
      * Stores the current Run Level Type
      */
-    private int currentRunLevelType;
+    private LevelType currentRunLevelType;
     /**
      * Stores the difficulty
      */
@@ -58,7 +58,7 @@ public class User implements Serializable {
         this.tapScore = 0;
         this.typeScore = 0;
         this.hiScore = 0;
-        this.currentRunLevelType = 1;
+        this.currentRunLevelType = LevelType.TAP;
         this.currentRunLevels = 0;
         this.currentRunDifficulty = 1;
         this.runningAds = true;
@@ -117,7 +117,7 @@ public class User implements Serializable {
     /**
      * Getter method that gets the Current Level Type
      */
-    public int getCurrentRunLevelType() {
+    public LevelType getCurrentRunLevelType() {
         return currentRunLevelType;
     }
 
@@ -126,7 +126,7 @@ public class User implements Serializable {
      *
      * @param currentRunLevelType variable that stores current Run Level Type
      */
-    public void setCurrentRunLevelType(int currentRunLevelType) {
+    public void setCurrentRunLevelType(LevelType currentRunLevelType) {
         this.currentRunLevelType = currentRunLevelType;
     }
 

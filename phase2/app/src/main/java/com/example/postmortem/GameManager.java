@@ -14,6 +14,7 @@ import com.example.postmortem.DataTypes.Hiscore;
 import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.DataTypes.UserManager;
+import com.example.postmortem.LevelSystems.LevelType;
 import com.example.postmortem.LevelSystems.PickUpLevelActivity;
 import com.example.postmortem.LevelSystems.SwipeLevelActivity;
 import com.example.postmortem.LevelSystems.TapLevelActivity;
@@ -21,11 +22,6 @@ import com.example.postmortem.LevelSystems.TypeLevelActivity;
 import com.example.postmortem.MenuSystems.GameOverMenuActivity;
 
 public class GameManager implements Parcelable {
-
-    public static final int PICKUP_LEVEL_TYPE = 0;
-    public static final int TAP_LEVEL_TYPE = 1;
-    public static final int TYPE_LEVEL_TYPE = 2;
-    public static final int SWIPE_LEVEL_TYPE = 3;
 
     public static final String INTENT_NAME = "manager";
     public static final Creator<GameManager> CREATOR = new Creator<GameManager>() {
@@ -52,7 +48,7 @@ public class GameManager implements Parcelable {
     /**
      * The Current Level Type
      */
-    private int currLevelType = -1;
+    private LevelType currLevelType;
     /**
      * The Active state of the User
      */
@@ -95,7 +91,7 @@ public class GameManager implements Parcelable {
     protected GameManager(Parcel in) {
         this.userManager = UserManager.getManager();
 
-        this.currLevelType = in.readInt();
+        this.currLevelType = (LevelType) in.readSerializable();
         this.activeUser = userManager.getUser(in.readString());
         this.levels = in.readInt();
         this.difficulty = in.readInt();
@@ -110,7 +106,8 @@ public class GameManager implements Parcelable {
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(currLevelType);
+        dest.writeSerializable(currLevelType);
+        //dest.writeInt(currLevelType);
         if (activeUser == null) {
             dest.writeString("null");
         } else {
@@ -223,7 +220,7 @@ public class GameManager implements Parcelable {
      */
     public void continueFromSave(AppCompatActivity context) {
         loadSettingsFromUser();
-        int currentLevelType = activeUser.getCurrentRunLevelType();
+        LevelType currentLevelType = activeUser.getCurrentRunLevelType();
         Intent intent = createGivenLevel(context, currentLevelType);
         transitionLevel(context, intent);
     }
@@ -299,7 +296,7 @@ public class GameManager implements Parcelable {
      */
     private Intent createRandomLevel(AppCompatActivity context) {
 
-        int newLevelType = decideNewLevelType();
+        LevelType newLevelType = decideNewLevelType();
         return createGivenLevel(context, newLevelType);
 
     }
@@ -309,13 +306,8 @@ public class GameManager implements Parcelable {
      *
      * @return the new level type
      */
-    private int decideNewLevelType() {
-        int levelType = (int) (Math.random() * 4);
-        while (levelType == currLevelType) {
-            levelType = (int) (Math.random() * 4);
-        }
-
-        return levelType;
+    private LevelType decideNewLevelType() {
+        return LevelType.randomLevelType();
     }
 
     /**
@@ -324,7 +316,7 @@ public class GameManager implements Parcelable {
      * @param context   the context of the program
      * @param levelType the type of level to create
      */
-    private Intent createGivenLevel(AppCompatActivity context, int levelType) {
+    private Intent createGivenLevel(AppCompatActivity context, LevelType levelType) {
 
         currLevelType = levelType;
         Intent newLevelIntent = createLevelIntent(context);
@@ -344,21 +336,21 @@ public class GameManager implements Parcelable {
         Intent intent = null;
 
         switch (currLevelType) {
-            case PICKUP_LEVEL_TYPE:
+            case PICKUP:
                 intent = new Intent(context, PickUpLevelActivity.class);
                 break;
 
-            case TAP_LEVEL_TYPE:
+            case TAP:
                 intent = new Intent(context, TapLevelActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 break;
 
-            case TYPE_LEVEL_TYPE:
+            case TYPE:
                 intent = new Intent(context, TypeLevelActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 break;
 
-            case SWIPE_LEVEL_TYPE:
+            case SWIPE:
                 intent = new Intent(context, SwipeLevelActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 break;

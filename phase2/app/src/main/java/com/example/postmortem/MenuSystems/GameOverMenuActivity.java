@@ -12,7 +12,6 @@ import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
-import com.example.postmortem.UserLoader;
 
 import java.util.List;
 

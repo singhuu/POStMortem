@@ -23,7 +23,7 @@ public class UserFileController extends FileController {
             int tapScore = Integer.parseInt(userData[3]);
             int typeScore = Integer.parseInt(userData[4]);
             int pickupScore = Integer.parseInt(userData[5]);
-            int levelType = Integer.parseInt(userData[6]);
+            int levelTypeId = Integer.parseInt(userData[6]);
             int levelsLeft = Integer.parseInt(userData[7]);
             int difficulty = Integer.parseInt(userData[8]);
             boolean runningAds = Boolean.parseBoolean(userData[9]);
@@ -35,7 +35,7 @@ public class UserFileController extends FileController {
             newUser.setScore(pickupScore, LevelType.PICKUP);
             newUser.setCurrentRunDifficulty(difficulty);
             newUser.setCurrentRunLevels(levelsLeft);
-            newUser.setCurrentRunLevelType(levelType);
+            newUser.setCurrentRunLevelType(LevelType.getLevelTypeFromId(levelTypeId));
             newUser.setRunningAds(runningAds);
             users.add(newUser);
 
@@ -76,7 +76,8 @@ public class UserFileController extends FileController {
         data.append(",");
         data.append(user.getPickupScore());
         data.append(",");
-        data.append(user.getCurrentRunLevelType());
+        LevelType levelType = user.getCurrentRunLevelType();
+        data.append(levelType.getLevelId());
         data.append(",");
         data.append(user.getCurrentRunLevels());
         data.append(",");

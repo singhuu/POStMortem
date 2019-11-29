@@ -2,7 +2,6 @@ package com.example.postmortem.LevelSystems;
 
 import androidx.core.view.GestureDetectorCompat;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.GestureDetector;
@@ -10,7 +9,6 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.example.postmortem.R;
-import com.example.postmortem.UserLoader;
 
 public class SwipeLevelActivity extends LevelActivity{
     SwipeLevel level;
