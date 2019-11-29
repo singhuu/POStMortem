@@ -43,30 +43,20 @@ public class TypeLevel extends Level {
   }
 
   /**
+   * Setter method that changes the level score value
+   * @param s score that will be changed to
+   */
+  public void setScore(int s) {
+    score = s;
+  }
+  /**
    * using data from a text file pull the questions and answers and create those questions
-   * only pull 4 questions randomly from the file
    */
   public void createQuestions() {
     //arraylist holding all questions to cycle through
     ArrayList<Question> ques = new ArrayList<>();
 
-    ArrayList<String> formatQues = new ArrayList<>();
-
-    String s;
-    InputStream is;
-    BufferedReader reader;
-
-    is = MainActivity.get_m_Context().getResources().openRawResource(R.raw.all_questions);
-    reader = new BufferedReader(new InputStreamReader(is));
-    try {
-      //cycles all lines of text file if possible
-      while ((s = reader.readLine()) != null) {
-        formatQues.add(s);
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    //reads the text file
+    ArrayList<String> formatQues = readFile();
 
     //shuffling questions so the user doesn't always get the same questions
     Collections.shuffle(formatQues);
@@ -87,6 +77,34 @@ public class TypeLevel extends Level {
     this.allQuestions = ques;
     this.currentQuestion = ques.get(currentQuestionNum);
   }
+
+  /** helper method which reads the file data and formats it
+   *
+   * @return a String ArrayList containing the questions from the file */
+  private ArrayList<String> readFile() {
+    ArrayList<String> formatQues = new ArrayList<>();
+
+    String s;
+    InputStream is;
+    BufferedReader reader;
+
+    is = MainActivity.get_m_Context().getResources().openRawResource(R.raw.all_questions);
+    reader = new BufferedReader(new InputStreamReader(is));
+    if (is != null) {
+      try {
+        //cycles all lines of text file if possible
+        while ((s = reader.readLine()) != null) {
+          formatQues.add(s);
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    return formatQues;
+
+  }
+
 
   /**
    * Functions checks if the answer is true
