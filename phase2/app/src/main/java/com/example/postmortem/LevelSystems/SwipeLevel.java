@@ -4,8 +4,6 @@ public class SwipeLevel extends Level {
   int[][] obstacleTiles;
   int currPlayerCol;
 
-  private int rowsPassed = 0;
-
   public SwipeLevel(int difficulty) {
     super(difficulty);
 
@@ -17,7 +15,7 @@ public class SwipeLevel extends Level {
     int finalRowNum = obstacleTiles.length - 1;
     if (obstacleTiles[finalRowNum][currPlayerCol] == 0) {
       moveForward();
-      rowsPassed++;
+      score += 2;
       return true;
     } else
       return false;
@@ -60,6 +58,6 @@ public class SwipeLevel extends Level {
 
   @Override
   public int getScore() {
-    return this.rowsPassed * 2;
+    return this.score;
   }
 }

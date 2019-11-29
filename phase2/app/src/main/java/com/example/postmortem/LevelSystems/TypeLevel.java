@@ -13,11 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TypeLevel extends Level {
-
-  /**
-   * Stores the score
-   */
-  public int score = 0;
   /**
    * Question object that stores the current Question
    */

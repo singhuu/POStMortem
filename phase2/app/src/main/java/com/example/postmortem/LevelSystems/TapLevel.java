@@ -3,11 +3,6 @@ package com.example.postmortem.LevelSystems;
 public class TapLevel extends Level {
 
   /**
-   * stores the number of times the screen is pressed
-   */
-  private int timesPressed = 0;
-
-  /**
    * Constructor that references to the TapLevel difficulty
    *
    * @param difficulty integer variable that stores difficulty
@@ -20,7 +15,7 @@ public class TapLevel extends Level {
    * Increments the number of times pressed
    */
   public void incrementTimesPressed() {
-    timesPressed++;
+    score++;
   }
 
   /**
@@ -29,7 +24,7 @@ public class TapLevel extends Level {
    * @return timesPressed variable
    */
   public int getTimesPressed() {
-    return timesPressed;
+    return score;
   }
 
   /**
@@ -38,6 +33,6 @@ public class TapLevel extends Level {
    * @return timesPressed as the score is the same as timesPressed
    */
   public int getScore() {
-    return timesPressed;
+    return score;
   }
 }

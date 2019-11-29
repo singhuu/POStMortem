@@ -25,10 +25,6 @@ public class PickUpLevel extends Level {
    * List that stores possible choices
    */
   private String[] selectables;
-  /**
-   * Stores the correct choices
-   */
-  private int numCorrect = 0;
 
   /**
    * Constructor Method that creates a new list of selectables
@@ -92,14 +88,14 @@ public class PickUpLevel extends Level {
 
   @Override
   public int getScore() {
-    return this.numCorrect * 10;
+    return this.score;
   }
 
   /**
-   * Tracks the increase in score by 1
+   * Tracks the increase in score by 10
    */
   public void increaseScore() {
-    this.numCorrect += 1;
+    this.score += 10;
   }
 
   /**
