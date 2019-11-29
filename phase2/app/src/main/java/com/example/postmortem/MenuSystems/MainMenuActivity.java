@@ -22,12 +22,10 @@ public class MainMenuActivity extends AppCompatActivity {
   }
 
   public void continueGame(View target) {
-    // TODO PROPERLY IMPLEMENT CONTINUEGAME
     gameManager.continueFromSave(this);
   }
 
   public void start(View target) {
-    // TODO PROPERLY IMPLEMENT START
     gameManager.start(this);
   }
 
@@ -41,13 +39,5 @@ public class MainMenuActivity extends AppCompatActivity {
     Intent intent = new Intent(this, UserSelectMenuActivity.class);
     intent.putExtra(GameManager.INTENT_NAME, gameManager);
     startActivity(intent);
-  }
-
-  /**
-   * Exit the game, return to Android.
-   */
-  public void quit(View target) {
-    this.finish();
-    System.exit(0);
   }
 }
