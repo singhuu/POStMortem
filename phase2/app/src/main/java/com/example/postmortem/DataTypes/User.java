@@ -168,19 +168,27 @@ public class User implements Serializable {
     public void setScore(int score, LevelType game) {
         switch (game) {
             case TAP:
-                this.tapScore = score;
+                if(score > tapScore) {
+                    this.tapScore = score;
+                }
                 break;
 
             case TYPE:
-                this.typeScore = score;
+                if(score > typeScore) {
+                    this.typeScore = score;
+                }
                 break;
 
             case PICKUP:
-                this.pickupScore = score;
+                if(score > pickupScore) {
+                    this.pickupScore = score;
+                }
                 break;
 
             case SWIPE:
-                this.swipeScore = score;
+                if(score > swipeScore) {
+                    this.swipeScore = score;
+                }
                 break;
 
             default:
