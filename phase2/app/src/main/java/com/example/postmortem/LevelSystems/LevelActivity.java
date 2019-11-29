@@ -60,13 +60,7 @@ public abstract class LevelActivity extends AppCompatActivity {
     curr_username = getIntent().getStringExtra("CURR_USERNAME");
   }
 
-  /**
-   * Creates a trigger for the event
-   *
-   * @param keyCode code of the Key
-   * @param event   current event of the KeyEvent object
-   * @return either true or waits for key down
-   */
+  // Used to disable back button usability in app
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
     if (keyCode == KeyEvent.KEYCODE_BACK) {

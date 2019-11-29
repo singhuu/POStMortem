@@ -15,7 +15,7 @@ import com.example.postmortem.R;
 
 import java.util.List;
 
-public class GameOverMenuActivity extends AppCompatActivity {
+public class GameOverMenuActivity extends MenuActivity {
 
   GameManager gameManager;
 
