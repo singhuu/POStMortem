@@ -30,11 +30,6 @@ public class GameOverMenuActivity extends AppCompatActivity {
   }
 
   private void populateCurrentScores() {
-    // tap score : a
-    // pickup score: b
-    // swipe score: c
-    // type score: d
-    // total score: a + b + c + d
     User user = gameManager.getActiveUser();
     StringBuilder scores = new StringBuilder();
     scores.append("Tap Level Score: " + user.getTapScore() + "\n");
@@ -52,9 +47,9 @@ public class GameOverMenuActivity extends AppCompatActivity {
 
     List<Hiscore> hiscores = HiscoreManager.getManager().getHiscores();
     int i = 0;
-    for(Hiscore hiscore: hiscores){
+    for (Hiscore hiscore : hiscores) {
       scores.append("#");
-      scores.append(i+1);
+      scores.append(i + 1);
       scores.append(": ");
       scores.append(hiscore);
       scores.append("\n");

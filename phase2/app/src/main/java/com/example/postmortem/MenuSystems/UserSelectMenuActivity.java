@@ -15,8 +15,6 @@ import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
 
-import java.util.Optional;
-
 public class UserSelectMenuActivity extends AppCompatActivity {
 
   GameManager gameManager;
@@ -43,11 +41,11 @@ public class UserSelectMenuActivity extends AppCompatActivity {
     tryLogin(username, password);
   }
 
-  private void tryLogin(String username, String password){
-    try{
+  private void tryLogin(String username, String password) {
+    try {
       User user = validator.login(username, password);
       acceptLogin(user);
-    } catch(AccountException e){
+    } catch (AccountException e) {
       String message = e.getMessage();
       constructDialog("Error", message);
     }
@@ -71,11 +69,11 @@ public class UserSelectMenuActivity extends AppCompatActivity {
     tryCreateUser(username, password);
   }
 
-  private void tryCreateUser(String username, String password){
-    try{
+  private void tryCreateUser(String username, String password) {
+    try {
       validator.createAccount(username, password);
       constructDialog("success", "New user created.");
-    } catch(AccountException e){
+    } catch (AccountException e) {
       String message = e.getMessage();
       constructDialog("Error", message);
     }
