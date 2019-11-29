@@ -28,6 +28,7 @@
         <activity android:name=".MenuSystems.GameOverMenuActivity" />
         <activity android:name=".MenuSystems.UserSelectMenuActivity" />
         <activity android:name=".MenuSystems.OptionMenuActivity" />
+        <receiver android:name=".notifications.NotificationUpdate" />
     </application>
 
 </manifest>
