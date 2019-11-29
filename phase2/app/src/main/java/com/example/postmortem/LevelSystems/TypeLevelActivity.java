@@ -12,16 +12,11 @@ import com.example.postmortem.SoundManager;
 
 
 public class TypeLevelActivity extends LevelActivity {
-
-
   /**
    * List that stores the buttons
    */
   Button[] selectButtons;
-  /**
-   * Stores TextView of timer
-   */
-  TextView timerText;
+
   /**
    * object of TypeLevel
    */
@@ -121,8 +116,8 @@ public class TypeLevelActivity extends LevelActivity {
       clickedAnswer = true;
       if (level.checkAnswer(clickedVal)) {
         level.score = level.score + 25;
-        TextView textView = findViewById(R.id.score);
-        textView.setText(String.format("%d", level.getScore()));
+
+        scoreText.setText(String.format("%d", level.getScore()));
         sm.playWowEffect();
       } else {
         sm.playBooEffect();
@@ -181,5 +176,11 @@ public class TypeLevelActivity extends LevelActivity {
   @Override
   public void saveScore() {
     gameManager.getActiveUser().setScore(level.getScore(), LevelType.TYPE);
+  }
+
+  @Override
+  public void cheatClickHandler(View view) {
+    level.score += 100;
+    scoreText.setText(String.format("%d", level.getScore()));
   }
 }

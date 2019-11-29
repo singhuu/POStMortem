@@ -14,7 +14,7 @@ public abstract class Level extends Activity {
    */
   protected int wrongChoiceCountdown = 0;
 
-  protected int score;
+  protected int score = 0;
 
   /**
    * Constructor that stores the difficulty
