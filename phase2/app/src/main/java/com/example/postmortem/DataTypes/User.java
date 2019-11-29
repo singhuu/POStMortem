@@ -152,12 +152,17 @@ public class User implements Serializable {
     }
 
     /**
+     * Getter method that gets the Swipe Score
+     */
+    public int getSwipeScore(){return this.swipeScore;}
+
+    /**
      * Getter method that gets total Score
      *
      * @return returns that total sum of tap+type+pickup scores
      */
     public int getScore() {
-        return tapScore + typeScore + pickupScore;
+        return tapScore + typeScore + pickupScore + swipeScore;
     }
 
     public void setScore(int score, LevelType game) {
