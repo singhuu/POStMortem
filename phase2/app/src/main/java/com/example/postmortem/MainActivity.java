@@ -1,7 +1,12 @@
 package com.example.postmortem;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.MenuSystems.UserSelectMenuActivity;
-
+import com.example.postmortem.notifications.NotificationUpdate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,12 +22,17 @@ public class MainActivity extends AppCompatActivity {
      * Main Context variable that modifies the current context if necessary
      */
     private static Context mContext;
+    /**
+     * Decides the time after which the notification is triggered when the app is left idle
+     */
+    final int time  = 5 * 60 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
+        notifications();
         SoundManager sm = new SoundManager(mContext);
         initializeGame();
         startGame();
@@ -55,6 +65,24 @@ public class MainActivity extends AppCompatActivity {
      */
     public static Context get_m_Context() {
         return mContext;
+    }
+
+    /**
+     * Creates notification channels, intents and defines conditions for notifications to be called.
+     */
+    private void notifications() {
+        NotificationChannel notificationChannel;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel = new NotificationChannel("primary",
+                    "the_only_one", NotificationManager.IMPORTANCE_HIGH);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+            AlarmManager mAlarmManager = (AlarmManager) getApplicationContext().getSystemService(ALARM_SERVICE);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1234,
+                    new Intent(getApplicationContext(), NotificationUpdate.class), 0);
+            mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, pendingIntent);
+        }
     }
 
 
