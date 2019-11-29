@@ -23,16 +23,18 @@ public class UserFileController extends FileController {
             int tapScore = Integer.parseInt(userData[3]);
             int typeScore = Integer.parseInt(userData[4]);
             int pickupScore = Integer.parseInt(userData[5]);
-            int levelTypeId = Integer.parseInt(userData[6]);
-            int levelsLeft = Integer.parseInt(userData[7]);
-            int difficulty = Integer.parseInt(userData[8]);
-            boolean runningAds = Boolean.parseBoolean(userData[9]);
+            int swipeScore = Integer.parseInt(userData[6]);
+            int levelTypeId = Integer.parseInt(userData[7]);
+            int levelsLeft = Integer.parseInt(userData[8]);
+            int difficulty = Integer.parseInt(userData[9]);
+            boolean runningAds = Boolean.parseBoolean(userData[10]);
 
             User newUser = new User(username, password);
             newUser.setHiscore(hiscore);
             newUser.setScore(tapScore, LevelType.TAP);
             newUser.setScore(typeScore, LevelType.TYPE);
             newUser.setScore(pickupScore, LevelType.PICKUP);
+            newUser.setScore(swipeScore, LevelType.SWIPE);
             newUser.setCurrentRunDifficulty(difficulty);
             newUser.setCurrentRunLevels(levelsLeft);
             newUser.setCurrentRunLevelType(LevelType.getLevelTypeFromId(levelTypeId));
@@ -75,6 +77,8 @@ public class UserFileController extends FileController {
         data.append(user.getTypeScore());
         data.append(",");
         data.append(user.getPickupScore());
+        data.append(",");
+        data.append(user.getSwipeScore());
         data.append(",");
         LevelType levelType = user.getCurrentRunLevelType();
         data.append(levelType.getLevelId());
