@@ -96,6 +96,8 @@ public abstract class LevelActivity extends AppCompatActivity {
 
   public abstract void saveScore();
 
+  public abstract void cheatClickHandler(View view);
+
   /**
    * cancelTimer that cancels the Count Down
    */
