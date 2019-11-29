@@ -2,6 +2,7 @@ package com.example.postmortem.MenuSystems;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
 
-public class OptionMenuActivity extends AppCompatActivity {
+public class OptionMenuActivity extends MenuActivity {
 
   GameManager gameManager;
 

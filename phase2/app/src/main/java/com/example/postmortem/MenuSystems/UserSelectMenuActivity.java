@@ -15,7 +15,7 @@ import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
 
-public class UserSelectMenuActivity extends AppCompatActivity {
+public class UserSelectMenuActivity extends MenuActivity {
 
   GameManager gameManager;
   UserManager userManager;

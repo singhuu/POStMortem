@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends MenuActivity {
 
   GameManager gameManager;
 
