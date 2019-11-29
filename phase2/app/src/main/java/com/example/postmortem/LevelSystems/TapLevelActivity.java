@@ -52,8 +52,8 @@ public class TapLevelActivity extends LevelActivity {
   public void pressButton(View target) {
     // Do something in response to imageButton press
     TapLevel tapLevel = (TapLevel) level;
-    tapLevel.incrementTimesPressed();
-    int timesPressed = tapLevel.getTimesPressed();
+    tapLevel.incrementScore();
+    int timesPressed = tapLevel.getScore();
     TextView textView = findViewById(R.id.score);
     textView.setText(Integer.toString(timesPressed));
 
@@ -67,7 +67,7 @@ public class TapLevelActivity extends LevelActivity {
       imageButton.setImageResource(R.mipmap.laptop_closed_foreground);
     }
 
-    if (timesPressed == 100) {
+    if (timesPressed == 25) {
       displayMeric();
       sm.playWowEffect();
     }

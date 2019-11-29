@@ -14,17 +14,8 @@ public class TapLevel extends Level {
   /**
    * Increments the number of times pressed
    */
-  public void incrementTimesPressed() {
+  public void incrementScore() {
     score++;
-  }
-
-  /**
-   * Getter method that returns the number of times pressed
-   *
-   * @return timesPressed variable
-   */
-  public int getTimesPressed() {
-    return score;
   }
 
   /**
