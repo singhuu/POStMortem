@@ -91,7 +91,7 @@ public class UserManager {
         return canCreate;
     }
 
-    private boolean checkUserExists(String username){
+    public boolean checkUserExists(String username){
         for(User user: users){
             if(user.getUsername().equals(username)){
                 return true;

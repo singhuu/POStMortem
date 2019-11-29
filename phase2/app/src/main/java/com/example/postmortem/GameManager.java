@@ -15,6 +15,7 @@ import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.User;
 import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.LevelSystems.PickUpLevelActivity;
+import com.example.postmortem.LevelSystems.SwipeLevelActivity;
 import com.example.postmortem.LevelSystems.TapLevelActivity;
 import com.example.postmortem.LevelSystems.TypeLevelActivity;
 import com.example.postmortem.MenuSystems.GameOverMenuActivity;
@@ -24,6 +25,7 @@ public class GameManager implements Parcelable {
     public static final int PICKUP_LEVEL_TYPE = 0;
     public static final int TAP_LEVEL_TYPE = 1;
     public static final int TYPE_LEVEL_TYPE = 2;
+    public static final int SWIPE_LEVEL_TYPE = 3;
 
     public static final String INTENT_NAME = "manager";
     public static final Creator<GameManager> CREATOR = new Creator<GameManager>() {
@@ -308,9 +310,9 @@ public class GameManager implements Parcelable {
      * @return the new level type
      */
     private int decideNewLevelType() {
-        int levelType = (int) (Math.random() * 3);
+        int levelType = (int) (Math.random() * 4);
         while (levelType == currLevelType) {
-            levelType = (int) (Math.random() * 3);
+            levelType = (int) (Math.random() * 4);
         }
 
         return levelType;
@@ -353,6 +355,11 @@ public class GameManager implements Parcelable {
 
             case TYPE_LEVEL_TYPE:
                 intent = new Intent(context, TypeLevelActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                break;
+
+            case SWIPE_LEVEL_TYPE:
+                intent = new Intent(context, SwipeLevelActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 break;
 

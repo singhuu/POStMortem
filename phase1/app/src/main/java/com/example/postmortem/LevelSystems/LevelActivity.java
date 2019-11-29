@@ -10,6 +10,7 @@ import com.example.postmortem.MainActivity;
 import com.example.postmortem.MenuSystems.GameMenu;
 import com.example.postmortem.MenuSystems.GameOverMenu;
 import com.example.postmortem.MenuSystems.MenuActivity;
+import com.example.postmortem.SoundManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +21,7 @@ public abstract class LevelActivity extends AppCompatActivity {
   protected static int difficulty;
   protected CountDownTimer countTimer = null;
 
-  protected String curr_username = "";
+    protected String curr_username = "";
 
   /*LevelActivity(int layout, Level level) {
     this.layout = layout;

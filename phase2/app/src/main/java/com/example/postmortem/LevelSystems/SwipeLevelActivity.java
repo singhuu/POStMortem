@@ -34,7 +34,7 @@ public class SwipeLevelActivity extends LevelActivity{
 
         mDetector = new GestureDetectorCompat(this, new SwipeLevelGestureListener());
 
-        //gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
+        gameManager = getIntent().getParcelableExtra("GAME_MANAGER");
 
         getIntent().getIntExtra("DIFFICULTY", difficulty);
         level = new SwipeLevel(difficulty);
@@ -176,7 +176,7 @@ public class SwipeLevelActivity extends LevelActivity{
 
     @Override
     public void saveScore() {
-        UserLoader.getUser(curr_username).setScore(level.getScore(), LevelType.PICKUP);
+        gameManager.getActiveUser().setScore(level.getScore(), LevelType.SWIPE);
     }
 
     //Class to register swipe events

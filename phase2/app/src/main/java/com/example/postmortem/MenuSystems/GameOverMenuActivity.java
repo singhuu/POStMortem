@@ -41,7 +41,7 @@ public class GameOverMenuActivity extends AppCompatActivity {
     scores.append("Tap Level Score: " + user.getTapScore() + "\n");
     scores.append("Type Level Score: " + user.getTypeScore() + "\n");
     scores.append("Pickup Level Score: " + user.getPickupScore() + "\n");
-    scores.append("Swipe Level Score: " + user.getTapScore() + "\n"); //TODO ADD SWIPE LEVEL GET
+    scores.append("Swipe Level Score: " + user.getSwipeScore() + "\n");
     scores.append("Total Score: " + user.getScore());
 
     TextView currentScores = findViewById(R.id.currentScores);

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 
 import com.example.postmortem.R;
+import com.example.postmortem.SoundManager;
 import com.example.postmortem.UserLoader;
 
 import java.io.BufferedWriter;
@@ -19,6 +20,7 @@ public class TypeLevelActivity extends LevelActivity {
 
 
   Button[] selectButtons;
+  SoundManager sm = new SoundManager(this);
   private boolean clickedAnswer = false;
   TextView timerText;
   TypeLevel level = new TypeLevel(difficulty);
@@ -103,8 +105,12 @@ public class TypeLevelActivity extends LevelActivity {
      clickedAnswer = true;
      if(level.checkAnswer(clickedVal)) {
        level.score = level.score + 25;
+       sm.playWowEffect();
        TextView textView = findViewById(R.id.score);
        textView.setText(level.getScore() + "");
+     }
+     else {
+       sm.playBooEffect();
      }
      for (int i = 0; i < selectButtons.length - 1; i++) {
        //button shouldn't be clickable anymore

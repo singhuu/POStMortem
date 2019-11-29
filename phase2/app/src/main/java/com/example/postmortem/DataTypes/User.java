@@ -23,9 +23,13 @@ public class User implements Serializable {
      */
     private int tapScore;
     /**
-     * Stores scores froom type game
+     * Stores scores from type game
      */
     private int typeScore;
+    /**
+     * Stores scores from swipe game
+     */
+    private int swipeScore;
     /**
      * Stores the high score
      */
@@ -148,12 +152,17 @@ public class User implements Serializable {
     }
 
     /**
+     * Getter method that gets the Swipe Score
+     */
+    public int getSwipeScore(){return this.swipeScore;}
+
+    /**
      * Getter method that gets total Score
      *
      * @return returns that total sum of tap+type+pickup scores
      */
     public int getScore() {
-        return tapScore + typeScore + pickupScore;
+        return tapScore + typeScore + pickupScore + swipeScore;
     }
 
     public void setScore(int score, LevelType game) {
@@ -168,6 +177,10 @@ public class User implements Serializable {
 
             case PICKUP:
                 this.pickupScore = score;
+                break;
+
+            case SWIPE:
+                this.swipeScore = score;
                 break;
 
             default:
