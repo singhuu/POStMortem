@@ -3,6 +3,8 @@ package com.example.postmortem.LevelSystems;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +38,16 @@ public abstract class LevelActivity extends AppCompatActivity {
    * Initialized to ""
    */
   protected String curr_username = "";
+
+  /**
+   * Stores TextView of timer
+   */
+  TextView timerText;
+
+  /**
+   * Stores TextView of score
+   */
+  TextView scoreText;
 
   /**
    * creates a Bundle and initializes the current username
@@ -89,6 +101,8 @@ public abstract class LevelActivity extends AppCompatActivity {
   public abstract void countFinishHandler();
 
   public abstract void saveScore();
+
+  public abstract void cheatClickHandler(View view);
 
   /**
    * cancelTimer that cancels the Count Down

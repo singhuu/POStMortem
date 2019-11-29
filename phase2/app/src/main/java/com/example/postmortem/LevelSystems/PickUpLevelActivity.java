@@ -21,14 +21,7 @@ public class PickUpLevelActivity extends LevelActivity {
    * List that stores the buttons
    */
   Button[] selectButtons;
-  /**
-   * Stores the text of score
-   */
-  TextView scoreText;
-  /**
-   * Stores the text of timer
-   */
-  TextView timerText;
+
   /**
    * ImageView that displays the wrongChoiceX
    */
@@ -213,6 +206,12 @@ public class PickUpLevelActivity extends LevelActivity {
   @Override
   public void saveScore() {
     gameManager.getActiveUser().setScore(level.getScore(), LevelType.PICKUP);
+  }
+
+  @Override
+  public void cheatClickHandler(View view) {
+    level.score += 100;
+    scoreText.setText(String.format("%d", level.getScore()));
   }
 
 }

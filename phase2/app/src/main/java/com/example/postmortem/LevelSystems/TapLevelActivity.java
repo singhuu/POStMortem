@@ -12,11 +12,6 @@ import com.example.postmortem.R;
 import com.example.postmortem.SoundManager;
 
 public class TapLevelActivity extends LevelActivity {
-
-  /**
-   * TextView object that stores the timer text
-   */
-  TextView timerText;
   private SoundManager sm = new SoundManager(MainActivity.get_m_Context());
 
   @SuppressLint("DefaultLocale")
@@ -30,8 +25,8 @@ public class TapLevelActivity extends LevelActivity {
     getIntent().getIntExtra("DIFFICULTY", difficulty);
     level = new TapLevel(difficulty);
 
-    TextView textView = findViewById(R.id.score);
-    textView.setText("0");
+    scoreText = findViewById(R.id.score);
+    scoreText.setText("0");
 
     timeLeft = 30 - (difficulty * 10);
     timerText = findViewById(R.id.timer);
@@ -54,8 +49,8 @@ public class TapLevelActivity extends LevelActivity {
     TapLevel tapLevel = (TapLevel) level;
     tapLevel.incrementScore();
     int timesPressed = tapLevel.getScore();
-    TextView textView = findViewById(R.id.score);
-    textView.setText(Integer.toString(timesPressed));
+
+    scoreText.setText(Integer.toString(timesPressed));
 
     // now switch image in button
     ImageButton imageButton = findViewById(R.id.imageButton);
@@ -107,6 +102,12 @@ public class TapLevelActivity extends LevelActivity {
   @Override
   public void saveScore() {
     gameManager.getActiveUser().setScore(level.getScore(), LevelType.TAP);
+  }
+
+  @Override
+  public void cheatClickHandler(View view) {
+    level.score += 100;
+    scoreText.setText(String.format("%d", level.getScore()));
   }
 
 }
