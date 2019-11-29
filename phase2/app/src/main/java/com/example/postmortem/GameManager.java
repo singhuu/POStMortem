@@ -78,7 +78,7 @@ public class GameManager implements Parcelable {
      */
     public GameManager() {
         this.userManager = UserManager.getManager();
-        this.levels = 3;
+        this.levels = 4;
         this.difficulty = 1;
         this.runningAds = true;
     }

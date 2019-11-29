@@ -37,8 +37,8 @@ public class OptionMenuActivity extends AppCompatActivity {
     EditText levelsToPlay = findViewById(R.id.levelsToPlay);
     int levels = Integer.valueOf(levelsToPlay.getText().toString());
 
-    // check if levels >= 3
-    if (levels < 3) {
+    // check if levels >= 4
+    if (levels < 4) {
       invalidLevelNum(target);
       return;
     }
@@ -70,7 +70,7 @@ public class OptionMenuActivity extends AppCompatActivity {
     // code modded from https://medium.com/@suragch/making-an-alertdialog-in-android-2045381e2edb
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle("Error");
-    builder.setMessage("Must play at least 3 levels.");
+    builder.setMessage("Must play at least 4 levels.");
     builder.setPositiveButton("OK", null);
     AlertDialog dialog = builder.create();
     dialog.show();
