@@ -172,7 +172,6 @@ public class SwipeLevelActivity extends LevelActivity {
     gameManager.getActiveUser().setScore(level.getScore(), LevelType.SWIPE);
   }
 
-    @Override
     public void cheatClickHandler(View view) {
         level.score += 100;
         scoreText.setText(String.format("%d", level.getScore()));

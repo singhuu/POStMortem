@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
 
@@ -26,13 +24,13 @@ public class MainMenuActivity extends MenuActivity {
   }
 
   public void start(View target) {
-    gameManager.start(this);
-  }
-
-  public void openOptions(View target) {
     Intent intent = new Intent(this, OptionMenuActivity.class);
     intent.putExtra(GameManager.INTENT_NAME, gameManager);
     startActivity(intent);
+  }
+
+  public void openStats(View target) {
+
   }
 
   public void logout(View target) {

@@ -2,14 +2,12 @@ package com.example.postmortem.MenuSystems;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
@@ -52,6 +50,7 @@ public class OptionMenuActivity extends MenuActivity {
     // write option changes to gamemanager
 
     writeOptions(target, levels, ads, difficulty);
+    gameManager.start(this);
   }
 
   private void writeOptions(View target, int levels, boolean ads, String difficulty) {
@@ -64,7 +63,6 @@ public class OptionMenuActivity extends MenuActivity {
     } else {
       gameManager.setDifficulty(3);
     }
-    cancel(target);
   }
 
   public void invalidLevelNum(View target) {
