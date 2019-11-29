@@ -12,15 +12,17 @@ import com.example.postmortem.SoundManager;
 
 
 public class TypeLevelActivity extends LevelActivity {
+
+
   /**
    * List that stores the buttons
    */
-  Button[] selectButtons;
+  private Button[] selectButtons;
 
   /**
    * object of TypeLevel
    */
-  TypeLevel level = new TypeLevel(difficulty);
+  private TypeLevel level = new TypeLevel(difficulty);
   private SoundManager sm = new SoundManager(MainActivity.get_m_Context());
   /**
    * Checks if answer is clicked
@@ -111,45 +113,57 @@ public class TypeLevelActivity extends LevelActivity {
   public void clickHandler(View target) {
     Button clickedButton = (Button) target;
     String clickedVal = (String) clickedButton.getText();
-    // if the button is one of the answers, show the color to indicate which button is correct
+
+    /** if the button is one of the answers, show the color to indicate which button is correct */
     if (clickedButton != selectButtons[4]) {
       clickedAnswer = true;
       if (level.checkAnswer(clickedVal)) {
-        level.score = level.score + 25;
+        level.setScore(level.getScore() + 25);
 
-        scoreText.setText(String.format("%d", level.getScore()));
+        scoreText.setText(Integer.toString(level.getScore()));
         sm.playWowEffect();
-      } else {
+      }
+      else {
         sm.playBooEffect();
       }
-      for (int i = 0; i < selectButtons.length - 1; i++) {
-        //button shouldn't be clickable anymore
-        selectButtons[i].setEnabled(false);
-        if (selectButtons[i].getText() != level.getCurrentQuestion().getCorrectAnswer()) {
-          selectButtons[i].setBackgroundColor(getResources().getColor(R.color.supremeRed));
-        } else {
-          selectButtons[i].setBackgroundColor(getResources().getColor(R.color.green));
-        }
-      }
+
+      changeButtonColor();
     }
-    // goes to the next question
+    /** goes to the next question */
     else {
       if (clickedAnswer) {
-        level.nextQuestion();
-        assignButtonVals(selectButtons);
-        TextView title = findViewById(R.id.textView4);
-        TextView question_text = findViewById(R.id.textView5);
-
-        String a = "Question " + (level.getCurrentQuestionNum() + 1);
-        title.setText(a);
-        String text_1 = level.getCurrentQuestion().getQuestion();
-        question_text.setText(text_1);
-        for (int i = 0; i < selectButtons.length - 1; i++) {
-          selectButtons[i].setEnabled(true);
-          selectButtons[i].setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        }
-
+        goToNextQuestion();
         clickedAnswer = false;
+      }
+    }
+  }
+
+  /** helper method that moves to the next question in the level */
+  private void goToNextQuestion() {
+    level.nextQuestion();
+    assignButtonVals(selectButtons);
+    TextView title = findViewById(R.id.textView4);
+    TextView question_text = findViewById(R.id.textView5);
+
+    String a = "Question " + (level.getCurrentQuestionNum() + 1);
+    title.setText(a);
+    String text_1 = level.getCurrentQuestion().getQuestion();
+    question_text.setText(text_1);
+    for (int i = 0; i < selectButtons.length - 1; i++) {
+      selectButtons[i].setEnabled(true);
+      selectButtons[i].setBackgroundColor(getResources().getColor(R.color.colorAccent));
+    }
+  }
+
+  /** helper method that changes the colors of the buttons correctly after being pressed */
+  private void changeButtonColor() {
+    for (int i = 0; i < selectButtons.length - 1; i++) {
+      //button shouldn't be clickable anymore
+      selectButtons[i].setEnabled(false);
+      if (selectButtons[i].getText() != level.getCurrentQuestion().getCorrectAnswer()) {
+        selectButtons[i].setBackgroundColor(getResources().getColor(R.color.supremeRed));
+      } else {
+        selectButtons[i].setBackgroundColor(getResources().getColor(R.color.green));
       }
     }
   }
