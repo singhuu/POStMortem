@@ -77,11 +77,15 @@ public class MainActivity extends AppCompatActivity {
                     "the_only_one", NotificationManager.IMPORTANCE_HIGH);
 
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
             AlarmManager mAlarmManager = (AlarmManager) getApplicationContext().getSystemService(ALARM_SERVICE);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1234,
                     new Intent(getApplicationContext(), NotificationUpdate.class), 0);
-            mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, pendingIntent);
+            if (mAlarmManager != null) {
+                mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, pendingIntent);
+            }
         }
     }
 
