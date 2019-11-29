@@ -58,7 +58,7 @@ public class UserManager {
    * @param password the password of the desired account
    * @return optionally the user logged in to
    */
-  private Optional<User> attemptLogin(String username, String password) {
+  Optional<User> attemptLogin(String username, String password) {
     Optional user = Optional.empty();
     for (User account : users) {
       if (loginCorrect(account, username, password)) {
