@@ -28,6 +28,8 @@
         <activity android:name=".MenuSystems.GameOverMenuActivity" />
         <activity android:name=".MenuSystems.UserSelectMenuActivity" />
         <activity android:name=".MenuSystems.OptionMenuActivity" />
+        <activity android:name=".LevelSystems.PickUpLevel" />
+
         <receiver android:name=".notifications.NotificationUpdate" />
     </application>
 
