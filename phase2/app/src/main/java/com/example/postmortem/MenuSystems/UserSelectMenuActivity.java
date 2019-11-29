@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.postmortem.DataTypes.AccountException;
 import com.example.postmortem.DataTypes.User;
@@ -72,7 +71,7 @@ public class UserSelectMenuActivity extends MenuActivity {
   private void tryCreateUser(String username, String password) {
     try {
       validator.createAccount(username, password);
-      constructDialog("success", "New user created.");
+      constructDialog("Success", "New user created.");
     } catch (AccountException e) {
       String message = e.getMessage();
       constructDialog("Error", message);

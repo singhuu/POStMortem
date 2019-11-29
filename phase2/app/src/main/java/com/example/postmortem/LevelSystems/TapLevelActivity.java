@@ -104,7 +104,6 @@ public class TapLevelActivity extends LevelActivity {
     gameManager.getActiveUser().setScore(level.getScore(), LevelType.TAP);
   }
 
-  @Override
   public void cheatClickHandler(View view) {
     level.score += 100;
     scoreText.setText(String.format("%d", level.getScore()));

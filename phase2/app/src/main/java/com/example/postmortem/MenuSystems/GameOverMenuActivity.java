@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.postmortem.DataTypes.Hiscore;
 import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.User;
@@ -61,7 +59,9 @@ public class GameOverMenuActivity extends MenuActivity {
   }
 
   public void restart(View target) {
-    gameManager.start(this);
+    Intent intent = new Intent(this, OptionMenuActivity.class);
+    intent.putExtra(GameManager.INTENT_NAME, gameManager);
+    startActivity(intent);
   }
 
   /**

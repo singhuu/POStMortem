@@ -126,7 +126,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:onClick="apply"
                 android:padding="10dp"
-                android:text="Apply"
+                android:text="Start"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold|italic" />
