@@ -270,13 +270,17 @@ public class GameManager implements Parcelable {
    * Creates a level and adds it to level list,
    *
    * @param context the current state of the app
-   * @return returns true if success, false if failed
+   * @return an Intent object for the new LevelType created
    */
   private Intent createRandomLevel(AppCompatActivity context) {
 
     LevelType newLevelType = decideNewLevelType();
-    return createGivenLevel(context, newLevelType);
 
+    if (currLevelType != newLevelType) {
+      return createRandomLevel(context);
+    } else {
+      return createGivenLevel(context, newLevelType);
+    }
   }
 
   /**
