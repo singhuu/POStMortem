@@ -39,7 +39,7 @@ public class TypeLevel extends Level {
    * @return score variable
    */
   public int getScore() {
-    return score;
+    return this.score;
   }
 
   /**
@@ -47,7 +47,7 @@ public class TypeLevel extends Level {
    * @param s score that will be changed to
    */
   public void setScore(int s) {
-    score = s;
+    this.score = s;
   }
   /**
    * using data from a text file pull the questions and answers and create those questions
