@@ -1,9 +1,8 @@
-package com.example.postmortem.notifications;
+package com.example.postmortem.Notifications;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
