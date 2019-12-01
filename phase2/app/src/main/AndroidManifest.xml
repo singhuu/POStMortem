@@ -29,7 +29,6 @@
         <activity android:name=".MenuSystems.UserSelectMenuActivity" />
         <activity android:name=".MenuSystems.OptionMenuActivity" />
         <activity android:name=".LevelSystems.PickUpLevel" />
-        <activity android:name=".MenuSystems.StatsMenuActivity" />
         <receiver android:name=".notifications.NotificationUpdate" />
     </application>
 

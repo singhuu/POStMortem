@@ -29,10 +29,6 @@ public class MainMenuActivity extends MenuActivity {
     startActivity(intent);
   }
 
-  public void openStats(View target) {
-
-  }
-
   public void logout(View target) {
     Intent intent = new Intent(this, UserSelectMenuActivity.class);
     intent.putExtra(GameManager.INTENT_NAME, gameManager);
