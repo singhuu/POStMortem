@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 public class UserCredentialValidator {
 
+  /**
+   * User Manager object that interacts with the login information
+   */
   private UserManager manager;
 
   public UserCredentialValidator() {

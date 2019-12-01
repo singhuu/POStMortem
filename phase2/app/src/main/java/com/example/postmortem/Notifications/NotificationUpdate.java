@@ -22,12 +22,13 @@ public class NotificationUpdate extends BroadcastReceiver {
 
     /**
      * Creates the notifications and the contents in it and notifies the asystem
+     *
      * @param context the current state of the app
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void updateNotification(Context context){
+    private void updateNotification(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(context,1234,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 1234, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new Notification.Builder(context.getApplicationContext(), "primary")
                 .setContentTitle("Why don't you come play again")
                 .setContentText("We miss you, we do.")
@@ -35,8 +36,8 @@ public class NotificationUpdate extends BroadcastReceiver {
                 .setContentIntent(resultPendingIntent)
                 .setAutoCancel(true)
                 .build();
-        NotificationManager manager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if(manager!=null) manager.notify(123, notification);
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) manager.notify(123, notification);
     }
 
 }

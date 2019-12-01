@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
   /**
    * Decides the time after which the notification is triggered when the app is left idle
    */
-  final int notificationTime = 60;
+  final int notificationTime = 60 * 60 * 1000;
 
   /**
    * Getter function that returns the context
