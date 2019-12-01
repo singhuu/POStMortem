@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -65,16 +66,20 @@ public class UserSelectMenuActivity extends MenuActivity {
     String username = usernameField.getText().toString();
     String password = passwordField.getText().toString();
 
-    tryCreateUser(username, password);
+    if(tryCreateUser(username, password))
+      login(target);
   }
 
-  private void tryCreateUser(String username, String password) {
+  private boolean tryCreateUser(String username, String password) {
     try {
       validator.createAccount(username, password);
-      constructDialog("Success", "New user created.");
+      Toast userCreated = Toast.makeText(this, "User Created", Toast.LENGTH_LONG);
+      userCreated.show();
+      return true;
     } catch (AccountException e) {
       String message = e.getMessage();
       constructDialog("Error", message);
+      return false;
     }
   }
 
