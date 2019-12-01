@@ -274,22 +274,13 @@ public class GameManager implements Parcelable {
    */
   private Intent createRandomLevel(AppCompatActivity context) {
 
-    LevelType newLevelType = decideNewLevelType();
+    LevelType newLevelType = LevelType.randomLevelType();
 
     if (currLevelType != newLevelType) {
       return createGivenLevel(context, newLevelType);
     } else {
       return createRandomLevel(context);
     }
-  }
-
-  /**
-   * Decides what the next Level is going to be
-   *
-   * @return the new level type
-   */
-  private LevelType decideNewLevelType() {
-    return LevelType.randomLevelType();
   }
 
   /**
@@ -305,7 +296,6 @@ public class GameManager implements Parcelable {
     addExtras(newLevelIntent);
 
     return newLevelIntent;
-
   }
 
   /**
@@ -378,7 +368,7 @@ public class GameManager implements Parcelable {
     if (runningAds) {
       showAd(context, intent);
     } else {
-      AdNoShow(context, intent);
+      adNoShow(context, intent);
     }
 
   }
@@ -421,7 +411,7 @@ public class GameManager implements Parcelable {
    * @param context the current state of the program
    * @param intent  the operation of be performed
    */
-  private void AdNoShow(AppCompatActivity context, Intent intent) {
+  private void adNoShow(AppCompatActivity context, Intent intent) {
 
     AlertDialog.Builder builder = createEndPopup(context, intent);
     AlertDialog dialog = builder.create();

@@ -21,7 +21,7 @@ public class TypeLevelActivity extends LevelActivity {
    * object of TypeLevel
    */
   private TypeLevel level = new TypeLevel(difficulty);
-  private SoundManager sm = new SoundManager(MainActivity.get_m_Context());
+  private SoundManager sm = new SoundManager(MainActivity.getMContext());
   /**
    * Checks if answer is clicked
    */

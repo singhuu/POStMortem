@@ -1,4 +1,4 @@
-package com.example.postmortem.Notifications;
+package com.example.postmortem;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -9,9 +9,6 @@ import android.content.Intent;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
-
-import com.example.postmortem.MainActivity;
-import com.example.postmortem.R;
 
 public class NotificationUpdate extends BroadcastReceiver {
     @RequiresApi(api = Build.VERSION_CODES.O)

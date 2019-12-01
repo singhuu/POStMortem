@@ -30,7 +30,7 @@
         <activity android:name=".MenuSystems.OptionMenuActivity" />
         <activity android:name=".LevelSystems.PickUpLevel" />
 
-        <receiver android:name=".Notifications.NotificationUpdate" />
+        <receiver android:name=".NotificationUpdate" />
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@ public class PickUpLevelActivity extends LevelActivity {
    * ImageView that displays the wrongChoiceX
    */
   ImageView wrongChoiceX;
-  private SoundManager sm = new SoundManager(MainActivity.get_m_Context());
+  private SoundManager sm = new SoundManager(MainActivity.getMContext());
 
   @SuppressLint("DefaultLocale")
   @Override

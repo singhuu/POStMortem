@@ -88,7 +88,7 @@ public class TypeLevel extends Level {
     InputStream is;
     BufferedReader reader;
 
-    is = MainActivity.get_m_Context().getResources().openRawResource(R.raw.all_questions);
+    is = MainActivity.getMContext().getResources().openRawResource(R.raw.all_questions);
     reader = new BufferedReader(new InputStreamReader(is));
     if (is != null) {
       try {

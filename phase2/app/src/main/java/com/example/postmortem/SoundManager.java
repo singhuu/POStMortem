@@ -28,37 +28,12 @@ public class SoundManager {
     main.setLooping(true);
   }
 
-
-  public void pauseMainMusic() {
-    main.pause();
-  }
-
-  public void stopMainMusic() {
-    main.stop();
-    main.release();
-  }
-
   public void playWowEffect() {
 
     wowEffect.start();
   }
 
-  public boolean isWowPlaying() {
-    return wowEffect.isPlaying();
-  }
-
-  public void stopWowEffect() {
-    wowEffect.stop();
-    wowEffect.release();
-  }
-
-
   public void playBooEffect() {
     booEffect.start();
-  }
-
-  public void stopBooEffect() {
-    booEffect.stop();
-    booEffect.release();
   }
 }

@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.MenuSystems.UserSelectMenuActivity;
-import com.example.postmortem.Notifications.NotificationUpdate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
    *
    * @return mContext, the context in the main activity
    */
-  public static Context get_m_Context() {
+  public static Context getMContext() {
     return mContext;
   }
 
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     mContext = this;
-    notifications();
+    initializeNotifications();
     SoundManager sm = new SoundManager(mContext);
     initializeGame();
     startGame();
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
   /**
    * Creates notification channels, intents and defines conditions for notifications to be called.
    */
-  private void notifications() {
+  private void initializeNotifications() {
     NotificationChannel notificationChannel;
     notificationChannel = new NotificationChannel("primary",
             "the_only_one", NotificationManager.IMPORTANCE_HIGH);

@@ -12,7 +12,7 @@ import com.example.postmortem.R;
 import com.example.postmortem.SoundManager;
 
 public class TapLevelActivity extends LevelActivity {
-  private SoundManager sm = new SoundManager(MainActivity.get_m_Context());
+  private SoundManager sm = new SoundManager(MainActivity.getMContext());
 
   @SuppressLint("DefaultLocale")
   @Override
