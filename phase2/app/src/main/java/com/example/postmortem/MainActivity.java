@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.postmortem.DataTypes.HiscoreManager;
 import com.example.postmortem.DataTypes.UserManager;
 import com.example.postmortem.MenuSystems.UserSelectMenuActivity;
-import com.example.postmortem.notifications.NotificationUpdate;
+import com.example.postmortem.Notifications.NotificationUpdate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
   /**
    * Decides the time after which the notification is triggered when the app is left idle
    */
-  final int time = 5 * 60 * 1000;
+  final int notificationTime = 60;
 
   /**
    * Getter function that returns the context
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1234,
             new Intent(getApplicationContext(), NotificationUpdate.class), 0);
     if (mAlarmManager != null) {
-      mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, pendingIntent);
+      mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + notificationTime, pendingIntent);
     }
   }
 
