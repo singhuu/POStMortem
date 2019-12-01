@@ -277,9 +277,9 @@ public class GameManager implements Parcelable {
     LevelType newLevelType = decideNewLevelType();
 
     if (currLevelType != newLevelType) {
-      return createRandomLevel(context);
-    } else {
       return createGivenLevel(context, newLevelType);
+    } else {
+      return createRandomLevel(context);
     }
   }
 
