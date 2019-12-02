@@ -1,5 +1,7 @@
 package com.example.postmortem.FileInterfacing;
 
+import android.util.Log;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,10 +25,8 @@ class FileInterface {
     private void openFile(String filePath) {
         file = new File(filePath);
         try {
-
-            boolean exists = file.exists();
-            boolean create = file.createNewFile();
-            int wait = 0;
+            Log.d("FileInterface", "file.exists() returns " + file.exists());
+            Log.d("FileInterface", "file.createNewFile() returns " + file.createNewFile());
 
         } catch (IOException e) {
             e.printStackTrace();
