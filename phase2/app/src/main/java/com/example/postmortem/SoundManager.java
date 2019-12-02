@@ -3,15 +3,19 @@ package com.example.postmortem;
 import android.content.Context;
 import android.media.MediaPlayer;
 
-/** this class controls all the sound heard in the game */
+/**
+ * this class controls all the sound heard in the game
+ */
 public class SoundManager {
 
   private MediaPlayer main;
   private MediaPlayer wowEffect;
   private MediaPlayer booEffect;
 
-  /** the constructor creates mediaplayers for each sound and gets the MainMethod context which is
+  /**
+   * the constructor creates mediaplayers for each sound and gets the MainMethod context which is
    * required in order to pull the sound files from their folder
+   *
    * @param c the context of the file needed to pull the sound files
    */
   public SoundManager(Context c) {

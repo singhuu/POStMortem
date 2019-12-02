@@ -44,11 +44,13 @@ public class TypeLevel extends Level {
 
   /**
    * Setter method that changes the level score value
+   *
    * @param s score that will be changed to
    */
   public void setScore(int s) {
     this.score = s;
   }
+
   /**
    * using data from a text file pull the questions and answers and create those questions
    */
@@ -78,9 +80,11 @@ public class TypeLevel extends Level {
     this.currentQuestion = ques.get(currentQuestionNum);
   }
 
-  /** helper method which reads the file data and formats it
+  /**
+   * helper method which reads the file data and formats it
    *
-   * @return a String ArrayList containing the questions from the file */
+   * @return a String ArrayList containing the questions from the file
+   */
   private ArrayList<String> readFile() {
     ArrayList<String> formatQues = new ArrayList<>();
 
