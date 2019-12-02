@@ -1,0 +1,47 @@
+Initial Install
+-	This software is standalone and can be installed without any additional frameworks or libraries.
+
+Login
+-	Before any games can be played, the user must login. If they don’t have a user credential saved,
+    they can create an account and will automatically be logged in.
+
+Play
+-	When the user clicks play, they are greeted by the options screen where they can choose the
+    number of minigames they will play, the difficulty they will play at, and if they will have ads
+    showing or not.
+
+Continue
+-	If a user closes the app halfway through playing a minigame, their play session will be saved
+    and, upon returning to the app, they can press continue to start playing at the last level they
+    left on.
+
+Minigame Breakdown
+-	All our minigames have a goal of achieving the most points possible in the given time frame.
+    This time frame is affected by the selected difficulty, but all point values are constant
+    across difficulties.
+
+1.	Forest Runner
+    The goal of this game is to progress the most rows possible. The field is split into 3 columns
+    that the player can occupy. For each row in the path ahead, up to 2 blocks will contain trees
+    that prevents the player from progressing when in the same column as the player. The space
+    directly in front of the player is free, the player will automatically progress to the next
+    row until another obstacle is encountered.
+
+2.	CS Quiz
+    This functions like a standard trivia game. The user is given a question and 4 potential
+    answers. They then will select one of the options and will either receive points when selecting
+    the correct one or will be forced to continue to the next question when selecting the wrong one.
+
+3.	Laptop Tap
+    The user must tap the image of the laptop as many times as possible. Points are given for each
+    tap, and the laptop has a simple two frame animation that is played every two taps.
+
+4.	Item Select
+    The user is given 6 different image buttons, a prompt to select one of the six images by its
+    name. If the user selects the right image, they are given pints and a new set of images and
+    prompts are generated. If the user selects the wrong image however, a red x appears, and they
+    are blocked from selecting other buttons for a few seconds.
+
+Cheats
+-	In every minigame, tapping the timer gives the player an extra 100 points. This can be done as
+    many times as the player chooses.
