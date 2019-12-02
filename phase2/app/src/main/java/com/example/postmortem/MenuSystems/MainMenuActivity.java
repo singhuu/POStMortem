@@ -3,6 +3,7 @@ package com.example.postmortem.MenuSystems;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.postmortem.GameManager;
 import com.example.postmortem.R;
@@ -21,12 +22,17 @@ public class MainMenuActivity extends MenuActivity {
   }
 
   /**
-   * Continue the game from previous state
+   * Continue the game from previous state if previous game is found
    *
    * @param target the view variable
    */
   public void continueGame(View target) {
-    gameManager.continueFromSave(this);
+    if(gameManager.getActiveUser().getCurrentRunLevels() != 0)
+      gameManager.continueFromSave(this);
+    else{
+      Toast noContinue = Toast.makeText(this, "No Previous Game Found", Toast.LENGTH_SHORT);
+      noContinue.show();
+    }
   }
 
   /**
