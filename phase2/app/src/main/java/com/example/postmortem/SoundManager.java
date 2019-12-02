@@ -25,16 +25,25 @@ public class SoundManager {
 
   }
 
+  /**
+   * starts playing the background music
+   */
   void startMainMusic() {
     main.start();
     main.setLooping(true);
   }
 
+  /**
+   * starts playing the wow effect music
+   */
   public void playWowEffect() {
 
     wowEffect.start();
   }
 
+  /**
+   * starts playing the boo effect music
+   */
   public void playBooEffect() {
     booEffect.start();
   }
