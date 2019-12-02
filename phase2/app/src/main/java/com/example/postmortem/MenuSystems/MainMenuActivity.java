@@ -27,9 +27,9 @@ public class MainMenuActivity extends MenuActivity {
    * @param target the view variable
    */
   public void continueGame(View target) {
-    if(gameManager.getActiveUser().getCurrentRunLevels() != 0)
+    if (gameManager.getActiveUser().getCurrentRunLevels() != 0)
       gameManager.continueFromSave(this);
-    else{
+    else {
       Toast noContinue = Toast.makeText(this, "No Previous Game Found", Toast.LENGTH_SHORT);
       noContinue.show();
     }
