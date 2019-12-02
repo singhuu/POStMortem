@@ -45,3 +45,6 @@ Minigame Breakdown
 Cheats
 -	In every minigame, tapping the timer gives the player an extra 100 points. This can be done as
     many times as the player chooses.
+
+UML Diagrams
+-   The UML class diagrams are contained in the file design.pdf, organized one package per page.
