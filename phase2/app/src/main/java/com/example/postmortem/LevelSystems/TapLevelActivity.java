@@ -88,7 +88,7 @@ public class TapLevelActivity extends LevelActivity {
   }
 
   /**
-   * updates total score
+   * Updates total score
    */
   @Override
   public void countFinishHandler() {
@@ -104,9 +104,14 @@ public class TapLevelActivity extends LevelActivity {
     gameManager.getActiveUser().setScore(level.getScore(), LevelType.TAP);
   }
 
-  public void cheatClickHandler(View view) {
-    level.score += 100;
-    scoreText.setText(String.format("%d", level.getScore()));
-  }
+    /**
+     * Triggers the cheat to the score
+     *
+     * @param view the current view of the app
+     */
+    public void cheatClickHandler(View view) {
+        level.score += 100;
+        scoreText.setText(String.format("%d", level.getScore()));
+    }
 
 }
