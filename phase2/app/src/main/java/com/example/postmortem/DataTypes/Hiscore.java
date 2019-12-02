@@ -1,5 +1,7 @@
 package com.example.postmortem.DataTypes;
 
+import androidx.annotation.NonNull;
+
 public class Hiscore {
 
     /**
@@ -37,6 +39,7 @@ public class Hiscore {
     /**
      * @return A string representation of this HiScore
      */
+    @NonNull
     @Override
     public String toString() {
         return username + " " + score;

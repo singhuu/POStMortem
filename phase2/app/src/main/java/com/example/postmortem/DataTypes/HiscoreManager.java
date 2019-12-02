@@ -63,7 +63,7 @@ public class HiscoreManager {
     /**
      * Ensures High Scores are added
      *
-     * @param newHiscore
+     * @param newHiscore new hiscore from recent play-through
      */
     public void addHiscore(Hiscore newHiscore) {
         int i = 0;

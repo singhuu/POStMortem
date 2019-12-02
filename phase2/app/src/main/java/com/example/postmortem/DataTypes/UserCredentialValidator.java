@@ -18,7 +18,7 @@ public class UserCredentialValidator {
    * Gets the user matching the username and password
    *
    * @param username the username of the user to be logged in
-   * @param password the ppassword of the user to be logged in
+   * @param password the password of the user to be logged in
    * @return the user matching the username and password
    * @throws AccountException whatever went wrong in the login process
    */
