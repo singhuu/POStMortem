@@ -10,6 +10,10 @@ import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 import com.example.postmortem.SoundManager;
 
+import java.util.Locale;
+
+import androidx.core.content.ContextCompat;
+
 
 public class TypeLevelActivity extends LevelActivity {
   /**
@@ -148,7 +152,7 @@ public class TypeLevelActivity extends LevelActivity {
     question_text.setText(text_1);
     for (int i = 0; i < selectButtons.length - 1; i++) {
       selectButtons[i].setEnabled(true);
-      selectButtons[i].setBackgroundColor(getResources().getColor(R.color.colorAccent));
+      selectButtons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
     }
   }
 
@@ -158,9 +162,9 @@ public class TypeLevelActivity extends LevelActivity {
       //button shouldn't be clickable anymore
       selectButtons[i].setEnabled(false);
       if (selectButtons[i].getText() != level.getCurrentQuestion().getCorrectAnswer()) {
-        selectButtons[i].setBackgroundColor(getResources().getColor(R.color.supremeRed));
+        selectButtons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.supremeRed));
       } else {
-        selectButtons[i].setBackgroundColor(getResources().getColor(R.color.green));
+        selectButtons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.green));
       }
     }
 
@@ -193,6 +197,6 @@ public class TypeLevelActivity extends LevelActivity {
 
   public void cheatClickHandler(View view) {
     level.score += 100;
-    scoreText.setText(String.format("%d", level.getScore()));
+    scoreText.setText(String.format(Locale.CANADA, "%d", level.getScore()));
   }
 }

@@ -60,7 +60,7 @@ public class TypeLevel extends Level {
 
     //shuffling questions so the user doesn't always get the same questions
     Collections.shuffle(formatQues);
-    //cycles through questions in formatques when they are in string form and adds them to database of questions
+    //cycles through questions in formatQues when they are in string form and adds them to database of questions
 
     for (int i = 0; i < formatQues.size(); i++) {
       String[] l = formatQues.get(i).split(",", -1);
@@ -90,15 +90,13 @@ public class TypeLevel extends Level {
 
     is = MainActivity.getMContext().getResources().openRawResource(R.raw.all_questions);
     reader = new BufferedReader(new InputStreamReader(is));
-    if (is != null) {
-      try {
-        //cycles all lines of text file if possible
-        while ((s = reader.readLine()) != null) {
-          formatQues.add(s);
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
+    try {
+      //cycles all lines of text file if possible
+      while ((s = reader.readLine()) != null) {
+        formatQues.add(s);
       }
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
     return formatQues;
@@ -149,7 +147,7 @@ public class TypeLevel extends Level {
   /**
    * Getter method that gets your difficulty
    *
-   * @param difficulty
+   * @param difficulty integer variable that stores difficulty
    */
   public void setDifficulty(int difficulty) {
     this.difficulty = difficulty;

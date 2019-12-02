@@ -11,6 +11,8 @@ import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 import com.example.postmortem.SoundManager;
 
+import java.util.Locale;
+
 public class TapLevelActivity extends LevelActivity {
   private SoundManager sm = new SoundManager(MainActivity.getMContext());
 
@@ -106,7 +108,7 @@ public class TapLevelActivity extends LevelActivity {
 
   public void cheatClickHandler(View view) {
     level.score += 100;
-    scoreText.setText(String.format("%d", level.getScore()));
+    scoreText.setText(String.format(Locale.CANADA, "%d", level.getScore()));
   }
 
 }

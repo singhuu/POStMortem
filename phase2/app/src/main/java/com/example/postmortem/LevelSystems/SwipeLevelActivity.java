@@ -146,7 +146,7 @@ public class SwipeLevelActivity extends LevelActivity {
     /**
      * Getter method that returns the updated player position
      *
-     * @return the player postion
+     * @return the player position
      */
     private TextView[] getPlayerTiles() {
         playerTiles = new TextView[3];
