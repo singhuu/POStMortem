@@ -6,7 +6,6 @@ import android.media.MediaPlayer;
 /** this class controls all the sound heard in the game */
 public class SoundManager {
 
-  private Context mContext;
   private MediaPlayer main;
   private MediaPlayer wowEffect;
   private MediaPlayer booEffect;
@@ -16,14 +15,13 @@ public class SoundManager {
    * @param c the context of the file needed to pull the sound files
    */
   public SoundManager(Context c) {
-    mContext = c;
-    main = MediaPlayer.create(mContext, R.raw.mainmusic);
-    wowEffect = MediaPlayer.create(mContext, R.raw.wowshorter);
-    booEffect = MediaPlayer.create(mContext, R.raw.buzzerloweraudio);
+    main = MediaPlayer.create(c, R.raw.mainmusic);
+    wowEffect = MediaPlayer.create(c, R.raw.wowshorter);
+    booEffect = MediaPlayer.create(c, R.raw.buzzerloweraudio);
 
   }
 
-  public void startMainMusic() {
+  void startMainMusic() {
     main.start();
     main.setLooping(true);
   }

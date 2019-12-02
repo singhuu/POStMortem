@@ -18,7 +18,7 @@ public class NotificationUpdate extends BroadcastReceiver {
     }
 
     /**
-     * Creates the notifications and the contents in it and notifies the asystem
+     * Creates the notifications and the contents in it and notifies the system
      *
      * @param context the current state of the app
      */

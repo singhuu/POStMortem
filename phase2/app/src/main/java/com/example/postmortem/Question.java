@@ -14,7 +14,7 @@ public class Question {
     private String correctAnswer;
 
     /**
-     * Constructor method that stores initalizes variables
+     * Constructor method that stores initializes variables
      *
      * @param question String that stores the question
      * @param answers  Stores the possible answers
