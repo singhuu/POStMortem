@@ -67,7 +67,7 @@ public class OptionMenuActivity extends MenuActivity {
     /**
      * Options menu of the user
      *
-     * @param levels     the current level
+     * @param levels     the current number of levels
      * @param ads        checks if ads are turned on
      * @param difficulty the current difficulty
      */
