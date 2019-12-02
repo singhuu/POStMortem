@@ -37,7 +37,6 @@ public class SoundManager {
    * starts playing the wow effect music
    */
   public void playWowEffect() {
-
     wowEffect.start();
   }
 
