@@ -96,7 +96,7 @@ public class UserSelectMenuActivity extends MenuActivity {
      *
      * @param username the username entered by the client
      * @param password the password entered by the client
-     * @return
+     * @return returns true/false based on if user succeeds in being created
      */
     private boolean tryCreateUser(String username, String password) {
         try {
@@ -118,7 +118,7 @@ public class UserSelectMenuActivity extends MenuActivity {
      * @param message the body of the message
      */
     public void constructDialog(String title, String message) {
-        // code modded from https://medium.com/@suragch/making-an-alertdialog-in-android-2045381e2edb
+        // code modified from https://medium.com/@suragch/making-an-alertdialog-in-android-2045381e2edb
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
         builder.setMessage(message);

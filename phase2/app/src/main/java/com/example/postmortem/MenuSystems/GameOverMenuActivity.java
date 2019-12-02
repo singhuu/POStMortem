@@ -35,15 +35,16 @@ public class GameOverMenuActivity extends MenuActivity {
      */
     private void populateCurrentScores() {
         User user = gameManager.getActiveUser();
-        StringBuilder scores = new StringBuilder();
-        scores.append("Tap Level Score: " + user.getTapScore() + "\n");
-        scores.append("Type Level Score: " + user.getTypeScore() + "\n");
-        scores.append("Pickup Level Score: " + user.getPickupScore() + "\n");
-        scores.append("Swipe Level Score: " + user.getSwipeScore() + "\n");
-        scores.append("Total Score: " + user.getScore());
+
+        String scores = "";
+        scores += "Tap Level Score: " + user.getTapScore() + "\n";
+        scores += "Type Level Score: " + user.getTypeScore() + "\n";
+        scores += "Pickup Level Score: " + user.getPickupScore() + "\n";
+        scores += "Swipe Level Score: " + user.getSwipeScore() + "\n";
+        scores += "Total Score: " + user.getScore();
 
         TextView currentScores = findViewById(R.id.currentScores);
-        currentScores.setText(scores.toString());
+        currentScores.setText(scores);
     }
 
     /**
