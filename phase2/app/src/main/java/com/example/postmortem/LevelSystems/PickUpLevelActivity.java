@@ -11,6 +11,8 @@ import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 import com.example.postmortem.SoundManager;
 
+import java.util.Locale;
+
 public class PickUpLevelActivity extends LevelActivity {
 
   /**
@@ -210,7 +212,7 @@ public class PickUpLevelActivity extends LevelActivity {
 
   public void cheatClickHandler(View view) {
     level.score += 100;
-    scoreText.setText(String.format("%d", level.getScore()));
+    scoreText.setText(String.format(Locale.CANADA, "%d", level.getScore()));
   }
 
 }

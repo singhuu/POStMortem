@@ -25,32 +25,35 @@ abstract class FileController {
     List loadedList = new LinkedList<>();
     try {
       List<String> fileData = fileInterface.readFile();
-      List<String[]> seperatedData = formatReadData(fileData);
-      loadedList = updateList(seperatedData);
+      List<String[]> separatedData = formatReadData(fileData);
+      loadedList = updateList(separatedData);
     } catch (IOException e) {
-      Log.e("IOException", e.getMessage());
-    } finally {
-      return loadedList;
+      if (e.getMessage() != null)
+        Log.e("IOException", e.getMessage());
     }
+
+    return loadedList;
   }
 
   /**
    * Formats the read data from the file
+   *
    * @param fileData List Interface that stores the file data
    * @return the formatted data
    */
   private List<String[]> formatReadData(List<String> fileData) {
-    List<String[]> seperatedData = new ArrayList<>();
+    List<String[]> separatedData = new ArrayList<>();
     for (String line : fileData) {
-      seperatedData.add(line.split(","));
+      separatedData.add(line.split(","));
     }
-    return seperatedData;
+    return separatedData;
   }
 
   /**
    * Abstract method that returns the updated list
+   *
    * @param loadedData the read data
-   * @return nothing
+   * @return an updated list of elements
    */
   abstract List updateList(List<String[]> loadedData);
 
@@ -62,14 +65,16 @@ abstract class FileController {
       String output = formatOutputData(objects);
       fileInterface.writeToFile(output);
     } catch (IOException e) {
-      Log.e("IOException", e.getMessage());
+      if (e.getMessage() != null)
+        Log.e("IOException", e.getMessage());
     }
   }
 
   /**
    * Abstract method that returns the formatted data
+   *
    * @param objects the list of objects
-   * @return nothing
+   * @return the formatted output
    */
   abstract String formatOutputData(List objects);
 }

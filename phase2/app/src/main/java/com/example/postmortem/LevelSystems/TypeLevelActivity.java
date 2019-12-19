@@ -6,9 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.example.postmortem.MainActivity;
 import com.example.postmortem.R;
 import com.example.postmortem.SoundManager;
+
+import java.util.Locale;
 
 
 public class TypeLevelActivity extends LevelActivity {
@@ -135,7 +139,9 @@ public class TypeLevelActivity extends LevelActivity {
   }
 
 
-  /** helper method that moves to the next question in the level */
+  /**
+   * helper method that moves to the next question in the level
+   */
   private void goToNextQuestion() {
     level.nextQuestion();
     assignButtonVals(selectButtons);
@@ -148,19 +154,21 @@ public class TypeLevelActivity extends LevelActivity {
     question_text.setText(text_1);
     for (int i = 0; i < selectButtons.length - 1; i++) {
       selectButtons[i].setEnabled(true);
-      selectButtons[i].setBackgroundColor(getResources().getColor(R.color.colorAccent));
+      selectButtons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
     }
   }
 
-  /** helper method that changes the colors of the buttons correctly after being pressed */
+  /**
+   * helper method that changes the colors of the buttons correctly after being pressed
+   */
   private void changeButtonColor() {
     for (int i = 0; i < selectButtons.length - 1; i++) {
       //button shouldn't be clickable anymore
       selectButtons[i].setEnabled(false);
       if (selectButtons[i].getText() != level.getCurrentQuestion().getCorrectAnswer()) {
-        selectButtons[i].setBackgroundColor(getResources().getColor(R.color.supremeRed));
+        selectButtons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.supremeRed));
       } else {
-        selectButtons[i].setBackgroundColor(getResources().getColor(R.color.green));
+        selectButtons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.green));
       }
     }
 
@@ -193,6 +201,6 @@ public class TypeLevelActivity extends LevelActivity {
 
   public void cheatClickHandler(View view) {
     level.score += 100;
-    scoreText.setText(String.format("%d", level.getScore()));
+    scoreText.setText(String.format(Locale.CANADA, "%d", level.getScore()));
   }
 }

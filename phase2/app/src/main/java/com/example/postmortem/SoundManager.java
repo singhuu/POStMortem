@@ -8,45 +8,42 @@ import android.media.MediaPlayer;
  */
 public class SoundManager {
 
-    private Context mContext;
-    private MediaPlayer main;
-    private MediaPlayer wowEffect;
-    private MediaPlayer booEffect;
+  private MediaPlayer main;
+  private MediaPlayer wowEffect;
+  private MediaPlayer booEffect;
 
-    /**
-     * the constructor creates mediaplayers for each sound and gets the MainMethod context which is
-     * required in order to pull the sound files from their folder
-     *
-     * @param c the context of the file needed to pull the sound files
-     */
-    public SoundManager(Context c) {
-        mContext = c;
-        main = MediaPlayer.create(mContext, R.raw.mainmusic);
-        wowEffect = MediaPlayer.create(mContext, R.raw.wowshorter);
-        booEffect = MediaPlayer.create(mContext, R.raw.buzzerloweraudio);
+  /**
+   * the constructor creates mediaplayers for each sound and gets the MainMethod context which is
+   * required in order to pull the sound files from their folder
+   *
+   * @param c the context of the file needed to pull the sound files
+   */
+  public SoundManager(Context c) {
+    main = MediaPlayer.create(c, R.raw.mainmusic);
+    wowEffect = MediaPlayer.create(c, R.raw.wowshorter);
+    booEffect = MediaPlayer.create(c, R.raw.buzzerloweraudio);
 
-    }
+  }
 
-    /**
-     * Starts the main music
-     */
-    public void startMainMusic() {
-        main.start();
-        main.setLooping(true);
-    }
+  /**
+   * starts playing the background music
+   */
+  void startMainMusic() {
+    main.start();
+    main.setLooping(true);
+  }
 
-    /**
-     * Plays Wow Effect
-     */
-    public void playWowEffect() {
+  /**
+   * starts playing the wow effect music
+   */
+  public void playWowEffect() {
+    wowEffect.start();
+  }
 
-        wowEffect.start();
-    }
-
-    /**
-     * Plays Boo Effect
-     */
-    public void playBooEffect() {
-        booEffect.start();
-    }
+  /**
+   * starts playing the boo effect music
+   */
+  public void playBooEffect() {
+    booEffect.start();
+  }
 }
